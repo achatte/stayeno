@@ -246,6 +246,125 @@ a{text-decoration:none;color:inherit}
 /* FOOTER */
 .footer{padding:27px 0;border-top:1px solid var(--line);color:#7e8997;font-size:12px}.footerrow{display:flex;justify-content:space-between;gap:20px}.footer a:hover{color:var(--blue)}
 
+
+/* CAPABILITY CHECKLIST */
+.capability-checklist{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.capability-column{
+  padding:26px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 8px 25px rgba(25,42,61,.04);
+}
+.capability-column.ready{
+  border-top:4px solid var(--green);
+}
+.capability-column.future{
+  border-top:4px solid #d94b4b;
+}
+.capability-column-head{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin-bottom:17px;
+}
+.capability-column-badge{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:17px;
+  font-weight:900;
+}
+.capability-column.ready .capability-column-badge{
+  color:#19874b;
+  background:var(--green-soft);
+}
+.capability-column.future .capability-column-badge{
+  color:#b83333;
+  background:#fff0f0;
+}
+.capability-column-head strong{
+  display:block;
+  font-size:18px;
+}
+.capability-column-head span{
+  display:block;
+  margin-top:3px;
+  color:#7b8796;
+  font-size:10px;
+}
+.capability-list{
+  display:grid;
+  gap:8px;
+}
+.capability-item{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fbfcfe;
+}
+.capability-mark{
+  flex:none;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:10px;
+  font-weight:900;
+}
+.capability-column.ready .capability-mark{
+  color:#19874b;
+  background:var(--green-soft);
+}
+.capability-column.future .capability-mark{
+  color:#b83333;
+  background:#fff0f0;
+}
+.capability-item strong{
+  display:block;
+  font-size:11px;
+  line-height:1.35;
+}
+.capability-item span{
+  display:block;
+  margin-top:2px;
+  color:#7b8796;
+  font-size:9px;
+  line-height:1.45;
+}
+.capability-api-note{
+  margin-top:14px;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#f7f9ff;
+  color:#68778d;
+  font-size:10px;
+  line-height:1.5;
+}
+.capability-api-note strong{
+  color:#26354d;
+}
+
+@media(max-width:800px){
+  .capability-checklist{
+    grid-template-columns:1fr;
+  }
+  .capability-column{
+    padding:22px;
+  }
+}
+
 /* MOBILE */
 @media(max-width:1050px){
   .hero-grid{grid-template-columns:1fr;gap:35px}.hero-product{min-height:430px}
@@ -438,45 +557,141 @@ a{text-decoration:none;color:inherit}
 
 <section class="section">
   <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">A different kind of connection</div>
-      <h2>Your bookings stay where they belong.</h2>
+
+    <div class="section-head center">
+      <div class="eyebrow">What Stayeno does</div>
+      <h2>Your booking triggers the work. Stayeno handles the work around the stay.</h2>
       <p>
-        Stayeno doesn't need to take over your booking platforms.
-        Reservation calendar information becomes the bridge into your
-        property operations.
+        Stayeno connects reservation calendar information to the operational tasks
+        that keep a short-term rental running.
       </p>
     </div>
 
-    <div class="bridge">
-      <div class="source">
-        <div class="eyebrow">01 · Booking platforms</div>
-        <h3>Keep managing reservations your way.</h3>
-        <p>Continue managing reservations through the platforms you already use. Stayeno reads the reservation calendar information they provide.</p>
-        <div class="source-list">
-          <div class="source-item"><span class="source-icon">A</span> Airbnb reservation calendar</div>
-          <div class="source-item"><span class="source-icon">V</span> Vrbo reservation calendar</div>
-          <div class="source-item"><span class="source-icon">B</span> Booking.com reservation calendar</div>
+    <div class="capability-checklist">
+
+      <div class="capability-column ready">
+        <div class="capability-column-head">
+          <div class="capability-column-badge">✓</div>
+          <div>
+            <strong>Available today</strong>
+            <span>Core Stayeno automation</span>
+          </div>
+        </div>
+
+        <div class="capability-list">
+
+          <div class="capability-item">
+            <div class="capability-mark">✓</div>
+            <div>
+              <strong>Reservation calendar integration</strong>
+              <span>iCal feeds from Airbnb, Vrbo and Booking.com.</span>
+            </div>
+          </div>
+
+          <div class="capability-item">
+            <div class="capability-mark">✓</div>
+            <div>
+              <strong>Reservation processing</strong>
+              <span>Normalize reservations, detect duplicates and handle changes.</span>
+            </div>
+          </div>
+
+          <div class="capability-item">
+            <div class="capability-mark">✓</div>
+            <div>
+              <strong>Schlage guest access</strong>
+              <span>Create, activate and manage guest access codes around each stay.</span>
+            </div>
+          </div>
+
+          <div class="capability-item">
+            <div class="capability-mark">✓</div>
+            <div>
+              <strong>Automatic Schlage code cleanup</strong>
+              <span>Remove past codes so the lock does not become overloaded.</span>
+            </div>
+          </div>
+
+          <div class="capability-item">
+            <div class="capability-mark">✓</div>
+            <div>
+              <strong>Cleaning & turnover automation</strong>
+              <span>Coordinate cleaners and handle same-day turnovers.</span>
+            </div>
+          </div>
+
+          <div class="capability-item">
+            <div class="capability-mark">✓</div>
+            <div>
+              <strong>Thermostat automation</strong>
+              <span>Apply property temperature rules around guest stays.</span>
+            </div>
+          </div>
+
+          <div class="capability-item">
+            <div class="capability-mark">✓</div>
+            <div>
+              <strong>Email & SMS notifications</strong>
+              <span>Keep hosts, cleaners and property contacts informed.</span>
+            </div>
+          </div>
+
+          <div class="capability-item">
+            <div class="capability-mark">✓</div>
+            <div>
+              <strong>Multi-property operations</strong>
+              <span>Run reservation-driven workflows across properties.</span>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="bridge-center">
-        <div class="orb"><div><strong>READ-ONLY</strong><span>BY DESIGN</span></div></div>
-        <div class="bridge-arrow">↓</div>
-      </div>
+      <div class="capability-column future">
+        <div class="capability-column-head">
+          <div class="capability-column-badge">→</div>
+          <div>
+            <strong>Future expansion</strong>
+            <span>Direct platform connectivity</span>
+          </div>
+        </div>
 
-      <div class="destination">
-        <div class="eyebrow">02 · Stayeno</div>
-        <h3>Let the reservation start the workflow.</h3>
-        <p>Stayeno turns reservation timing into organized operational steps around the property.</p>
-        <div class="dest-grid">
-          <div class="dest">Unified reservation view</div>
-          <div class="dest">Smart access</div>
-          <div class="dest">Notifications</div>
-          <div class="dest">Cleaner coordination</div>
+        <div class="capability-list">
+
+          <div class="capability-item">
+            <div class="capability-mark">→</div>
+            <div>
+              <strong>Direct OTA API access</strong>
+              <span>Direct API access to Airbnb, Vrbo and Booking.com is not available yet.</span>
+            </div>
+          </div>
+
+          <div class="capability-item">
+            <div class="capability-mark">→</div>
+            <div>
+              <strong>Unified guest inbox</strong>
+              <span>Bring guest conversations from booking platforms into one place.</span>
+            </div>
+          </div>
+
+          <div class="capability-item">
+            <div class="capability-mark">→</div>
+            <div>
+              <strong>Real-time OTA synchronization</strong>
+              <span>Direct platform synchronization beyond the available iCal feeds.</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="capability-api-note">
+          <strong>Today:</strong> reservations remain managed on your booking platforms.
+          Stayeno focuses on automating the property operations around those reservations.
         </div>
       </div>
+
     </div>
+
   </div>
 </section>
 
@@ -500,7 +715,7 @@ a{text-decoration:none;color:inherit}
   <div class="container">
     <div class="section-head center">
       <div class="eyebrow">From reservation to turnover</div>
-      <h2>The workflow follows the stay.</h2>
+      <h2>The workflow <span style="color:var(--blue)">AUTOMATION</span> follows the stay.</h2>
     </div>
 
     <div class="process">
