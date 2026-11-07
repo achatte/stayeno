@@ -4,14 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>How it works — Stayeno</title>
-<meta name="description" content="Watch one booking set everything in motion: door codes, cleaning, climate and guest answers — with zero clicks from you.">
+<meta name="description" content="Watch a host run a whole stay just by chatting: door codes, cleaning, climate and guest answers — with zero clicks.">
 <meta name="theme-color" content="#070d22">
-<meta property="og:title" content="How Stayeno works — one booking, zero clicks">
-<meta property="og:description" content="From booking to checkout, Stayeno runs the lock, the cleaning, the thermostat and the guest messages.">
+<meta property="og:title" content="How Stayeno works — just chat, zero clicks">
+<meta property="og:description" content="Chat with Stayeno like ChatGPT. It runs the lock, the cleaning, the thermostat and the guest messages.">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=7">
 <link rel="apple-touch-icon" href="favicon.png?v=7">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Stayeno">
 <link rel="stylesheet" href="css/stayeno.css">
 <script>document.documentElement.classList.add('js');</script>
+<style>
+/* ---- Chat panel inside the workflow movie (this page only) ---- */
+.stage-wrap{display:grid;grid-template-columns:360px 1fr}
+.mv-chat{display:flex;flex-direction:column;height:524px;margin:18px 0 18px 18px;border-radius:22px;background:#fff;color:var(--ink);overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.mv-chat-top{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.mv-orb{flex:none;width:30px;height:30px;border-radius:50%;background:var(--ai);box-shadow:0 0 16px rgba(139,92,246,.5)}
+.mv-chat-top b{display:block;font-size:14px}
+.mv-chat-top small{display:block;font-size:11px;color:var(--muted)}
+.mv-chat-top .mv-live{margin-left:auto;font-size:11px;font-weight:800;color:var(--green)}
+.mv-log{flex:1;overflow:hidden;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;gap:9px;background:#f8fafc}
+.mv-msg{max-width:88%;padding:9px 12px;font-size:13px;line-height:1.45;border-radius:14px;animation:mvIn .3s ease both}
+@keyframes mvIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.mv-msg.me{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:4px}
+.mv-msg.ai{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;color:#334155}
+.mv-msg.ai b{color:var(--ink)}
+.mv-msg.typing{display:flex;gap:4px;padding:12px 14px}
+.mv-msg.typing span{width:6px;height:6px;border-radius:50%;background:#94a3b8;animation:mvDot 1s infinite}
+.mv-msg.typing span:nth-child(2){animation-delay:.15s}
+.mv-msg.typing span:nth-child(3){animation-delay:.3s}
+@keyframes mvDot{0%,80%,100%{opacity:.3}40%{opacity:1}}
+.mv-input{display:flex;align-items:center;gap:8px;margin:10px;padding:7px 7px 7px 14px;border-radius:14px;border:1px solid var(--line);background:#fff}
+.mv-typed{flex:1;min-height:20px;font-size:13px;white-space:nowrap;overflow:hidden}
+.mv-typed:empty:before{content:"Message Stayeno…";color:#94a3b8}
+.mv-caret{width:2px;height:16px;background:var(--blue);animation:mvBlink 1s steps(1) infinite}
+@keyframes mvBlink{50%{opacity:0}}
+.mv-send{width:32px;height:32px;border-radius:10px;background:var(--ai);display:grid;place-items:center;color:#fff;font-weight:900}
+.stage-wrap .node{width:170px}
+.stage-wrap .n-card{width:210px}
+.stage-wrap .caption{width:min(440px,calc(100% - 260px))}
+.chat-callout{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto 26px;max-width:720px;padding:12px 18px;border-radius:999px;background:var(--bg-soft);border:1px solid var(--line);font-size:14.5px;color:#334155;text-align:center}
+.chat-callout b{color:var(--ink)}
+@media(max-width:1080px){
+  .stage-wrap{grid-template-columns:1fr}
+  .mv-chat{margin:16px 16px 0;height:340px}
+  .stage-wrap .caption{width:min(560px,calc(100% - 40px))}
+}
+@media(prefers-reduced-motion:reduce){.mv-msg,.mv-caret{animation:none}}
+</style>
 </head>
 <body>
 
@@ -46,29 +87,32 @@
 <header class="page-hero center">
   <div class="container">
     <span class="ai-badge">✦ How Stayeno works</span>
-    <h1>From booking to checkout —<br><span class="grad-text">without lifting a finger.</span></h1>
-    <p class="lead">A booking arrives. Stayeno takes it from there: the door code, the cleaner, the
-      thermostat, the guest's questions, and closing everything down after checkout.</p>
+    <h1>Just chat.<br><span class="grad-text">Stayeno does the work.</span></h1>
+    <p class="lead">Talk to Stayeno the way you'd talk to ChatGPT. It runs the door code, the cleaner,
+      the thermostat and the guest's questions — from the booking to the moment they leave.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="#movie">▶ Watch the 40-second story</a>
+      <a class="btn btn-primary" href="#movie">▶ Watch the 1-minute story</a>
       <a class="btn btn-ghost" href="signup.html">Start free</a>
     </div>
   </div>
 </header>
 
 <!-- =====================================================================
-     THE WORKFLOW MOVIE — drawn in code (no video file), about 25 KB
+     THE WORKFLOW MOVIE — drawn in code (no video file)
+     Left: the host chatting with Stayeno.  Right: what Stayeno does.
      ===================================================================== -->
 <section class="section" id="movie">
   <div class="container">
     <div class="section-head reveal">
-      <div class="eyebrow">One booking · zero clicks</div>
-      <h2>Watch what happens after a guest books.</h2>
-      <p>This is Sarah's stay at Ocean View Suite — every step Stayeno takes on its own, from the
-        moment she books to the moment she leaves.</p>
+      <div class="eyebrow">Just chat · zero clicks</div>
+      <h2>Watch a host run a whole stay — just by chatting.</h2>
+      <p>Sarah books Ocean View Suite. The host chats with Stayeno on the left. On the right, you see
+        everything Stayeno does in the real world.</p>
     </div>
 
-    <div class="movie reveal" id="movie-player" role="region" aria-label="Animated story of one booking">
+    <div class="chat-callout reveal">💬 <span><b>Like ChatGPT — for your rentals.</b> Ask, tell or approve in plain words, on desktop or phone.</span></div>
+
+    <div class="movie reveal" id="movie-player" role="region" aria-label="Animated story: a host runs one booking by chatting with Stayeno">
       <div class="movie-top">
         <div class="movie-clock" aria-live="polite"><i></i><span id="mv-clock">Tue · 2:14 PM</span></div>
         <div class="movie-counter">
@@ -77,66 +121,85 @@
         </div>
       </div>
 
-      <div class="stage" id="mv-stage">
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="wireGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="100">
-              <stop offset="0" stop-color="#22d3ee"/><stop offset=".5" stop-color="#8b5cf6"/><stop offset="1" stop-color="#2457ff"/>
-            </linearGradient>
-          </defs>
-          <line class="wire" data-wire="booking"    x1="50" y1="50" x2="13" y2="20"/>
-          <line class="wire" data-wire="cleaner"    x1="50" y1="50" x2="13" y2="50"/>
-          <line class="wire" data-wire="guest"      x1="50" y1="50" x2="13" y2="80"/>
-          <line class="wire" data-wire="lock"       x1="50" y1="50" x2="87" y2="20"/>
-          <line class="wire" data-wire="team"       x1="50" y1="50" x2="87" y2="50"/>
-          <line class="wire" data-wire="thermostat" x1="50" y1="50" x2="87" y2="80"/>
-        </svg>
+      <div class="stage-wrap">
 
-        <div class="hub" id="mv-hub" aria-hidden="true"><span>STAYENO<br>AI</span></div>
-
-        <div class="node" data-node="booking" style="left:13%;top:20%">
-          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-          <div class="n-label">Booking</div>
-          <div class="n-card" data-card="booking"></div>
-        </div>
-        <div class="node" data-node="cleaner" style="left:13%;top:50%">
-          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V10l7-6 7 6v11"/><path d="M9 21v-6h6v6"/></svg></div>
-          <div class="n-label">Cleaning</div>
-          <div class="n-card" data-card="cleaner"></div>
-        </div>
-        <div class="node top" data-node="guest" style="left:13%;top:80%">
-          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <div class="n-label">Guest inbox</div>
-          <div class="n-card" data-card="guest"></div>
-        </div>
-        <div class="node" data-node="lock" style="left:87%;top:20%">
-          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-          <div class="n-label">Smart lock</div>
-          <div class="n-card" data-card="lock"></div>
-        </div>
-        <div class="node" data-node="team" style="left:87%;top:50%">
-          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
-          <div class="n-label">You &amp; co-host</div>
-          <div class="n-card" data-card="team"></div>
-        </div>
-        <div class="node top" data-node="thermostat" style="left:87%;top:80%">
-          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>
-          <div class="n-label">Thermostat</div>
-          <div class="n-card" data-card="thermostat"></div>
-        </div>
-
-        <div class="caption" id="mv-caption" aria-live="polite">
-          <h3 id="mv-title">A booking arrives</h3>
-          <p id="mv-text">Sarah books Ocean View Suite on Airbnb — Friday to Monday.</p>
-        </div>
-
-        <div class="endcard" id="mv-end" aria-hidden="true">
-          <div>
-            <b>0 clicks.</b>
-            <span>Ten tasks. One booking. Stayeno did it all.</span>
-            <small>Now imagine every booking, every property, every week.</small>
+        <!-- Chat window (left) -->
+        <div class="mv-chat" aria-label="Host chat with Stayeno">
+          <div class="mv-chat-top">
+            <div class="mv-orb" aria-hidden="true"></div>
+            <div><b>Stayeno AI</b><small>Ocean View Suite · 3 properties</small></div>
+            <span class="mv-live">● Online</span>
+          </div>
+          <div class="mv-log" id="mv-log" aria-live="polite"></div>
+          <div class="mv-input" aria-hidden="true">
+            <div class="mv-typed" id="mv-typed"></div><span class="mv-caret"></span>
+            <div class="mv-send">↑</div>
           </div>
         </div>
+
+        <!-- What Stayeno does (right) -->
+        <div class="stage" id="mv-stage">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="wireGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="100">
+                <stop offset="0" stop-color="#22d3ee"/><stop offset=".5" stop-color="#8b5cf6"/><stop offset="1" stop-color="#2457ff"/>
+              </linearGradient>
+            </defs>
+            <line class="wire" data-wire="booking"    x1="50" y1="50" x2="15" y2="20"/>
+            <line class="wire" data-wire="cleaner"    x1="50" y1="50" x2="15" y2="50"/>
+            <line class="wire" data-wire="guest"      x1="50" y1="50" x2="15" y2="80"/>
+            <line class="wire" data-wire="lock"       x1="50" y1="50" x2="85" y2="20"/>
+            <line class="wire" data-wire="team"       x1="50" y1="50" x2="85" y2="50"/>
+            <line class="wire" data-wire="thermostat" x1="50" y1="50" x2="85" y2="80"/>
+          </svg>
+
+          <div class="hub" id="mv-hub" aria-hidden="true"><span>STAYENO<br>AI</span></div>
+
+          <div class="node" data-node="booking" style="left:15%;top:20%">
+            <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+            <div class="n-label">Booking</div>
+            <div class="n-card" data-card="booking"></div>
+          </div>
+          <div class="node" data-node="cleaner" style="left:15%;top:50%">
+            <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V10l7-6 7 6v11"/><path d="M9 21v-6h6v6"/></svg></div>
+            <div class="n-label">Cleaning</div>
+            <div class="n-card" data-card="cleaner"></div>
+          </div>
+          <div class="node top" data-node="guest" style="left:15%;top:80%">
+            <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div class="n-label">Guest inbox</div>
+            <div class="n-card" data-card="guest"></div>
+          </div>
+          <div class="node" data-node="lock" style="left:85%;top:20%">
+            <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+            <div class="n-label">Smart lock</div>
+            <div class="n-card" data-card="lock"></div>
+          </div>
+          <div class="node" data-node="team" style="left:85%;top:50%">
+            <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+            <div class="n-label">You &amp; co-host</div>
+            <div class="n-card" data-card="team"></div>
+          </div>
+          <div class="node top" data-node="thermostat" style="left:85%;top:80%">
+            <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>
+            <div class="n-label">Thermostat</div>
+            <div class="n-card" data-card="thermostat"></div>
+          </div>
+
+          <div class="caption" id="mv-caption" aria-live="polite">
+            <h3 id="mv-title">A booking arrives</h3>
+            <p id="mv-text">Sarah books Ocean View Suite on Airbnb — Friday to Monday.</p>
+          </div>
+
+          <div class="endcard" id="mv-end" aria-hidden="true">
+            <div>
+              <b>0 clicks.</b>
+              <span>Just a chat. Stayeno did the rest.</span>
+              <small>Ten tasks, one booking — now imagine every booking, every property.</small>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="movie-bottom">
@@ -154,8 +217,8 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow">Getting started</div>
-      <h2>Four steps. Then it just runs.</h2>
-      <p>No onboarding calls, no training. You talk to Stayeno the way you'd brief a great co-host.</p>
+      <h2>Four messages. Then it just runs.</h2>
+      <p>No onboarding calls, no training. You set Stayeno up by chatting — the way you'd brief a great co-host.</p>
     </div>
     <div class="steps4">
       <div class="step-card reveal"><div class="big">01</div><h3>Paste your calendar link</h3><p>Airbnb, Vrbo or Booking.com. Stayeno reads your bookings and keeps them in sync.</p><div class="say">“Here's my Airbnb calendar link.”</div></div>
@@ -206,9 +269,9 @@
 
 <section class="cta">
   <div class="container reveal">
-    <span class="ai-badge">✦ Your first booking is the setup</span>
-    <h2>Let the next booking<br><span class="grad-text">run itself.</span></h2>
-    <p>Paste your calendar link and watch Stayeno take over the busywork.</p>
+    <span class="ai-badge">✦ Your first message is the setup</span>
+    <h2>Say hello.<br><span class="grad-text">Let the next booking run itself.</span></h2>
+    <p>Paste your calendar link and start chatting — Stayeno takes over the busywork.</p>
     <div class="actions">
       <a class="btn btn-primary" href="signup.html">Start free →</a>
       <a class="btn btn-ghost" href="features.html">Explore features</a>
@@ -235,11 +298,12 @@
 </footer>
 
 <script src="js/stayeno.js"></script>
+<script src="pwa.js" defer></script>
 <script>
 /* ==========================================================================
    WORKFLOW MOVIE — scenes play one after another, like a short film.
-   Each scene: which nodes light up, which wires glow, the clock, the
-   caption, and the card text shown next to each lit node.
+   Each scene: the chat messages (left), which stations light up (right),
+   the clock, the caption, and the card shown next to each lit station.
    ========================================================================== */
 (function(){
   var player = document.getElementById('movie-player');
@@ -247,42 +311,58 @@
 
   var reduceMotion = prefersReducedMotion();
   var ALL = ['booking','cleaner','guest','lock','team','thermostat'];
+  var MAX_CHAT = 7;              // messages kept visible in the chat window
+  var TYPE_MS = 38;              // typing speed of the host, per letter
 
   var SCENES = [
-    {chapter:'Booking', clock:'Tue · 2:14 PM', on:['booking'], wires:['booking'], tasks:1, ms:4200,
+    {chapter:'Booking', clock:'Tue · 2:14 PM', on:['booking'], wires:['booking'], tasks:1, ms:5600,
      title:'A booking arrives',
      text:'Sarah books Ocean View Suite on Airbnb — Friday to Monday, 3 nights.',
+     chat:[{who:'ai', text:'🎉 New Airbnb booking: <b>Sarah</b>, Fri → Mon at Ocean View Suite.'},
+           {who:'me', text:'Great! Handle everything.'}],
      cards:{booking:"<b>New booking · Airbnb</b>Sarah · Fri → Mon · 3 nights<br><span class='ok'>Read from your calendar ✓</span>"}},
-    {chapter:'Plan', clock:'Tue · 2:14 PM', on:[], wires:ALL, think:true, tasks:1, ms:4200,
+    {chapter:'Plan', clock:'Tue · 2:14 PM', on:[], wires:ALL, think:true, tasks:1, ms:4800,
      title:'Stayeno plans everything',
-     text:'It checks for duplicates and changes, then lines up the lock, the team, the cleaning and the climate.'},
-    {chapter:'Door code', clock:'Tue · 2:15 PM', on:['lock'], wires:['lock'], tasks:1, ms:4800,
+     text:'It checks for duplicates and changes, then lines up the lock, the team, the cleaning and the climate.',
+     chat:[{who:'ai', text:'On it ✓ Door code, cleaner, climate and messages — all lined up.'}]},
+    {chapter:'Door code', clock:'Tue · 2:15 PM', on:['lock'], wires:['lock'], tasks:1, ms:6200,
      title:'A private door code is created',
      text:'A unique code, active only for Sarah’s stay — and checked on the lock, not just sent.',
+     chat:[{who:'me', text:"What's Sarah's door code?"},
+           {who:'ai', text:'Ready and <b>verified on the lock</b> ✓ Active Fri 2 PM → Mon 1 PM.'}],
      cards:{lock:"<b>Door code · Sarah</b><span class='dots'>••••••</span><br>Active Fri 2 PM → Mon 1 PM<br><span class='ok'>Verified on the lock ✓</span>"}},
-    {chapter:'Team', clock:'Tue · 2:15 PM', on:['team'], wires:['team'], tasks:2, ms:4400,
+    {chapter:'Team', clock:'Tue · 2:15 PM', on:['team'], wires:['team'], tasks:2, ms:5200,
      title:'You and your co-host are told',
-     text:'Booking details and the door code arrive by email and text — before you even open the app.',
+     text:'Booking details and the door code arrive by email and text.',
+     chat:[{who:'ai', text:'Sent the booking and the code to <b>you and your co-host</b> ✓'}],
      cards:{team:"<b>📱 Host &amp; co-host</b>New booking · Sarah · Fri–Mon<br>Door code included<br><span class='ok'>Delivered ✓</span>"}},
-    {chapter:'Cleaning', clock:'Thu · 9:00 AM', on:['cleaner'], wires:['cleaner'], tasks:1, ms:4600,
+    {chapter:'Cleaning', clock:'Thu · 9:00 AM', on:['cleaner'], wires:['cleaner'], tasks:1, ms:6400,
      title:'Cleaning is lined up',
      text:'Your cleaner gets the schedule and the turnover window — never the guest’s door code.',
+     chat:[{who:'me', text:'Make sure Maria cleans Friday'},
+           {who:'ai', text:'Done — reminder sent for <b>Fri 12–4 PM</b>. She gets the schedule, not the door code.'}],
      cards:{cleaner:"<b>🧹 Cleaning reminder</b>Ocean View Suite · Friday<br>Window: 12 – 4 PM<br><span class='ok'>No door code shared ✓</span>"}},
-    {chapter:'Comfort', clock:'Fri · 11:00 AM', on:['thermostat'], wires:['thermostat'], tasks:1, ms:5200,
+    {chapter:'Comfort', clock:'Fri · 11:00 AM', on:['thermostat'], wires:['thermostat'], tasks:1, ms:6400,
      title:'The home gets comfortable',
      text:'Four hours before arrival, the AC starts cooling — Sarah walks into 70°F.',
+     chat:[{who:'me', text:'Pre-cool the house before Sarah arrives'},
+           {who:'ai', text:'Scheduled ✓ <b>70°F at 11 AM</b> — 4 hours before check-in.'}],
      cards:{thermostat:"<b>🌡️ Pre-arrival</b><div class='mini-dial'><strong data-count-from='80' data-count-to='70'>80°</strong><span>Cooling for Sarah<br>arrives 3 PM</span></div>"}},
-    {chapter:'Guest', clock:'Fri · 4:32 PM', on:['guest'], wires:['guest'], tasks:1, ms:5200,
+    {chapter:'Guest', clock:'Fri · 4:32 PM', on:['guest'], wires:['guest'], tasks:1, ms:5600,
      title:'Guests get answers in seconds',
      text:'Questions are answered from your house rules and listing — day or night.',
+     chat:[{who:'ai', text:'Sarah asked for the Wi-Fi — I answered her in <b>4 seconds</b> 🙂'}],
      cards:{guest:"<div class='chat-q'>What's the Wi-Fi password? 🙂</div><div class='chat-a'>It's on the welcome card by the door — network <b>OceanView</b>. Enjoy your stay!</div><small>✦ Answered by Stayeno AI · 4 sec</small>"}},
-    {chapter:'Checkout', clock:'Mon · 1:00 PM', on:['lock','thermostat'], wires:['lock','thermostat'], tasks:2, ms:5400,
+    {chapter:'Checkout', clock:'Mon · 1:00 PM', on:['lock','thermostat'], wires:['lock','thermostat'], tasks:2, ms:6600,
      title:'Checkout: access closed, energy saved',
      text:'The door code is removed and confirmed. The house goes back to energy-saving vacant mode.',
+     chat:[{who:'me', text:'Close everything after checkout'},
+           {who:'ai', text:'Done ✓ Door code <b>removed and confirmed</b>. House back to 80°F vacant mode.'}],
      cards:{lock:"<b>Door code removed</b><span class='ok'>Confirmed on the lock ✓</span>",
             thermostat:"<b>🌡️ Vacant mode</b><div class='mini-dial'><strong data-count-from='70' data-count-to='80'>70°</strong><span>Saving energy<br>until the next guest</span></div>"}},
-    {chapter:'0 clicks', clock:'Mon · 1:00 PM', on:[], wires:[], tasks:0, ms:5000, end:true,
-     title:'', text:''}
+    {chapter:'0 clicks', clock:'Mon · 1:00 PM', on:[], wires:[], tasks:0, ms:5400, end:true,
+     title:'', text:'',
+     chat:[{who:'ai', text:"All done for Sarah's stay — <b>10 tasks, 0 clicks</b>. Anything else?"}]}
   ];
 
   // ---- elements ----
@@ -295,6 +375,8 @@
   var endcard = document.getElementById('mv-end');
   var playBtn = document.getElementById('mv-play');
   var chapterBar = document.getElementById('mv-chapters');
+  var chatLog = document.getElementById('mv-log');
+  var typedEl = document.getElementById('mv-typed');
   var nodes = {}, cards = {}, wires = {};
   ALL.forEach(function(id){
     nodes[id] = player.querySelector('[data-node="' + id + '"]');
@@ -310,7 +392,7 @@
     b.className = 'chapter';
     b.setAttribute('aria-label', 'Go to: ' + scene.chapter);
     b.innerHTML = '<i></i><span>' + scene.chapter + '</span>';
-    b.addEventListener('click', function(){ goTo(n, true); });
+    b.addEventListener('click', function(){ goTo(n, false); });
     chapterBar.appendChild(b);
     chapters.push(b);
   });
@@ -333,6 +415,84 @@
   // ---- state ----
   var current = 0, playing = false, timer = null, startedAt = 0, remaining = 0;
   var counters = [];
+  var chatTimers = [], chatPosted = 0, typingBubble = null;
+
+  /* ---------------- chat helpers ---------------- */
+
+  // [text] = escapeText(text)
+  function escapeText(text){
+    var div = document.createElement('div'); div.textContent = text; return div.innerHTML;
+  }
+
+  // [element] = addChat(who, html)
+  function addChat(who, html){
+    var el = document.createElement('div');
+    el.className = 'mv-msg ' + who;
+    el.innerHTML = html;
+    chatLog.appendChild(el);
+    while(chatLog.children.length > MAX_CHAT){ chatLog.removeChild(chatLog.firstChild); }
+    return el;
+  }
+
+  // [] = postMessage(m): show one finished message (host text is escaped)
+  function postMessage(m){
+    addChat(m.who, m.who === 'me' ? escapeText(m.text) : m.text);
+  }
+
+  // [] = stopChat(): cancel typing/answers in progress
+  function stopChat(){
+    chatTimers.forEach(clearTimeout); chatTimers = [];
+    typedEl.textContent = '';
+    if(typingBubble && typingBubble.parentNode){ typingBubble.parentNode.removeChild(typingBubble); }
+    typingBubble = null;
+  }
+
+  // [] = finishChat(n): post the rest of scene n's messages at once
+  function finishChat(n){
+    stopChat();
+    var msgs = SCENES[n].chat || [];
+    for(var k = chatPosted; k < msgs.length; k++){ postMessage(msgs[k]); }
+    chatPosted = msgs.length;
+  }
+
+  // [] = rebuildChat(n): show all earlier scenes' messages instantly
+  function rebuildChat(n){
+    stopChat();
+    chatLog.innerHTML = '';
+    for(var k = 0; k < n; k++){ (SCENES[k].chat || []).forEach(postMessage); }
+    chatPosted = 0;
+  }
+
+  // [] = animateChat(n): the host types, Stayeno "thinks", then answers
+  function animateChat(n){
+    var msgs = SCENES[n].chat || [];
+    var t = 350;
+    chatPosted = 0;
+    msgs.forEach(function(m){
+      if(m.who === 'me'){
+        var startAt = t;
+        for(var i = 1; i <= m.text.length; i++){
+          (function(len){
+            chatTimers.push(setTimeout(function(){ typedEl.textContent = m.text.slice(0, len); }, startAt + len * TYPE_MS));
+          })(i);
+        }
+        t = startAt + m.text.length * TYPE_MS + 350;
+        chatTimers.push(setTimeout(function(){ typedEl.textContent = ''; postMessage(m); chatPosted++; }, t));
+        t += 300;
+      } else {
+        chatTimers.push(setTimeout(function(){ typingBubble = addChat('ai typing', '<span></span><span></span><span></span>'); }, t));
+        t += 850;
+        chatTimers.push(setTimeout(function(){
+          if(typingBubble && typingBubble.parentNode){ typingBubble.parentNode.removeChild(typingBubble); }
+          typingBubble = null;
+          postMessage(m); chatPosted++;
+        }, t));
+        t += 300;
+      }
+    });
+  }
+
+  /* ---------------- stage helpers ---------------- */
 
   // [] = countNumber(el): animate 80° -> 70° style numbers inside a card
   function countNumber(el){
@@ -348,14 +508,14 @@
     counters.push(id);
   }
 
-  // [total] = tasksBefore(n): tasks finished before scene n starts
+  // [total] = tasksUpTo(n): tasks finished by the end of scene n
   function tasksUpTo(n){
     var total = 0;
     for(var k = 0; k <= n; k++){ total += SCENES[k].tasks; }
     return total;
   }
 
-  // [] = showScene(n): draw scene n
+  // [] = showScene(n): draw scene n on the right-hand stage
   function showScene(n){
     var scene = SCENES[n];
     counters.forEach(clearInterval); counters = [];
@@ -371,7 +531,6 @@
       wires[id].classList.toggle('live', scene.wires.indexOf(id) >= 0);
       if(isOn && scene.cards && scene.cards[id]){ cards[id].innerHTML = scene.cards[id]; }
     });
-    // nodes already used earlier in the story keep a green "done" outline
     ALL.forEach(function(id){
       var usedBefore = false;
       for(var k = 0; k < n; k++){ if(SCENES[k].on.indexOf(id) >= 0) usedBefore = true; }
@@ -394,10 +553,13 @@
       c.classList.toggle('past', k < n);
       c.classList.toggle('now', k === n);
       var fill = c.querySelector('i');
-      if(k === n){ fill.style.transition = 'none'; fill.style.width = '0'; void fill.offsetWidth; }
-      else { fill.style.transition = 'none'; fill.style.width = ''; }
+      fill.style.transition = 'none';
+      fill.style.width = (k === n) ? '0' : '';
+      void fill.offsetWidth;
     });
   }
+
+  /* ---------------- playback ---------------- */
 
   // [] = runTimer(ms): fill the current chapter and move on after ms
   function runTimer(ms){
@@ -407,14 +569,20 @@
     fill.style.transition = 'width ' + ms + 'ms linear';
     requestAnimationFrame(function(){ fill.style.width = '100%'; });
     clearTimeout(timer);
-    timer = setTimeout(function(){ goTo((current + 1) % SCENES.length, false); }, ms);
+    timer = setTimeout(function(){ goTo((current + 1) % SCENES.length, true); }, ms);
   }
 
-  function goTo(n, fromClick){
+  // [] = goTo(n, inOrder): inOrder = the story moved on by itself
+  function goTo(n, inOrder){
+    stopChat();
+    if(!inOrder || n === 0){ rebuildChat(n); }
+    else { finishChat(current); }
     current = n;
-    remaining = 0;               // a new chapter always starts from its beginning
+    remaining = 0;
+    chatPosted = 0;
     showScene(n);
-    if(playing){ runTimer(SCENES[n].ms); }
+    if(playing){ animateChat(n); runTimer(SCENES[n].ms); }
+    else { finishChat(n); }
   }
 
   function play(){
@@ -422,6 +590,7 @@
     playing = true;
     playBtn.textContent = '❚❚';
     playBtn.setAttribute('aria-label','Pause');
+    if(chatPosted === 0 && remaining === 0){ animateChat(current); }
     runTimer(remaining > 0 ? remaining : SCENES[current].ms);
   }
 
@@ -429,6 +598,7 @@
     if(!playing) return;
     playing = false;
     clearTimeout(timer);
+    finishChat(current);
     remaining = Math.max(300, remaining - (Date.now() - startedAt));
     var fill = chapters[current].querySelector('i');
     var width = getComputedStyle(fill).width;
@@ -443,7 +613,7 @@
   showScene(0);
 
   // Start when the movie scrolls into view; pause when it leaves.
-  if(reduceMotion || !('IntersectionObserver' in window)) return;
+  if(reduceMotion || !('IntersectionObserver' in window)){ finishChat(0); return; }
   var userPaused = false;
   playBtn.addEventListener('click', function(){ userPaused = !playing; });
   var observer = new IntersectionObserver(function(entries){

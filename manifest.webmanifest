@@ -1,0 +1,17 @@
+{
+  "id": "/",
+  "name": "Stayeno — AI co-host for short-term rentals",
+  "short_name": "Stayeno",
+  "description": "Just ask. Your rentals run themselves: pricing, guest messages, door codes, cleaning and thermostats by chat.",
+  "start_url": "/?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#070d22",
+  "theme_color": "#070d22",
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/favicon.png?v=7", "sizes": "64x64", "type": "image/png" }
+  ]
+}
