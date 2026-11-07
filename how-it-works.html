@@ -1,59 +1,459 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>How It Works — Smart Hosting</title><link rel="stylesheet" href="css/style.css"><link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=5">
-<link rel="apple-touch-icon" href="favicon.png?v=5">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How it works — Stayeno</title>
+<meta name="description" content="Watch one booking set everything in motion: door codes, cleaning, climate and guest answers — with zero clicks from you.">
+<meta name="theme-color" content="#070d22">
+<meta property="og:title" content="How Stayeno works — one booking, zero clicks">
+<meta property="og:description" content="From booking to checkout, Stayeno runs the lock, the cleaning, the thermostat and the guest messages.">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=7">
+<link rel="apple-touch-icon" href="favicon.png?v=7">
+<link rel="stylesheet" href="css/stayeno.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-<nav class="nav" aria-label="Primary navigation">
+
+<nav class="nav" id="nav" aria-label="Primary navigation">
   <div class="container navinner">
-    <a class="brand" href="index.html" aria-label="Smart Hosting home">
-      <img class="brand-icon" src="assets/smart-hosting-icon.png" alt="" width="42" height="42">
-      <span class="brand-wordmark">Smart<span>Hosting</span></span>
+    <a class="brand" href="index.html" aria-label="Stayeno home">
+      <img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36">
+      <span class="brand-wordmark">Stay<span>eno</span></span>
     </a>
-    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="navlinks"><a href="how-it-works.html" class="active">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="sms.html">Notifications</a><a class="navcta" href="signup.html">Get started</a></div>
+    <div class="navlinks">
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html" class="active">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Start free</a>
+    </div>
+    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobile-menu" hidden>
     <div class="container mobile-menu-inner">
-      <a href="how-it-works.html" class="active">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="sms.html">Notifications</a>
-      <a class="navcta mobile-cta" href="signup.html">Get started</a>
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html" class="active">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-primary" href="signup.html">Start free</a>
     </div>
   </div>
 </nav>
 
-<header class="hero"><div class="container"><div class="eyebrow">How Smart Hosting works</div><h1>One reservation.<br>Multiple actions.</h1><p>Smart Hosting is designed to turn reservation timing into a simple operational workflow — so the repetitive steps around a stay don't have to be managed one by one.</p></div></header>
+<header class="page-hero center">
+  <div class="container">
+    <span class="ai-badge">✦ How Stayeno works</span>
+    <h1>From booking to checkout —<br><span class="grad-text">without lifting a finger.</span></h1>
+    <p class="lead">A booking arrives. Stayeno takes it from there: the door code, the cleaner, the
+      thermostat, the guest's questions, and closing everything down after checkout.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#movie">▶ Watch the 40-second story</a>
+      <a class="btn btn-ghost" href="signup.html">Start free</a>
+    </div>
+  </div>
+</header>
 
-<section class="section"><div class="container">
-<div class="timeline">
-<div class="stepnum">01</div><div class="tcard"><h3>Reservation enters the system</h3><p>Smart Hosting reads supported iCal reservation feeds from platforms such as Airbnb, VRBO and Booking.com.</p></div>
-<div class="stepnum">02</div><div class="tcard"><h3>Reservation data is normalized</h3><p>Incoming reservation information is normalized and checked for duplicates so the automation layer works from a consistent booking record.</p></div>
-<div class="stepnum">03</div><div class="tcard"><h3>The reservation becomes a trigger</h3><p>Check-in and checkout timing determine when property workflows need to run. The system checks the booking state before taking action.</p></div>
-<div class="stepnum">04</div><div class="tcard"><h3>Access workflow runs</h3><p>The current Schlage workflow can generate or manage guest access information according to the reservation timeline, with a manual PIN path available as well.</p></div>
-<div class="stepnum">05</div><div class="tcard"><h3>People receive operational information</h3><p>Email notifications can keep hosts, co-hosts, property managers and cleaners informed. SMS notifications are planned for a future release.</p></div>
-<div class="stepnum">06</div><div class="tcard"><h3>More property automation follows</h3><p>Honeywell thermostat automation, a dashboard and payments are planned additions as Smart Hosting evolves.</p></div>
-</div></div></section>
+<!-- =====================================================================
+     THE WORKFLOW MOVIE — drawn in code (no video file), about 25 KB
+     ===================================================================== -->
+<section class="section" id="movie">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">One booking · zero clicks</div>
+      <h2>Watch what happens after a guest books.</h2>
+      <p>This is Sarah's stay at Ocean View Suite — every step Stayeno takes on its own, from the
+        moment she books to the moment she leaves.</p>
+    </div>
 
-<section class="section alt"><div class="container">
-<div class="section-head"><div class="eyebrow">A closer look</div><h2>From calendar feed to property action.</h2><p>The goal is not another dashboard you have to constantly watch. The goal is a reliable chain of events that starts with the reservation.</p></div>
-<div class="panel"><div class="flow">
-<span class="node">OTA iCal</span><span class="arrow">→</span><span class="node">Normalize</span><span class="arrow">→</span><span class="node">De-duplicate</span><span class="arrow">→</span><span class="node">Check booking state</span><span class="arrow">→</span><span class="node">Generate access</span><span class="arrow">→</span><span class="node">Notify</span>
-</div></div>
-</div></section>
+    <div class="movie reveal" id="movie-player" role="region" aria-label="Animated story of one booking">
+      <div class="movie-top">
+        <div class="movie-clock" aria-live="polite"><i></i><span id="mv-clock">Tue · 2:14 PM</span></div>
+        <div class="movie-counter">
+          <span>Tasks done <b id="mv-tasks">0</b></span>
+          <span class="zero">Your clicks <b>0</b></span>
+        </div>
+      </div>
 
-<section class="cta"><div class="container"><h2>Automation should feel invisible.</h2><p>Smart Hosting is being built to handle the repetitive operational steps while keeping you informed when your attention is actually needed.</p><a class="btn btn-primary" href="pricing.html">See pricing</a></div></section>
-<footer class="footer"><div class="container footerrow"><span>© 2026 Smart Hosting · A&R Investment Venture LLC</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span></div></footer>
+      <div class="stage" id="mv-stage">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="wireGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="100">
+              <stop offset="0" stop-color="#22d3ee"/><stop offset=".5" stop-color="#8b5cf6"/><stop offset="1" stop-color="#2457ff"/>
+            </linearGradient>
+          </defs>
+          <line class="wire" data-wire="booking"    x1="50" y1="50" x2="13" y2="20"/>
+          <line class="wire" data-wire="cleaner"    x1="50" y1="50" x2="13" y2="50"/>
+          <line class="wire" data-wire="guest"      x1="50" y1="50" x2="13" y2="80"/>
+          <line class="wire" data-wire="lock"       x1="50" y1="50" x2="87" y2="20"/>
+          <line class="wire" data-wire="team"       x1="50" y1="50" x2="87" y2="50"/>
+          <line class="wire" data-wire="thermostat" x1="50" y1="50" x2="87" y2="80"/>
+        </svg>
+
+        <div class="hub" id="mv-hub" aria-hidden="true"><span>STAYENO<br>AI</span></div>
+
+        <div class="node" data-node="booking" style="left:13%;top:20%">
+          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <div class="n-label">Booking</div>
+          <div class="n-card" data-card="booking"></div>
+        </div>
+        <div class="node" data-node="cleaner" style="left:13%;top:50%">
+          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V10l7-6 7 6v11"/><path d="M9 21v-6h6v6"/></svg></div>
+          <div class="n-label">Cleaning</div>
+          <div class="n-card" data-card="cleaner"></div>
+        </div>
+        <div class="node top" data-node="guest" style="left:13%;top:80%">
+          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="n-label">Guest inbox</div>
+          <div class="n-card" data-card="guest"></div>
+        </div>
+        <div class="node" data-node="lock" style="left:87%;top:20%">
+          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+          <div class="n-label">Smart lock</div>
+          <div class="n-card" data-card="lock"></div>
+        </div>
+        <div class="node" data-node="team" style="left:87%;top:50%">
+          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <div class="n-label">You &amp; co-host</div>
+          <div class="n-card" data-card="team"></div>
+        </div>
+        <div class="node top" data-node="thermostat" style="left:87%;top:80%">
+          <div class="n-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>
+          <div class="n-label">Thermostat</div>
+          <div class="n-card" data-card="thermostat"></div>
+        </div>
+
+        <div class="caption" id="mv-caption" aria-live="polite">
+          <h3 id="mv-title">A booking arrives</h3>
+          <p id="mv-text">Sarah books Ocean View Suite on Airbnb — Friday to Monday.</p>
+        </div>
+
+        <div class="endcard" id="mv-end" aria-hidden="true">
+          <div>
+            <b>0 clicks.</b>
+            <span>Ten tasks. One booking. Stayeno did it all.</span>
+            <small>Now imagine every booking, every property, every week.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="movie-bottom">
+        <button class="play" id="mv-play" type="button" aria-label="Play">▶</button>
+        <div class="chapters" id="mv-chapters"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     GETTING STARTED
+     ===================================================================== -->
+<section class="section soft">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Getting started</div>
+      <h2>Four steps. Then it just runs.</h2>
+      <p>No onboarding calls, no training. You talk to Stayeno the way you'd brief a great co-host.</p>
+    </div>
+    <div class="steps4">
+      <div class="step-card reveal"><div class="big">01</div><h3>Paste your calendar link</h3><p>Airbnb, Vrbo or Booking.com. Stayeno reads your bookings and keeps them in sync.</p><div class="say">“Here's my Airbnb calendar link.”</div></div>
+      <div class="step-card reveal"><div class="big">02</div><h3>Tell it how you host</h3><p>Check-in times, your cleaner, your co-host, your house rules — in plain words.</p><div class="say">“Check-in is 3 PM. Maria cleans.”</div></div>
+      <div class="step-card reveal"><div class="big">03</div><h3>Connect your home</h3><p>Link your Schlage lock and Honeywell thermostat so codes and comfort run themselves.</p><div class="say">“Connect my front-door lock.”</div></div>
+      <div class="step-card reveal"><div class="big">04</div><h3>Stay in control</h3><p>Ask anything, approve with a word, or let it run. You're told when something needs you.</p><div class="say">“Pause price changes this week.”</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     WHAT YOU'LL NEVER DO AGAIN
+     ===================================================================== -->
+<section class="section dark">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow on-dark">Your new normal</div>
+      <h2>Things you'll never do again.</h2>
+      <p>Every one of these happens automatically, for every booking, on every property.</p>
+    </div>
+    <div class="never">
+      <div class="reveal"><i>✓</i><s>Type door codes into the lock</s></div>
+      <div class="reveal"><i>✓</i><s>Text the cleaner after every booking</s></div>
+      <div class="reveal"><i>✓</i><s>Check three calendars for changes</s></div>
+      <div class="reveal"><i>✓</i><s>Pre-cool the house before arrivals</s></div>
+      <div class="reveal"><i>✓</i><s>Answer “what's the Wi-Fi?” at midnight</s></div>
+      <div class="reveal"><i>✓</i><s>Remember to delete old door codes</s></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     UNDER THE HOOD
+     ===================================================================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Under the hood</div>
+      <h2>Automation you can trust with your front door.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal"><div class="card-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><h3>Checked, not assumed</h3><p>Every door code is read back from the lock after it's set. Every removal is confirmed. If something can't be confirmed, you hear about it.</p></div>
+      <div class="card reveal"><div class="card-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/></svg></div><h3>Never twice, never missed</h3><p>Stayeno remembers what it already did. Messages aren't sent twice, and anything that fails is retried automatically.</p></div>
+      <div class="card reveal"><div class="card-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div><h3>Careful with changes</h3><p>Moved dates and cancellations are double-checked before access changes, so a calendar glitch never locks out a guest who's staying.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container reveal">
+    <span class="ai-badge">✦ Your first booking is the setup</span>
+    <h2>Let the next booking<br><span class="grad-text">run itself.</span></h2>
+    <p>Paste your calendar link and watch Stayeno take over the busywork.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="signup.html">Start free →</a>
+      <a class="btn btn-ghost" href="features.html">Explore features</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36"><span class="brand-wordmark">Stay<span>eno</span></span></a>
+        <p>The AI co-host that runs your short-term rentals — so you can focus on growing your business.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><strong>Product</strong><a href="index.html#ai">AI co-host</a><a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="signup.html">Start free</a></div>
+        <div class="footer-col"><strong>Messaging</strong><a href="sms.html">Notifications</a><a href="sms-compliance.html">SMS Compliance</a></div>
+        <div class="footer-col"><strong>Legal</strong><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+        <div class="footer-col"><strong>Contact</strong><a href="mailto:support@stayeno.com">support@stayeno.com</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Stayeno · A&amp;R Investment Venture LLC</span><span>Built for hosts who'd rather grow than chase tasks.</span></div>
+  </div>
+</footer>
+
+<script src="js/stayeno.js"></script>
 <script>
+/* ==========================================================================
+   WORKFLOW MOVIE — scenes play one after another, like a short film.
+   Each scene: which nodes light up, which wires glow, the clock, the
+   caption, and the card text shown next to each lit node.
+   ========================================================================== */
 (function(){
-  const nav=document.querySelector('.nav');
-  const btn=document.querySelector('.mobile-menu-toggle');
-  const menu=document.getElementById('mobile-menu');
-  if(!btn||!menu) return;
-  function closeMenu(){menu.hidden=true;btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu');nav.classList.remove('menu-open');}
-  btn.addEventListener('click',function(){const open=menu.hidden;menu.hidden=!open;btn.setAttribute('aria-expanded',String(open));btn.setAttribute('aria-label',open?'Close menu':'Open menu');nav.classList.toggle('menu-open',open);});
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-  window.addEventListener('resize',function(){if(window.innerWidth>800) closeMenu();});
+  var player = document.getElementById('movie-player');
+  if(!player) return;
+
+  var reduceMotion = prefersReducedMotion();
+  var ALL = ['booking','cleaner','guest','lock','team','thermostat'];
+
+  var SCENES = [
+    {chapter:'Booking', clock:'Tue · 2:14 PM', on:['booking'], wires:['booking'], tasks:1, ms:4200,
+     title:'A booking arrives',
+     text:'Sarah books Ocean View Suite on Airbnb — Friday to Monday, 3 nights.',
+     cards:{booking:"<b>New booking · Airbnb</b>Sarah · Fri → Mon · 3 nights<br><span class='ok'>Read from your calendar ✓</span>"}},
+    {chapter:'Plan', clock:'Tue · 2:14 PM', on:[], wires:ALL, think:true, tasks:1, ms:4200,
+     title:'Stayeno plans everything',
+     text:'It checks for duplicates and changes, then lines up the lock, the team, the cleaning and the climate.'},
+    {chapter:'Door code', clock:'Tue · 2:15 PM', on:['lock'], wires:['lock'], tasks:1, ms:4800,
+     title:'A private door code is created',
+     text:'A unique code, active only for Sarah’s stay — and checked on the lock, not just sent.',
+     cards:{lock:"<b>Door code · Sarah</b><span class='dots'>••••••</span><br>Active Fri 2 PM → Mon 1 PM<br><span class='ok'>Verified on the lock ✓</span>"}},
+    {chapter:'Team', clock:'Tue · 2:15 PM', on:['team'], wires:['team'], tasks:2, ms:4400,
+     title:'You and your co-host are told',
+     text:'Booking details and the door code arrive by email and text — before you even open the app.',
+     cards:{team:"<b>📱 Host &amp; co-host</b>New booking · Sarah · Fri–Mon<br>Door code included<br><span class='ok'>Delivered ✓</span>"}},
+    {chapter:'Cleaning', clock:'Thu · 9:00 AM', on:['cleaner'], wires:['cleaner'], tasks:1, ms:4600,
+     title:'Cleaning is lined up',
+     text:'Your cleaner gets the schedule and the turnover window — never the guest’s door code.',
+     cards:{cleaner:"<b>🧹 Cleaning reminder</b>Ocean View Suite · Friday<br>Window: 12 – 4 PM<br><span class='ok'>No door code shared ✓</span>"}},
+    {chapter:'Comfort', clock:'Fri · 11:00 AM', on:['thermostat'], wires:['thermostat'], tasks:1, ms:5200,
+     title:'The home gets comfortable',
+     text:'Four hours before arrival, the AC starts cooling — Sarah walks into 70°F.',
+     cards:{thermostat:"<b>🌡️ Pre-arrival</b><div class='mini-dial'><strong data-count-from='80' data-count-to='70'>80°</strong><span>Cooling for Sarah<br>arrives 3 PM</span></div>"}},
+    {chapter:'Guest', clock:'Fri · 4:32 PM', on:['guest'], wires:['guest'], tasks:1, ms:5200,
+     title:'Guests get answers in seconds',
+     text:'Questions are answered from your house rules and listing — day or night.',
+     cards:{guest:"<div class='chat-q'>What's the Wi-Fi password? 🙂</div><div class='chat-a'>It's on the welcome card by the door — network <b>OceanView</b>. Enjoy your stay!</div><small>✦ Answered by Stayeno AI · 4 sec</small>"}},
+    {chapter:'Checkout', clock:'Mon · 1:00 PM', on:['lock','thermostat'], wires:['lock','thermostat'], tasks:2, ms:5400,
+     title:'Checkout: access closed, energy saved',
+     text:'The door code is removed and confirmed. The house goes back to energy-saving vacant mode.',
+     cards:{lock:"<b>Door code removed</b><span class='ok'>Confirmed on the lock ✓</span>",
+            thermostat:"<b>🌡️ Vacant mode</b><div class='mini-dial'><strong data-count-from='70' data-count-to='80'>70°</strong><span>Saving energy<br>until the next guest</span></div>"}},
+    {chapter:'0 clicks', clock:'Mon · 1:00 PM', on:[], wires:[], tasks:0, ms:5000, end:true,
+     title:'', text:''}
+  ];
+
+  // ---- elements ----
+  var clock = document.getElementById('mv-clock');
+  var tasksEl = document.getElementById('mv-tasks');
+  var hub = document.getElementById('mv-hub');
+  var caption = document.getElementById('mv-caption');
+  var titleEl = document.getElementById('mv-title');
+  var textEl = document.getElementById('mv-text');
+  var endcard = document.getElementById('mv-end');
+  var playBtn = document.getElementById('mv-play');
+  var chapterBar = document.getElementById('mv-chapters');
+  var nodes = {}, cards = {}, wires = {};
+  ALL.forEach(function(id){
+    nodes[id] = player.querySelector('[data-node="' + id + '"]');
+    cards[id] = player.querySelector('[data-card="' + id + '"]');
+    wires[id] = player.querySelector('[data-wire="' + id + '"]');
+  });
+
+  // ---- chapter buttons ----
+  var chapters = [];
+  SCENES.forEach(function(scene, n){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chapter';
+    b.setAttribute('aria-label', 'Go to: ' + scene.chapter);
+    b.innerHTML = '<i></i><span>' + scene.chapter + '</span>';
+    b.addEventListener('click', function(){ goTo(n, true); });
+    chapterBar.appendChild(b);
+    chapters.push(b);
+  });
+
+  // ---- end-card confetti ----
+  var COLORS = ['#22d3ee','#8b5cf6','#2457ff','#86efac','#fcd34d'];
+  for(var s = 0; s < 28; s++){
+    var spark = document.createElement('i');
+    spark.className = 'spark';
+    spark.style.left = '50%';
+    spark.style.top = '45%';
+    spark.style.background = COLORS[s % COLORS.length];
+    var angle = (s / 28) * Math.PI * 2;
+    var dist = 160 + Math.random() * 200;
+    spark.style.setProperty('--dx', Math.round(Math.cos(angle) * dist) + 'px');
+    spark.style.setProperty('--dy', Math.round(Math.sin(angle) * dist) + 'px');
+    endcard.appendChild(spark);
+  }
+
+  // ---- state ----
+  var current = 0, playing = false, timer = null, startedAt = 0, remaining = 0;
+  var counters = [];
+
+  // [] = countNumber(el): animate 80° -> 70° style numbers inside a card
+  function countNumber(el){
+    var from = Number(el.getAttribute('data-count-from'));
+    var to = Number(el.getAttribute('data-count-to'));
+    if(reduceMotion){ el.textContent = to + '°'; return; }
+    var steps = Math.abs(to - from), k = 0;
+    var id = setInterval(function(){
+      k = k + 1;
+      el.textContent = (from + (to > from ? k : -k)) + '°';
+      if(k >= steps) clearInterval(id);
+    }, 230);
+    counters.push(id);
+  }
+
+  // [total] = tasksBefore(n): tasks finished before scene n starts
+  function tasksUpTo(n){
+    var total = 0;
+    for(var k = 0; k <= n; k++){ total += SCENES[k].tasks; }
+    return total;
+  }
+
+  // [] = showScene(n): draw scene n
+  function showScene(n){
+    var scene = SCENES[n];
+    counters.forEach(clearInterval); counters = [];
+
+    clock.textContent = scene.clock;
+    tasksEl.textContent = tasksUpTo(n);
+    hub.classList.toggle('think', !!scene.think);
+    endcard.classList.toggle('show', !!scene.end);
+
+    ALL.forEach(function(id){
+      var isOn = scene.on.indexOf(id) >= 0;
+      nodes[id].classList.toggle('on', isOn);
+      wires[id].classList.toggle('live', scene.wires.indexOf(id) >= 0);
+      if(isOn && scene.cards && scene.cards[id]){ cards[id].innerHTML = scene.cards[id]; }
+    });
+    // nodes already used earlier in the story keep a green "done" outline
+    ALL.forEach(function(id){
+      var usedBefore = false;
+      for(var k = 0; k < n; k++){ if(SCENES[k].on.indexOf(id) >= 0) usedBefore = true; }
+      nodes[id].classList.toggle('done', usedBefore && scene.on.indexOf(id) < 0 && !scene.end);
+    });
+    player.querySelectorAll('[data-count-from]').forEach(function(el){
+      if(el.closest('.node.on')) countNumber(el);
+    });
+
+    if(scene.end){
+      caption.style.visibility = 'hidden';
+    } else {
+      caption.style.visibility = '';
+      titleEl.textContent = scene.title;
+      textEl.textContent = scene.text;
+      caption.classList.remove('swap'); void caption.offsetWidth; caption.classList.add('swap');
+    }
+
+    chapters.forEach(function(c, k){
+      c.classList.toggle('past', k < n);
+      c.classList.toggle('now', k === n);
+      var fill = c.querySelector('i');
+      if(k === n){ fill.style.transition = 'none'; fill.style.width = '0'; void fill.offsetWidth; }
+      else { fill.style.transition = 'none'; fill.style.width = ''; }
+    });
+  }
+
+  // [] = runTimer(ms): fill the current chapter and move on after ms
+  function runTimer(ms){
+    remaining = ms;
+    startedAt = Date.now();
+    var fill = chapters[current].querySelector('i');
+    fill.style.transition = 'width ' + ms + 'ms linear';
+    requestAnimationFrame(function(){ fill.style.width = '100%'; });
+    clearTimeout(timer);
+    timer = setTimeout(function(){ goTo((current + 1) % SCENES.length, false); }, ms);
+  }
+
+  function goTo(n, fromClick){
+    current = n;
+    remaining = 0;               // a new chapter always starts from its beginning
+    showScene(n);
+    if(playing){ runTimer(SCENES[n].ms); }
+  }
+
+  function play(){
+    if(playing) return;
+    playing = true;
+    playBtn.textContent = '❚❚';
+    playBtn.setAttribute('aria-label','Pause');
+    runTimer(remaining > 0 ? remaining : SCENES[current].ms);
+  }
+
+  function pause(){
+    if(!playing) return;
+    playing = false;
+    clearTimeout(timer);
+    remaining = Math.max(300, remaining - (Date.now() - startedAt));
+    var fill = chapters[current].querySelector('i');
+    var width = getComputedStyle(fill).width;
+    fill.style.transition = 'none';
+    fill.style.width = width;
+    playBtn.textContent = '▶';
+    playBtn.setAttribute('aria-label','Play');
+  }
+
+  playBtn.addEventListener('click', function(){ if(playing){ pause(); } else { play(); } });
+
+  showScene(0);
+
+  // Start when the movie scrolls into view; pause when it leaves.
+  if(reduceMotion || !('IntersectionObserver' in window)) return;
+  var userPaused = false;
+  playBtn.addEventListener('click', function(){ userPaused = !playing; });
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting && !userPaused){ play(); }
+      if(!entry.isIntersecting){ pause(); }
+    });
+  }, {threshold:0.45});
+  observer.observe(player);
 })();
 </script>
-</body></html>
+</body>
+</html>
