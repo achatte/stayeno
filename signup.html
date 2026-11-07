@@ -1,87 +1,328 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Get Started — Smart Hosting</title><link rel="stylesheet" href="css/style.css"><link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=6">
-<link rel="apple-touch-icon" href="favicon.png?v=6">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Start free — Stayeno</title>
+<meta name="description" content="Start free: paste your Airbnb, Vrbo or Booking.com calendar link and let Stayeno set up your automation.">
+<meta name="theme-color" content="#070d22">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=7">
+<link rel="apple-touch-icon" href="favicon.png?v=7">
+<link rel="stylesheet" href="css/stayeno.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-<nav class="nav" aria-label="Primary navigation">
+
+<nav class="nav" id="nav" aria-label="Primary navigation">
   <div class="container navinner">
-    <a class="brand" href="index.html" aria-label="Smart Hosting home">
-      <img class="brand-icon" src="assets/smart-hosting-icon.png" alt="Smart Hosting logo" width="42" height="42">
-      <span class="brand-wordmark">Smart<span>Hosting</span></span>
+    <a class="brand" href="index.html" aria-label="Stayeno home">
+      <img class="brand-icon" src="favicon.png?v=7" alt="Stayeno logo" width="36" height="36">
+      <span class="brand-wordmark">Stay<span>eno</span></span>
     </a>
-    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="navlinks"><a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="sms.html">Notifications</a><a class="navcta" href="signup.html">Get started</a></div>
+    <div class="navlinks">
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Start free</a>
+    </div>
+    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobile-menu" hidden>
     <div class="container mobile-menu-inner">
-      <a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="sms.html">Notifications</a>
-      <a class="navcta mobile-cta" href="signup.html">Get started</a>
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-primary" href="signup.html">Start free</a>
     </div>
   </div>
 </nav>
-<section class="section"><div class="container" style="max-width:760px">
-<div class="eyebrow">Get started</div><h1 style="font-size:54px">Tell us about your property.</h1><p style="color:var(--muted);font-size:18px">Create an account request and choose whether you want to receive Smart Hosting SMS operational notifications.</p>
-<div class="panel">
-<form id="signupForm" action="https://formsubmit.co/manager@chatterjeeconsultingservices.com" method="POST">
-<input type="hidden" name="_subject" value="Smart Hosting account request / SMS consent record">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_next" value="https://www.smartlyhosted.com/signup.html?submitted=1">
-<input type="hidden" name="sms_consent" id="smsConsentValue" value="No">
-<input type="hidden" name="sms_consent_timestamp" id="smsConsentTimestamp" value="">
-<input type="hidden" name="consent_source" value="Smart Hosting website signup form">
-<label>Name<br><input name="name" required autocomplete="name" style="width:100%;margin-top:7px"></label><br><br>
-<label>Email<br><input type="email" name="email" required autocomplete="email" style="width:100%;margin-top:7px"></label><br><br>
-<label>Phone number <span style="color:var(--muted)">(optional)</span><br><input id="phone" type="tel" name="phone" autocomplete="tel" style="width:100%;margin-top:7px"></label><br><br>
-<label style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" name="terms" required style="margin-top:5px"> <span>I agree to the <a href="terms.html" style="color:var(--brand);font-weight:700">Terms of Service</a> and acknowledge the <a href="privacy.html" style="color:var(--brand);font-weight:700">Privacy Policy</a>.</span></label><br>
-<label style="display:flex;gap:10px;align-items:flex-start"><input id="smsConsent" type="checkbox" name="sms_consent_checkbox" value="Yes" style="margin-top:5px"> <span>By providing my phone number and checking this box, I agree to receive SMS operational/account notifications from Smart Hosting. Message frequency may vary. Standard Message and Data Rates may apply. Reply STOP to opt out. Reply HELP for help. Consent is not a condition of purchase. We will not share mobile information with third parties for promotional or marketing purposes.</span></label><br>
-<p class="note" style="margin-top:-6px">SMS consent is optional. You may submit this form without opting into SMS notifications.</p>
-<button class="btn btn-primary" type="submit">Submit request</button>
-<p id="result" class="note" role="status"></p>
-</form>
-</div>
-</div></section>
-<footer class="footer"><div class="container footerrow"><span>© 2026 Smart Hosting · A&amp;R Investment Venture LLC</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span></div></footer>
+
+<header class="page-hero compact center" style="padding-bottom:150px">
+  <div class="container">
+    <span class="ai-badge">✦ Start free</span>
+    <h1>Paste your calendar link.<br><span class="grad-text">Stayeno does the rest.</span></h1>
+    <p class="lead">Create an account request and choose whether you want to receive Stayeno SMS operational notifications.</p>
+  </div>
+</header>
+
+<section class="section soft" style="padding-top:0">
+  <div class="container" style="margin-top:-100px;position:relative;z-index:2">
+    <div class="signup-wrap">
+
+      <!-- ============================== FORM ============================== -->
+      <div class="form-side">
+        <h2>Tell us about your property.</h2>
+        <p>It takes about a minute.</p>
+
+        <form id="signupForm" action="https://formsubmit.co/support@stayeno.com" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Stayeno account request / SMS consent record">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://www.stayeno.com/signup.html?submitted=1">
+          <input type="hidden" name="sms_consent" id="smsConsentValue" value="No">
+          <input type="hidden" name="sms_consent_timestamp" id="smsConsentTimestamp" value="">
+          <input type="hidden" name="consent_source" value="Stayeno website signup form">
+
+          <label class="field"><span>Name</span>
+            <input class="input" name="name" required autocomplete="name"></label>
+
+          <label class="field"><span>Email</span>
+            <input class="input" type="email" name="email" required autocomplete="email"></label>
+
+          <label class="field"><span>Phone number <em>(optional)</em></span>
+            <input class="input" id="phone" type="tel" name="phone" autocomplete="tel"></label>
+
+          <div class="field">
+            <span>Booking calendar link (iCal) <em>— at least one</em></span>
+            <div class="ical-list" id="icalList">
+              <div class="ical-row">
+                <input class="input ical-input" type="url" name="ical_url_1" required placeholder="https://www.airbnb.com/calendar/ical/…" aria-label="Calendar link 1" aria-describedby="icalMsg1">
+                <span class="ical-state" aria-hidden="true"></span>
+                <div class="ical-msg" id="icalMsg1"></div>
+              </div>
+            </div>
+            <button class="add-ical" id="addIcal" type="button">+ Add another calendar</button>
+            <div class="privacy-hint">🔒 <span>Your calendar link is private. Stayeno uses it only to read your bookings.</span></div>
+          </div>
+
+          <details class="help-tabs">
+            <summary>Where do I find my calendar link?</summary>
+            <div class="tabbar" role="tablist" aria-label="Booking platform">
+              <button type="button" role="tab" aria-selected="true" aria-controls="help-airbnb" id="ht-airbnb">Airbnb</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="help-vrbo" id="ht-vrbo" tabindex="-1">Vrbo</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="help-booking" id="ht-booking" tabindex="-1">Booking.com</button>
+            </div>
+            <div class="tabpanel" role="tabpanel" id="help-airbnb" aria-labelledby="ht-airbnb">
+              <ol><li>Open <b>Listings</b> and choose your listing.</li><li>Go to <b>Availability</b> → <b>Connect calendars</b>.</li><li>Choose <b>Export calendar</b> and copy the link.</li></ol>
+            </div>
+            <div class="tabpanel" role="tabpanel" id="help-vrbo" aria-labelledby="ht-vrbo" hidden>
+              <ol><li>Open your property's <b>Calendar</b>.</li><li>Choose <b>Import &amp; export</b>.</li><li>Under <b>Export calendar</b>, copy the link.</li></ol>
+            </div>
+            <div class="tabpanel" role="tabpanel" id="help-booking" aria-labelledby="ht-booking" hidden>
+              <ol><li>In the extranet, open <b>Rates &amp; Availability</b>.</li><li>Choose <b>Sync calendars</b>.</li><li>Under <b>Export calendar</b>, copy the link.</li></ol>
+            </div>
+            <div class="tabpanel" style="padding-top:0"><small>Menu names can differ slightly between accounts.</small></div>
+          </details>
+
+          <label class="field"><span>Number of properties <em>(optional)</em></span>
+            <input class="input" type="number" name="property_count" min="1" inputmode="numeric"></label>
+
+          <label class="check"><input type="checkbox" name="terms" required> <span>I agree to the <a href="terms.html">Terms of Service</a> and acknowledge the <a href="privacy.html">Privacy Policy</a>.</span></label>
+
+          <label class="check"><input id="smsConsent" type="checkbox" name="sms_consent_checkbox" value="Yes"> <span>By providing my phone number and checking this box, I agree to receive SMS operational/account notifications from Stayeno. Message frequency may vary. Standard Message and Data Rates may apply. Reply STOP to opt out. Reply HELP for help. Consent is not a condition of purchase. We will not share mobile information with third parties for promotional or marketing purposes.</span></label>
+          <p class="form-note">SMS consent is optional. You may submit this form without opting into SMS notifications.</p>
+
+          <button class="btn btn-primary btn-block" type="submit">Start free →</button>
+          <p id="result" class="form-result" role="status"></p>
+        </form>
+      </div>
+
+      <!-- ============================== VISUAL ============================== -->
+      <aside class="visual-side" aria-label="What happens after you sign up">
+        <span class="ai-badge">✦ Your AI co-host</span>
+        <h3>Here's what Stayeno does once you're in.</h3>
+        <p>Paste a valid calendar link and watch the preview.</p>
+        <div class="setup-list" id="setupList">
+          <div class="setup-item"><span class="dot">1</span>Read your booking calendar</div>
+          <div class="setup-item"><span class="dot">2</span>Find your upcoming stays</div>
+          <div class="setup-item"><span class="dot">3</span>Prepare door codes &amp; cleaning</div>
+          <div class="setup-item"><span class="dot">4</span>Set up climate &amp; notifications</div>
+          <div class="setup-item"><span class="dot">5</span>Your AI co-host is ready</div>
+        </div>
+        <div class="visual-foot">Read-only calendar connection · Cancel anytime</div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36"><span class="brand-wordmark">Stay<span>eno</span></span></a>
+        <p>The AI co-host that runs your short-term rentals — so you can focus on growing your business.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><strong>Product</strong><a href="index.html#ai">AI co-host</a><a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="signup.html">Start free</a></div>
+        <div class="footer-col"><strong>Messaging</strong><a href="sms.html">Notifications</a><a href="sms-compliance.html">SMS Compliance</a></div>
+        <div class="footer-col"><strong>Legal</strong><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+        <div class="footer-col"><strong>Contact</strong><a href="mailto:support@stayeno.com">support@stayeno.com</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Stayeno · A&amp;R Investment Venture LLC</span><span>Built for hosts who'd rather grow than chase tasks.</span></div>
+  </div>
+</footer>
+
+<script src="js/stayeno.js"></script>
 <script>
+/* ==========================================================================
+   SIGNUP FORM
+   1. Calendar links: add rows (max 5) and check each link as it is typed
+   2. Help tabs (Airbnb / Vrbo / Booking.com)
+   3. Preview checklist on the right
+   4. Submit: same SMS-consent rules as before + calendar link check
+   ========================================================================== */
 (function(){
-  const form=document.getElementById('signupForm');
-  const sms=document.getElementById('smsConsent');
-  const phone=document.getElementById('phone');
-  const smsValue=document.getElementById('smsConsentValue');
-  const timestamp=document.getElementById('smsConsentTimestamp');
-  const result=document.getElementById('result');
-  if(form){
-    form.addEventListener('submit',function(e){
-      if(sms.checked && !phone.value.trim()){
-        e.preventDefault();
-        phone.setCustomValidity('Please enter a phone number if you want to opt into SMS notifications.');
-        phone.reportValidity();
-        return;
+  var MAX_CALENDARS = 5;
+  var ALLOWED = [
+    {domain:'airbnb.com',  name:'Airbnb'},
+    {domain:'vrbo.com',    name:'Vrbo'},
+    {domain:'booking.com', name:'Booking.com'}
+  ];
+
+  var form = document.getElementById('signupForm');
+  var list = document.getElementById('icalList');
+  var addBtn = document.getElementById('addIcal');
+  var sms = document.getElementById('smsConsent');
+  var phone = document.getElementById('phone');
+  var smsValue = document.getElementById('smsConsentValue');
+  var timestamp = document.getElementById('smsConsentTimestamp');
+  var result = document.getElementById('result');
+  if(!form) return;
+
+  // [ok, message] = checkCalendarLink(text)
+  // ok: true = valid, false = invalid, null = empty
+  function checkCalendarLink(text){
+    var value = String(text || '').trim();
+    if(!value) return [null, ''];
+    var url;
+    try { url = new URL(value); } catch(e){ return [false, 'That doesn’t look like a link. Paste the full address.']; }
+    if(url.protocol !== 'https:') return [false, 'Calendar links start with https://'];
+    var host = url.hostname.toLowerCase();
+    for(var i = 0; i < ALLOWED.length; i++){
+      var d = ALLOWED[i].domain;
+      if(host === d || host.slice(-(d.length + 1)) === '.' + d){
+        return [true, ALLOWED[i].name + ' calendar link ✓'];
       }
-      phone.setCustomValidity('');
-      smsValue.value=sms.checked?'Yes':'No';
-      timestamp.value=sms.checked?new Date().toISOString():'';
+    }
+    return [false, 'Use the calendar link from Airbnb, Vrbo or Booking.com.'];
+  }
+
+  // [] = showLinkState(row)
+  function showLinkState(row){
+    var input = row.querySelector('.ical-input');
+    var state = row.querySelector('.ical-state');
+    var msg = row.querySelector('.ical-msg');
+    var check = checkCalendarLink(input.value);
+    state.className = 'ical-state' + (check[0] === true ? ' ok' : check[0] === false ? ' bad' : '');
+    state.textContent = check[0] === true ? '✓' : check[0] === false ? '!' : '';
+    msg.className = 'ical-msg' + (check[0] === false ? ' bad' : '');
+    msg.textContent = check[1];
+    input.setCustomValidity(check[0] === false ? check[1] : '');
+    updatePreview();
+    return check[0];
+  }
+
+  function wireRow(row){
+    var input = row.querySelector('.ical-input');
+    input.addEventListener('input', function(){ showLinkState(row); });
+    input.addEventListener('blur', function(){ showLinkState(row); });
+  }
+  wireRow(list.querySelector('.ical-row'));
+
+  addBtn.addEventListener('click', function(){
+    var count = list.querySelectorAll('.ical-row').length;
+    if(count >= MAX_CALENDARS) return;
+    var n = count + 1;
+    var row = document.createElement('div');
+    row.className = 'ical-row';
+    row.innerHTML =
+      '<input class="input ical-input" type="url" name="ical_url_' + n + '" placeholder="https://www.vrbo.com/icalendar/…" aria-label="Calendar link ' + n + '" aria-describedby="icalMsg' + n + '">' +
+      '<span class="ical-state" aria-hidden="true"></span>' +
+      '<div class="ical-msg" id="icalMsg' + n + '"></div>';
+    list.appendChild(row);
+    wireRow(row);
+    row.querySelector('.ical-input').focus();
+    if(n >= MAX_CALENDARS){ addBtn.hidden = true; }
+  });
+
+  /* ---- 3. preview checklist (visual only) ---- */
+  var items = document.querySelectorAll('#setupList .setup-item');
+  var previewTimers = [];
+  var previewShown = false;
+  function updatePreview(){
+    var anyValid = false;
+    list.querySelectorAll('.ical-input').forEach(function(input){
+      if(checkCalendarLink(input.value)[0] === true) anyValid = true;
     });
-    phone.addEventListener('input',function(){phone.setCustomValidity('');});
+    if(anyValid && !previewShown){
+      previewShown = true;
+      items.forEach(function(item, k){
+        previewTimers.push(setTimeout(function(){ item.classList.add('work'); }, k * 700));
+        previewTimers.push(setTimeout(function(){
+          item.classList.remove('work'); item.classList.add('done');
+          item.querySelector('.dot').textContent = '✓';
+        }, k * 700 + 650));
+      });
+    }
+    if(!anyValid && previewShown){
+      previewShown = false;
+      previewTimers.forEach(clearTimeout); previewTimers = [];
+      items.forEach(function(item, k){
+        item.classList.remove('work','done');
+        item.querySelector('.dot').textContent = String(k + 1);
+      });
+    }
   }
-  if(new URLSearchParams(location.search).get('submitted')==='1' && result){
-    result.textContent='Thank you. Your request was submitted successfully.';
+
+  /* ---- 4. submit ---- */
+  form.addEventListener('submit', function(e){
+    // Calendar links: the first is required, every filled one must be valid.
+    var firstRow = list.querySelector('.ical-row');
+    var firstInput = firstRow.querySelector('.ical-input');
+    if(!firstInput.value.trim()){
+      e.preventDefault();
+      firstInput.setCustomValidity('Please paste at least one calendar link.');
+      firstInput.reportValidity();
+      return;
+    }
+    var badInput = null;
+    list.querySelectorAll('.ical-row').forEach(function(row){
+      if(showLinkState(row) === false && !badInput) badInput = row.querySelector('.ical-input');
+    });
+    if(badInput){ e.preventDefault(); badInput.reportValidity(); return; }
+
+    // Name, email and the Terms checkbox (browser checks).
+    form.querySelectorAll('[name=name],[name=email],[name=terms]').forEach(function(el){ el.setCustomValidity(''); });
+    if(!form.checkValidity()){ e.preventDefault(); form.reportValidity(); return; }
+
+    // SMS consent rules (unchanged).
+    if(sms.checked && !phone.value.trim()){
+      e.preventDefault();
+      phone.setCustomValidity('Please enter a phone number if you want to opt into SMS notifications.');
+      phone.reportValidity();
+      return;
+    }
+    phone.setCustomValidity('');
+    smsValue.value = sms.checked ? 'Yes' : 'No';
+    timestamp.value = sms.checked ? new Date().toISOString() : '';
+  });
+  phone.addEventListener('input', function(){ phone.setCustomValidity(''); });
+
+  if(new URLSearchParams(location.search).get('submitted') === '1' && result){
+    result.textContent = 'Thank you. Your request was submitted successfully.';
   }
 })();
-</script>
-<script>
+
+/* ---- 2. help tabs ---- */
 (function(){
-  const nav=document.querySelector('.nav');
-  const btn=document.querySelector('.mobile-menu-toggle');
-  const menu=document.getElementById('mobile-menu');
-  if(!btn||!menu) return;
-  function closeMenu(){menu.hidden=true;btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu');nav.classList.remove('menu-open');}
-  btn.addEventListener('click',function(){const open=menu.hidden;menu.hidden=!open;btn.setAttribute('aria-expanded',String(open));btn.setAttribute('aria-label',open?'Close menu':'Open menu');nav.classList.toggle('menu-open',open);});
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-  window.addEventListener('resize',function(){if(window.innerWidth>800) closeMenu();});
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabbar [role=tab]'));
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){
+        var on = (t === tab);
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    });
+  });
 })();
 </script>
-</body></html>
+</body>
+</html>
