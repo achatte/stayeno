@@ -3,411 +3,380 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Stayeno — Your property. Less busywork.</title>
-<meta name="description" content="Stayeno turns reservation events into automated property operations for short-term rentals.">
-<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=5">
-<link rel="apple-touch-icon" href="favicon.png?v=5">
+<title>Stayeno — Just ask. Your short-term rentals run themselves.</title>
+<meta name="description" content="Stayeno is the AI co-host you talk to. Ask in plain words and it runs your listings, pricing, guest messages, door codes, cleaning and thermostats — on desktop and mobile.">
+<meta name="theme-color" content="#070d22">
+<meta property="og:title" content="Stayeno — Just ask. Your rentals run themselves.">
+<meta property="og:description" content="The AI co-host for short-term rentals: pricing, guest inbox, direct booking, smart locks, cleaning and thermostats — all by chat.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=7">
+<link rel="apple-touch-icon" href="favicon.png?v=7">
+<script>document.documentElement.classList.add('js');</script>
 
 <style>
+/* ==========================================================================
+   1. DESIGN TOKENS
+   ========================================================================== */
 :root{
-  --blue:#2457ff;
-  --blue-dark:#1746df;
-  --blue-soft:#eff6ff;
-  --blue-pale:#f6f9ff;
-  --ink:#111827;
-  --text:#1d2940;
-  --muted:#68778d;
-  --line:#e4eaf2;
-  --green:#21a35a;
-  --green-soft:#eafff1;
-  --purple:#8b5cf6;
-  --white:#fff;
-  --shadow:0 18px 55px rgba(39,66,105,.10);
-  --shadow-lg:0 30px 90px rgba(38,69,120,.15);
-  --max:1200px;
+  --blue:#2457ff; --blue-dark:#1746df; --blue-soft:#eef3ff;
+  --cyan:#22d3ee; --violet:#8b5cf6; --green:#16a34a; --green-soft:#e9fbef;
+  --amber:#f59e0b; --red:#e5484d;
+  --navy:#070d22; --navy-2:#0d1736; --navy-3:#16224a;
+  --ink:#0f172a; --text:#1e293b; --muted:#64748b; --line:#e5eaf2; --bg-soft:#f6f8fc;
+  --ai:linear-gradient(135deg,#2457ff 0%,#8b5cf6 55%,#22d3ee 100%);
+  --shadow:0 18px 50px rgba(15,23,42,.08);
+  --shadow-lg:0 40px 100px rgba(7,13,34,.35);
+  --radius:20px; --max:1200px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  margin:0;color:var(--text);background:#fff;
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-a{text-decoration:none;color:inherit}
+body{margin:0;color:var(--text);background:#fff;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
 .container{width:min(var(--max),calc(100% - 48px));margin:auto}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:6px}
 
-/* NAV */
-.nav{
-  height:78px;position:relative;z-index:100;
-  background:#fff;border-bottom:1px solid var(--line);
-}
-.navinner{height:78px;display:flex;align-items:center;justify-content:space-between}
+/* Reveal-on-scroll (only when JavaScript runs) */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+
+/* ==========================================================================
+   2. NAVIGATION
+   ========================================================================== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .25s,border-color .25s,box-shadow .25s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(7,13,34,.82);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-color:rgba(255,255,255,.08)}
+.navinner{height:74px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:10px}
-.brand-icon{width:38px;height:38px;object-fit:contain}
-.brand-wordmark{font-size:22px;font-weight:850;letter-spacing:-.8px;color:#111827}
-.brand-wordmark span{color:var(--blue)}
-.navlinks{display:flex;align-items:center;gap:31px;color:#55657b;font-size:14px}
-.navlinks a:not(.navcta):hover{color:var(--blue)}
-.navcta{
-  padding:12px 19px;border-radius:11px;background:var(--blue);
-  color:#fff!important;font-weight:800;
-  box-shadow:0 8px 20px rgba(36,87,255,.20);
-  transition:.2s;
-}
-.navcta:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.brand-icon{width:36px;height:36px;object-fit:contain;border-radius:9px;background:#fff}
+.brand-wordmark{font-size:22px;font-weight:850;letter-spacing:-.8px;color:#fff}
+.brand-wordmark span{color:#7ea2ff}
+.navlinks{display:flex;align-items:center;gap:30px;font-size:14px;color:#c7d2ec}
+.navlinks a:not(.btn):hover{color:#fff}
 .mobile-menu-toggle{display:none}
+.mobile-menu{display:none}
 
-/* HERO */
-.hero{
-  position:relative;overflow:hidden;
-  padding:72px 0 70px;
-  background:
-    radial-gradient(circle at 86% 25%,rgba(36,87,255,.11),transparent 25%),
-    radial-gradient(circle at 51% 95%,rgba(36,87,255,.055),transparent 28%),
-    linear-gradient(180deg,#fff 0%,#fbfcff 100%);
-}
-.hero-grid{
-  position:relative;display:grid;
-  grid-template-columns:.88fr 1.12fr;
-  gap:54px;align-items:center;
-}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  color:var(--blue);font-size:11px;font-weight:900;
-  text-transform:uppercase;letter-spacing:1.8px;
-}
-.eyebrow:before{content:"";width:18px;height:2px;background:currentColor;border-radius:2px}
-.hero h1{
-  margin:17px 0 22px;max-width:610px;
-  font-size:clamp(49px,5.2vw,77px);
-  line-height:.97;letter-spacing:-4.1px;font-weight:820;color:#111827;
-}
-.hero h1 .blue{color:var(--blue)}
-.hero-lead{
-  max-width:580px;margin:0;color:#63738a;
-  font-size:18px;line-height:1.7;
-}
-.hero-lead strong{color:#26354d}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.btn{
-  min-height:49px;padding:0 20px;border-radius:11px;
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:800;transition:.2s ease;
-}
-.btn-primary{background:var(--blue);color:#fff;box-shadow:0 12px 28px rgba(36,87,255,.20)}
+/* ==========================================================================
+   3. BUTTONS AND SMALL PARTS
+   ========================================================================== */
+.btn{min-height:50px;padding:0 22px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-size:15px;font-weight:800;border:0;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 12px 30px rgba(36,87,255,.35)}
 .btn-primary:hover{background:var(--blue-dark);transform:translateY(-2px)}
-.btn-secondary{background:#fff;border:1px solid #dce4ef;color:#26354d}
-.btn-secondary:hover{border-color:#bdc9da;transform:translateY(-1px)}
-.hero-proof{display:flex;align-items:center;gap:10px;margin-top:24px;color:#8995a6;font-size:11px}
-.proof-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(33,163,90,.10)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.18)}
+.btn-ghost:hover{background:rgba(255,255,255,.14);transform:translateY(-1px)}
+.btn-light{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn-light:hover{border-color:#c4cfe0;transform:translateY(-1px)}
+.btn-sm{min-height:42px;padding:0 17px;font-size:14px;border-radius:11px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:850;letter-spacing:1.6px;text-transform:uppercase;color:var(--blue)}
+.eyebrow.on-dark{color:#8fb0ff}
+.ai-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#fff;background:var(--ai)}
+.grad-text{background:var(--ai);-webkit-background-clip:text;background-clip:text;color:transparent}
+.icon{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-/* HERO DASHBOARD — intentionally follows the blue/white visual language */
-.hero-product{position:relative;min-height:500px;display:flex;align-items:center;justify-content:center}
-.dashboard{
-  width:min(680px,100%);border:1px solid #dce5f0;border-radius:24px;
-  background:#fff;box-shadow:var(--shadow-lg);overflow:hidden;
-}
-.dash-top{
-  height:59px;padding:0 18px;display:flex;align-items:center;
-  justify-content:space-between;border-bottom:1px solid var(--line);
-}
-.dash-brand{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:850}
-.dash-mini-icon{
-  width:27px;height:27px;border-radius:8px;background:#edf3ff;
-  display:grid;place-items:center;color:var(--blue);font-size:12px;
-}
-.user{display:flex;align-items:center;gap:9px;font-size:10px;font-weight:750}
-.avatar{width:29px;height:29px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:9px}
-.dash-main{display:grid;grid-template-columns:170px 1fr;min-height:420px}
-.sidebar{border-right:1px solid var(--line);padding:17px 11px;background:#fcfdff}
-.side-label{padding:0 8px 10px;font-size:8px;font-weight:900;color:#8996a9;letter-spacing:1px}
-.property{
-  display:flex;gap:8px;padding:10px 8px;border-radius:11px;
-  margin-bottom:5px;align-items:center;
-}
-.property.active{background:#eaf1ff}
-.prop-img{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,#d8e5f7,#aabed8);position:relative}
-.prop-img:after{content:"";position:absolute;left:7px;right:7px;bottom:7px;height:10px;border-radius:3px;background:rgba(255,255,255,.75)}
-.prop-img.sand{background:linear-gradient(135deg,#ead7ba,#c9a77d)}
-.prop-img.gray{background:linear-gradient(135deg,#d8dde4,#aeb8c7)}
-.prop-copy{min-width:0}.prop-copy strong{display:block;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.prop-copy span{display:block;color:#6f7d90;font-size:7px;margin-top:3px}
-.active-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:4px}
-.main-panel{padding:18px 19px;background:#fff}
-.panel-head{display:flex;align-items:center;justify-content:space-between}
-.panel-title{display:flex;gap:8px;align-items:center}
-.panel-title-icon{color:var(--blue);font-size:12px}.panel-title strong{font-size:15px}.panel-sub{font-size:8px;color:#8b97a7;margin-top:4px}
-.running{padding:7px 10px;border-radius:20px;background:var(--green-soft);color:#19874b;font-size:8px;font-weight:900}
-.tabs{display:flex;gap:24px;margin-top:17px;border-bottom:1px solid var(--line)}
-.tabs span{padding:0 0 10px;font-size:8px;color:#748196}.tabs .active{color:var(--blue);font-weight:900;border-bottom:2px solid var(--blue)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:17px}
-.stat{padding:14px 11px;border:1px solid var(--line);border-radius:11px;background:#fff}
-.stat strong{font-size:19px;display:block;color:#14213a}.stat span{font-size:7px;color:#7c899a;display:block;margin-top:7px}
-.flow-activity{display:grid;grid-template-columns:1.15fr .85fr;gap:9px;margin-top:10px}
-.flow-box,.activity-box{border:1px solid var(--line);border-radius:11px;background:#fff;overflow:hidden}
-.box-head{height:37px;padding:0 11px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);font-size:8px;font-weight:850}
-.box-head a{color:var(--blue);font-size:7px}
-.flow-body{padding:11px}
-.flow-node{
-  padding:9px 7px;border:1px solid #bfe9cb;border-radius:8px;
-  background:#f0fff4;text-align:center;font-size:7px;font-weight:850;color:#246b3e;
-}
-.flow-node span{display:block;color:#769082;font-size:6px;font-weight:600;margin-top:3px}
-.flow-arrow{text-align:center;height:11px;font-size:8px;color:#7e8b9d}
-.flow-node.blue{border-color:#bed3ff;background:#f1f6ff;color:#2c58b4}
-.flow-split{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.flow-node.purple{border-color:#dac9ff;background:#faf7ff;color:#7044b6}
-.activity-row{padding:11px;border-bottom:1px solid var(--line)}
-.activity-row:last-child{border-bottom:0}
-.activity-row strong{display:block;font-size:7px}.activity-row span{display:block;font-size:6px;color:#8995a4;margin-top:4px}.activity-row time{float:right;color:#8995a4;font-size:6px;font-weight:700}
-.float{
-  position:absolute;background:#fff;border:1px solid #e0e7f0;
-  border-radius:13px;box-shadow:0 14px 40px rgba(37,64,104,.12);
-  z-index:3;
-}
-.readonly{left:-18px;top:42px;padding:11px 13px;display:flex;align-items:center;gap:9px}
-.readonly-icon{width:29px;height:29px;border-radius:50%;background:#edf3ff;color:var(--blue);display:grid;place-items:center;font-size:11px;font-weight:900}
-.float strong{display:block;font-size:8px;letter-spacing:.7px}.float span{display:block;font-size:7px;color:#8793a4;margin-top:3px}
-.cleaner{right:-16px;bottom:42px;padding:10px 13px;font-size:8px;font-weight:800}.cleaner b{color:var(--green)}
+/* ==========================================================================
+   4. HERO (dark, AI chat demo)
+   ========================================================================== */
+.hero{position:relative;overflow:hidden;color:#fff;padding:150px 0 110px;
+  background:
+    radial-gradient(900px 500px at 85% 10%,rgba(139,92,246,.30),transparent 60%),
+    radial-gradient(800px 500px at 10% 90%,rgba(36,87,255,.35),transparent 60%),
+    radial-gradient(600px 400px at 60% 60%,rgba(34,211,238,.10),transparent 60%),
+    var(--navy)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+.hero h1{margin:20px 0 22px;font-size:clamp(46px,6vw,82px);line-height:.98;letter-spacing:-3.5px;font-weight:850}
+.hero-lead{max-width:560px;margin:0;color:#b9c5e2;font-size:19px;line-height:1.65}
+.hero-lead strong{color:#fff;font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-notes{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:26px;color:#93a3c8;font-size:13px}
+.hero-notes span:before{content:"✓";color:var(--cyan);font-weight:900;margin-right:7px}
 
-/* TRUST */
-.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
-.trust-row{min-height:72px;display:flex;justify-content:center;align-items:center;gap:30px;flex-wrap:wrap}
-.trust-label{font-size:9px;text-transform:uppercase;letter-spacing:1.1px;font-weight:900;color:#9ba6b5}
-.ota{font-size:13px;font-weight:800;color:#6c798b}
+/* Chat window */
+.demo-wrap{position:relative}
+.chat{position:relative;border-radius:24px;background:rgba(13,23,54,.78);border:1px solid rgba(255,255,255,.12);
+  box-shadow:var(--shadow-lg),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);overflow:hidden}
+.chat:before{content:"";position:absolute;inset:-1px;border-radius:24px;padding:1px;background:var(--ai);opacity:.55;pointer-events:none;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.chat-top{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.chat-id{display:flex;align-items:center;gap:11px}
+.chat-orb{width:34px;height:34px;border-radius:50%;background:var(--ai);box-shadow:0 0 22px rgba(139,92,246,.6);position:relative}
+.chat-orb:after{content:"";position:absolute;inset:9px;border-radius:50%;background:rgba(255,255,255,.85)}
+.chat-id strong{display:block;font-size:14px}
+.chat-id small{display:block;color:#8fa0c6;font-size:11px}
+.live{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;color:#86efac}
+.live i{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.18);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(34,197,94,.05)}}
+.chat-log{height:390px;overflow:hidden;padding:20px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+.msg{max-width:88%;font-size:14px;line-height:1.5;animation:msgIn .35s ease both}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.msg.user{align-self:flex-end;background:var(--blue);color:#fff;padding:10px 14px;border-radius:16px 16px 4px 16px;box-shadow:0 8px 20px rgba(36,87,255,.35)}
+.msg.ai{align-self:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);color:#e6ecfb;padding:12px 14px;border-radius:16px 16px 16px 4px}
+.msg.typing{display:flex;gap:5px;padding:14px 16px}
+.msg.typing span{width:7px;height:7px;border-radius:50%;background:#a5b4fc;animation:dot 1s infinite}
+.msg.typing span:nth-child(2){animation-delay:.15s}.msg.typing span:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.ai-card{margin-top:9px;display:grid;gap:7px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:13px}
+.row b{font-weight:750;color:#fff}
+.row small{display:block;color:#93a3c8;font-size:11px}
+.pill{flex:none;padding:4px 9px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap}
+.pill.green{background:rgba(34,197,94,.16);color:#86efac}
+.pill.blue{background:rgba(36,87,255,.22);color:#a9c0ff}
+.pill.violet{background:rgba(139,92,246,.22);color:#d4c3ff}
+.pill.amber{background:rgba(245,158,11,.18);color:#fcd34d}
+.done{color:#86efac;font-weight:800}
+.chat-suggest{display:flex;gap:7px;overflow-x:auto;padding:0 20px 12px;scrollbar-width:none}
+.chat-suggest::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#cbd5f0;font-size:12px;font-weight:650;cursor:pointer;font-family:inherit;transition:.2s}
+.chip:hover,.chip.active{background:rgba(36,87,255,.28);border-color:rgba(126,162,255,.6);color:#fff}
+.chat-input{display:flex;align-items:center;gap:10px;margin:0 14px 14px;padding:8px 8px 8px 16px;border-radius:15px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.chat-input .typed{flex:1;min-height:22px;font-size:14px;color:#fff;white-space:nowrap;overflow:hidden}
+.chat-input .typed:empty:before{content:"Ask Stayeno anything…";color:#7d8db3}
+.caret{display:inline-block;width:2px;height:17px;background:var(--cyan);vertical-align:-3px;margin-left:1px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.send{width:38px;height:38px;border-radius:11px;background:var(--ai);display:grid;place-items:center;color:#fff}
 
-/* SECTIONS */
-.section{padding:104px 0}
-.section.soft{background:var(--blue-pale)}
-.section-head{max-width:730px;margin-bottom:45px}
-.section-head.center{margin-left:auto;margin-right:auto;text-align:center}
-.section h2{margin:13px 0 15px;font-size:clamp(36px,4vw,53px);line-height:1.04;letter-spacing:-2.6px;color:#111827}
-.section-head p{margin:0;color:var(--muted);font-size:17px;line-height:1.72}
+/* Phone + floating cards */
+.phone{position:absolute;right:-26px;bottom:-58px;width:190px;padding:10px;border-radius:30px;background:#0b1229;border:1px solid rgba(255,255,255,.14);box-shadow:var(--shadow-lg);z-index:3}
+.phone-screen{border-radius:22px;background:#f6f8fc;padding:12px 10px 14px;color:var(--ink)}
+.phone-notch{width:60px;height:6px;border-radius:6px;background:#1f2a4d;margin:0 auto 10px}
+.phone-time{font-size:22px;font-weight:850;text-align:center;letter-spacing:-.5px}
+.phone-date{font-size:9px;color:var(--muted);text-align:center;margin-bottom:10px}
+.notif{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 9px;margin-top:6px;box-shadow:0 4px 12px rgba(15,23,42,.06)}
+.notif strong{display:block;font-size:9.5px}
+.notif span{display:block;font-size:8.5px;color:var(--muted);margin-top:2px}
+.float-card{position:absolute;left:-34px;top:-26px;z-index:3;display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:14px;background:#fff;color:var(--ink);box-shadow:0 20px 50px rgba(7,13,34,.35);font-size:12px}
+.float-card .fc-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--green-soft);color:var(--green)}
+.float-card strong{display:block;font-size:12px}
+.float-card small{display:block;color:var(--muted);font-size:10.5px}
+.floaty{animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{50%{transform:translateY(-8px)}}
 
-/* CONNECTION */
-.bridge{display:grid;grid-template-columns:1fr 175px 1fr;gap:28px;align-items:center}
-.source,.destination{
-  min-height:315px;padding:30px;border:1px solid var(--line);border-radius:22px;
-  background:#fff;box-shadow:var(--shadow);
-}
-.source h3,.destination h3{margin:12px 0 9px;font-size:23px;letter-spacing:-.5px}
-.source>p,.destination>p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
-.source-list{display:grid;gap:8px;margin-top:20px}
-.source-item{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:11px;font-weight:750}
-.source-icon{width:24px;height:24px;border-radius:7px;background:#edf3ff;color:var(--blue);display:grid;place-items:center;font-size:9px}
-.orb{
-  position:relative;width:152px;height:152px;margin:auto;border-radius:50%;display:grid;place-items:center;
-  background:radial-gradient(circle,#fff 0 38%,#f0f5ff 39% 67%,#dce8ff 68% 100%);
-  border:1px solid #c9d9ff;box-shadow:0 0 0 14px rgba(36,87,255,.045),0 20px 48px rgba(36,87,255,.13);
-}
-.orb:after{content:"";position:absolute;inset:11px;border-radius:50%;border:1px dashed rgba(36,87,255,.35);animation:spin 18s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.orb strong{font-size:14px;letter-spacing:1px;color:#1b2c4b}.orb span{display:block;margin-top:5px;color:var(--blue);font-size:9px;letter-spacing:1.5px;font-weight:900}
-.bridge-arrow{margin-top:15px;color:var(--blue);font-size:20px}
-.dest-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
-.dest{padding:11px;border-radius:9px;background:#f7f9fc;border:1px solid var(--line);font-size:10px;font-weight:750}
+/* ==========================================================================
+   5. CONNECTIONS STRIP
+   ========================================================================== */
+.strip{background:#fff;border-bottom:1px solid var(--line)}
+.strip-row{min-height:86px;display:flex;align-items:center;justify-content:center;gap:12px 34px;flex-wrap:wrap;padding:18px 0}
+.strip-label{font-size:11px;font-weight:850;letter-spacing:1.3px;text-transform:uppercase;color:#94a3b8}
+.strip-item{font-size:15px;font-weight:800;color:#475569;display:flex;align-items:center;gap:8px}
+.strip-item i{width:8px;height:8px;border-radius:50%;background:var(--blue);opacity:.55}
 
-/* CARDS */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{padding:29px;border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:0 8px 25px rgba(25,42,61,.04)}
-.card-icon{width:43px;height:43px;border-radius:12px;background:#edf3ff;color:var(--blue);display:grid;place-items:center;font-size:16px;font-weight:900}
-.card h3{font-size:19px;margin:19px 0 9px}.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.68}
+/* ==========================================================================
+   6. SECTIONS (shared)
+   ========================================================================== */
+.section{padding:112px 0}
+.section.soft{background:var(--bg-soft)}
+.section-head{max-width:760px;margin:0 auto 54px;text-align:center}
+.section h2{margin:14px 0 16px;font-size:clamp(34px,4.3vw,56px);line-height:1.04;letter-spacing:-2.4px;color:var(--ink);font-weight:850}
+.section-head p{margin:0 auto;max-width:640px;color:var(--muted);font-size:18px;line-height:1.7}
 
-/* PROCESS */
-.process{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
-.process-step{padding:27px 24px}.process-step:not(:last-child){border-right:1px solid var(--line)}
-.process-number{color:var(--blue);font-size:10px;font-weight:900;letter-spacing:1.2px}.process h3{font-size:17px;margin:15px 0 8px}.process p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+/* ==========================================================================
+   7. AI SHOWCASE
+   ========================================================================== */
+.ai-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.ai-tile{position:relative;padding:32px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.ai-tile:hover{transform:translateY(-4px);box-shadow:0 30px 70px rgba(15,23,42,.12)}
+.ai-tile:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--ai)}
+.ai-tile-head{display:flex;align-items:center;gap:13px}
+.ai-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:#fff;background:var(--ai);box-shadow:0 10px 24px rgba(36,87,255,.28)}
+.ai-tile h3{margin:0;font-size:22px;letter-spacing:-.4px;color:var(--ink)}
+.ai-tile .tag{font-size:11px;font-weight:850;letter-spacing:1px;text-transform:uppercase;color:var(--violet)}
+.ai-tile p{margin:16px 0 20px;color:var(--muted);font-size:15px;line-height:1.65}
+.mini{border-radius:16px;background:var(--bg-soft);border:1px solid var(--line);padding:14px;display:grid;gap:9px}
+.mini .q{justify-self:end;max-width:85%;padding:9px 12px;border-radius:13px 13px 3px 13px;background:var(--blue);color:#fff;font-size:13px}
+.mini .a{justify-self:start;max-width:92%;padding:10px 12px;border-radius:13px 13px 13px 3px;background:#fff;border:1px solid var(--line);font-size:13px;color:var(--text)}
+.mini .a b{color:var(--ink)}
+.mini .guest{justify-self:start;max-width:90%;padding:9px 12px;border-radius:13px 13px 13px 3px;background:#fff7e6;border:1px solid #fde7b0;font-size:13px}
+.mini .reply{justify-self:end;max-width:90%;padding:9px 12px;border-radius:13px 13px 3px 13px;background:#f3eeff;border:1px solid #e1d5ff;font-size:13px}
+.mini .meta{font-size:11px;color:var(--muted)}
+.mini .meta.right{justify-self:end}
+.price-bar{display:flex;align-items:flex-end;gap:6px;height:70px;padding:6px 4px 0}
+.price-bar span{flex:1;border-radius:6px 6px 2px 2px;background:#cdd9ff}
+.price-bar span.hot{background:var(--ai)}
+.agent-log{display:grid;gap:7px}
+.agent-log div{display:flex;gap:9px;align-items:flex-start;font-size:13px;padding:9px 11px;border-radius:11px;background:#fff;border:1px solid var(--line)}
+.agent-log em{font-style:normal;flex:none;font-size:11px;font-weight:800;color:var(--muted);width:42px}
+.try{margin-top:34px;display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.try span{padding:9px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13px;font-weight:650;color:#334155;box-shadow:0 4px 12px rgba(15,23,42,.04)}
+.try span:before{content:"“";color:var(--violet);font-weight:900;margin-right:2px}
+.try span:after{content:"”";color:var(--violet);font-weight:900;margin-left:2px}
 
-/* FEATURE */
-.feature-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
-.feature-copy h2{margin-top:12px}.feature-copy p{color:var(--muted);font-size:16px;line-height:1.72}
-.feature-list{display:grid;gap:11px;margin-top:24px}
-.feature-list div{display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border:1px solid var(--line);border-radius:11px;background:#fff}
-.tick{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#edf3ff;color:var(--blue);font-size:10px;font-weight:900}
-.feature-list strong{font-size:12px}.feature-list span{display:block;color:#7b8796;font-size:11px;margin-top:3px;line-height:1.45}
-.mini-dashboard{border:1px solid #dfe6ef;border-radius:22px;background:#fff;box-shadow:var(--shadow-lg);padding:20px}
-.mini-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.mini-head strong{font-size:12px}.mini-head span{font-size:9px;color:#7b8796}
-.mini-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:18px}
-.mini-calendar div{height:31px;border-radius:6px;background:#f5f7f9;display:grid;place-items:center;font-size:8px;color:#778394}
-.mini-calendar .booked{background:#eaf1ff;color:var(--blue);font-weight:800}.mini-calendar .today{background:var(--blue);color:#fff;font-weight:800}
-.mini-events{display:grid;gap:7px}.mini-event{display:flex;align-items:center;gap:8px;padding:9px;border:1px solid var(--line);border-radius:9px}
-.mini-event i{width:7px;height:7px;border-radius:50%;background:var(--blue)}.mini-event span{font-size:9px;font-weight:750;flex:1}.mini-event b{font-size:8px;color:#7d8896}
+/* ==========================================================================
+   8. A DAY WITH STAYENO (timeline)
+   ========================================================================== */
+.timeline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.t-step{position:relative;padding:24px 22px;border-radius:20px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 24px rgba(15,23,42,.04)}
+.t-time{display:inline-block;font-size:12px;font-weight:850;color:var(--blue);background:var(--blue-soft);padding:4px 10px;border-radius:999px}
+.t-step h3{margin:14px 0 6px;font-size:17px;color:var(--ink)}
+.t-step p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+.t-step .who{margin-top:12px;font-size:12px;font-weight:800;color:var(--green)}
+.zero{margin:40px auto 0;max-width:640px;display:flex;align-items:center;justify-content:center;gap:18px;padding:18px 24px;border-radius:18px;background:var(--navy);color:#fff}
+.zero b{font-size:44px;line-height:1;letter-spacing:-2px;background:var(--ai);-webkit-background-clip:text;background-clip:text;color:transparent}
+.zero span{font-size:16px;color:#c7d2ec}
 
-/* ROADMAP */
-.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-.roadmap-card{padding:26px;border-radius:19px;border:1px solid var(--line);background:#fff}
-.roadmap-label{font-size:9px;letter-spacing:1.4px;font-weight:900;color:var(--blue)}
-.roadmap-card h3{margin:13px 0 8px;font-size:18px}.roadmap-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.62}
+/* ==========================================================================
+   9. AUTOMATION PILLARS
+   ========================================================================== */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pillar{padding:32px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
+.pillar-ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue)}
+.pillar h3{margin:20px 0 8px;font-size:22px;color:var(--ink);letter-spacing:-.4px}
+.pillar > p{margin:0 0 18px;color:var(--muted);font-size:15px;line-height:1.6}
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ticks li{display:flex;gap:10px;font-size:14px;line-height:1.45;color:#334155}
+.ticks li:before{content:"✓";flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--green-soft);color:var(--green);font-size:11px;font-weight:900}
 
-/* CTA */
-.cta{position:relative;overflow:hidden;padding:105px 0;text-align:center;background:linear-gradient(180deg,#fff 0%,#f3f7ff 100%)}
-.cta:before{content:"";position:absolute;width:500px;height:500px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-48%);background:radial-gradient(circle,rgba(36,87,255,.09),transparent 65%)}
-.cta .container{position:relative}.cta h2{margin:12px auto 16px;max-width:820px;font-size:clamp(39px,5vw,61px);line-height:1;letter-spacing:-3px;color:#111827}.cta p{max-width:620px;margin:auto;color:var(--muted);line-height:1.7}.cta .actions{justify-content:center}
+/* ==========================================================================
+   10. DIRECT BOOKING
+   ========================================================================== */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.split h2{text-align:left}
+.split .lead{color:var(--muted);font-size:17px;line-height:1.7;margin:0 0 22px}
+.booking{position:relative;border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:0 40px 90px rgba(15,23,42,.14);overflow:hidden}
+.booking-photo{height:190px;position:relative;background:
+   linear-gradient(180deg,rgba(7,13,34,0) 40%,rgba(7,13,34,.55)),
+   linear-gradient(160deg,#7dd3fc 0%,#3b82f6 45%,#1e3a8a 100%)}
+.booking-photo:before{content:"";position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(180deg,#fde68a,#f59e0b);clip-path:polygon(0 40%,20% 30%,45% 45%,70% 25%,100% 38%,100% 100%,0 100%);opacity:.9}
+.booking-photo:after{content:"";position:absolute;right:60px;top:34px;width:58px;height:58px;border-radius:50%;background:#fef3c7;box-shadow:0 0 40px rgba(254,243,199,.9)}
+.booking-title{position:absolute;left:22px;bottom:16px;color:#fff;z-index:2}
+.booking-title strong{display:block;font-size:20px}
+.booking-title span{font-size:13px;opacity:.9}
+.booking-body{padding:22px}
+.b-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.b-field{border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.b-field small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.6px;color:var(--muted);text-transform:uppercase}
+.b-field b{font-size:14px;color:var(--ink)}
+.b-total{display:flex;justify-content:space-between;align-items:center;margin:16px 0;font-size:14px;color:var(--muted)}
+.b-total b{font-size:22px;color:var(--ink)}
+.b-save{display:inline-block;margin-left:8px;padding:3px 9px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:11px;font-weight:800}
+.booking .btn{width:100%}
+.b-chat{position:absolute;right:-18px;top:150px;z-index:3}
 
-/* FOOTER */
-.footer{padding:27px 0;border-top:1px solid var(--line);color:#7e8997;font-size:12px}.footerrow{display:flex;justify-content:space-between;gap:20px}.footer a:hover{color:var(--blue)}
+/* ==========================================================================
+   11. SAVINGS CALCULATOR
+   ========================================================================== */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.calc-in{padding:42px;background:#fff}
+.calc-out{padding:42px;color:#fff;background:radial-gradient(500px 300px at 90% 0%,rgba(139,92,246,.4),transparent 60%),var(--navy)}
+.calc label{display:block;font-size:14px;font-weight:800;color:var(--ink);margin-bottom:10px}
+.calc-value{float:right;color:var(--blue)}
+.calc input[type=range]{width:100%;accent-color:var(--blue);height:30px}
+.calc .field{margin-bottom:28px}
+.calc input[type=number]{width:100%;height:50px;border-radius:12px;border:1px solid var(--line);padding:0 14px;font-size:16px;font-family:inherit;color:var(--ink)}
+.calc-note{font-size:12.5px;color:var(--muted);line-height:1.6}
+.out-label{font-size:13px;color:#9fb0d6;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.out-big{font-size:clamp(46px,5vw,64px);font-weight:850;letter-spacing:-2px;line-height:1.05;margin:6px 0 20px}
+.out-row{display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid rgba(255,255,255,.1);font-size:15px;color:#c7d2ec}
+.out-row b{color:#fff;font-size:18px}
 
+/* ==========================================================================
+   12. BUILT SAFE + COMPARISON
+   ========================================================================== */
+.safe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.safe{display:flex;gap:14px;padding:22px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.safe-ico{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue)}
+.safe strong{display:block;font-size:15px;color:var(--ink)}
+.safe span{display:block;margin-top:4px;font-size:13.5px;color:var(--muted);line-height:1.55}
+.compare{margin-top:56px;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+.compare table{width:100%;border-collapse:collapse;font-size:14.5px}
+.compare th,.compare td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--line)}
+.compare tr:last-child td{border-bottom:0}
+.compare thead th{background:var(--bg-soft);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.compare thead th.us{color:var(--blue)}
+.compare td.us{font-weight:750;color:var(--ink);background:linear-gradient(90deg,rgba(36,87,255,.05),rgba(139,92,246,.05))}
+.compare td.us:before{content:"✓ ";color:var(--green);font-weight:900}
+.compare td.them{color:var(--muted)}
 
-/* CAPABILITY CHECKLIST */
-.capability-checklist{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-.capability-column{
-  padding:26px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:#fff;
-  box-shadow:0 8px 25px rgba(25,42,61,.04);
-}
-.capability-column.ready{
-  border-top:4px solid var(--green);
-}
-.capability-column.future{
-  border-top:4px solid #d94b4b;
-}
-.capability-column-head{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  margin-bottom:17px;
-}
-.capability-column-badge{
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:17px;
-  font-weight:900;
-}
-.capability-column.ready .capability-column-badge{
-  color:#19874b;
-  background:var(--green-soft);
-}
-.capability-column.future .capability-column-badge{
-  color:#b83333;
-  background:#fff0f0;
-}
-.capability-column-head strong{
-  display:block;
-  font-size:18px;
-}
-.capability-column-head span{
-  display:block;
-  margin-top:3px;
-  color:#7b8796;
-  font-size:10px;
-}
-.capability-list{
-  display:grid;
-  gap:8px;
-}
-.capability-item{
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  padding:11px 12px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:#fbfcfe;
-}
-.capability-mark{
-  flex:none;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:10px;
-  font-weight:900;
-}
-.capability-column.ready .capability-mark{
-  color:#19874b;
-  background:var(--green-soft);
-}
-.capability-column.future .capability-mark{
-  color:#b83333;
-  background:#fff0f0;
-}
-.capability-item strong{
-  display:block;
-  font-size:11px;
-  line-height:1.35;
-}
-.capability-item span{
-  display:block;
-  margin-top:2px;
-  color:#7b8796;
-  font-size:9px;
-  line-height:1.45;
-}
-.capability-api-note{
-  margin-top:14px;
-  padding:12px 14px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:#f7f9ff;
-  color:#68778d;
-  font-size:10px;
-  line-height:1.5;
-}
-.capability-api-note strong{
-  color:#26354d;
-}
+/* ==========================================================================
+   13. FINAL CTA + FOOTER
+   ========================================================================== */
+.cta{position:relative;overflow:hidden;padding:120px 0;text-align:center;color:#fff;
+  background:radial-gradient(700px 400px at 50% 0%,rgba(139,92,246,.35),transparent 60%),radial-gradient(700px 400px at 50% 100%,rgba(36,87,255,.35),transparent 60%),var(--navy)}
+.cta h2{margin:16px auto 18px;max-width:860px;font-size:clamp(38px,5.4vw,68px);line-height:1;letter-spacing:-3px;font-weight:850}
+.cta p{max-width:620px;margin:0 auto;color:#b9c5e2;font-size:18px;line-height:1.7}
+.cta .actions{justify-content:center}
+.footer{background:#050a1a;color:#8592b2;font-size:13px;padding:34px 0}
+.footerrow{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.footer a:hover{color:#fff}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
 
-@media(max-width:800px){
-  .capability-checklist{
-    grid-template-columns:1fr;
-  }
-  .capability-column{
-    padding:22px;
-  }
+/* ==========================================================================
+   14. RESPONSIVE (phone first adjustments)
+   ========================================================================== */
+@media(max-width:1080px){
+  .hero-grid{grid-template-columns:1fr;gap:70px}
+  .demo-wrap{max-width:640px;margin:0 auto;width:100%}
+  .timeline{grid-template-columns:repeat(2,1fr)}
+  .pillars{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr;gap:50px}
+  .safe-grid{grid-template-columns:repeat(2,1fr)}
 }
-
-/* MOBILE */
-@media(max-width:1050px){
-  .hero-grid{grid-template-columns:1fr;gap:35px}.hero-product{min-height:430px}
-  .bridge{grid-template-columns:1fr}.bridge-center{order:2}.destination{order:3}
-  .cards{grid-template-columns:1fr}.process{grid-template-columns:1fr 1fr}
-  .process-step:nth-child(2){border-right:0}.process-step:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .feature-grid{grid-template-columns:1fr;gap:40px}.roadmap{grid-template-columns:1fr}
-}
-@media(max-width:800px){
+@media(max-width:820px){
   .container{width:min(var(--max),calc(100% - 32px))}
-  .navlinks{display:none}.mobile-menu-toggle{display:flex;width:42px;height:42px;border:1px solid var(--line);border-radius:10px;background:#fff;flex-direction:column;gap:4px;justify-content:center;align-items:center}
-  .mobile-menu-toggle span{width:17px;height:2px;background:var(--ink);border-radius:2px}
-  .mobile-menu{position:absolute;top:78px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
-  .mobile-menu-inner{display:grid;padding:10px 0 18px}.mobile-menu-inner>a:not(.mobile-cta){padding:13px 4px;color:#59687b;font-size:14px}.mobile-cta{margin-top:6px}
-  .hero{padding:60px 0 55px}.hero h1{letter-spacing:-2.8px}.hero-lead{font-size:17px}.hero-product{min-height:390px}
-  .float{display:none}.trust-row{padding:17px 0;gap:14px}.trust-label{width:100%;text-align:center}
-  .section{padding:76px 0}.section h2{letter-spacing:-1.8px}
-  .process{grid-template-columns:1fr}.process-step{border-right:0!important;border-bottom:1px solid var(--line)!important}.process-step:last-child{border-bottom:0!important}
-  .footerrow{flex-direction:column}
+  .navlinks{display:none}
+  .mobile-menu-toggle{display:flex;width:44px;height:44px;border-radius:11px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);flex-direction:column;gap:4px;align-items:center;justify-content:center;cursor:pointer}
+  .mobile-menu-toggle span{width:18px;height:2px;border-radius:2px;background:#fff}
+  .mobile-menu{display:block;position:absolute;top:74px;left:0;right:0;background:var(--navy);border-bottom:1px solid rgba(255,255,255,.08)}
+  .mobile-menu[hidden]{display:none}
+  .mobile-menu-inner{display:grid;padding:8px 0 20px}
+  .mobile-menu-inner a:not(.btn){padding:14px 4px;color:#c7d2ec;font-size:16px;border-bottom:1px solid rgba(255,255,255,.06)}
+  .mobile-menu-inner .btn{margin-top:14px}
+  .nav{background:rgba(7,13,34,.9)}
+  .hero{padding:120px 0 120px}
+  .hero h1{letter-spacing:-2.2px}
+  .hero-lead{font-size:17px}
+  .ai-grid{grid-template-columns:1fr}
+  .calc{grid-template-columns:1fr}
+  .calc-in,.calc-out{padding:30px}
+  .section{padding:84px 0}
+  .compare th,.compare td{padding:13px 12px;font-size:13px}
+  .float-card{left:-6px;top:-34px}
+  .phone{right:-6px;bottom:-80px;width:160px}
+  .b-chat{display:none}
 }
-@media(max-width:600px){
-  .hero h1{font-size:45px}.dashboard{border-radius:17px}.dash-main{grid-template-columns:1fr}.sidebar{display:none}.flow-activity{grid-template-columns:1fr}.activity-box{display:none}
-  .hero-product{min-height:310px}.product-window{transform:none}.dash-top{height:48px}.main-panel{padding:12px}.stats{gap:5px}.stat{padding:10px 7px}.stat strong{font-size:16px}
-  .source,.destination{padding:23px}.dest-grid{grid-template-columns:1fr}.cta h2{letter-spacing:-2px}
+@media(max-width:560px){
+  .timeline{grid-template-columns:1fr}
+  .safe-grid{grid-template-columns:1fr}
+  .chat-log{height:360px;padding:16px}
+  .msg{max-width:94%}
+  .phone{display:none}
+  .ai-tile,.pillar{padding:24px}
+  .zero{flex-direction:column;text-align:center;gap:6px}
+  .btn{width:100%}
+  .cta .actions .btn,.hero .actions .btn{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none}
 }
 </style>
 </head>
 
 <body>
 
-<nav class="nav" aria-label="Primary navigation">
+<!-- ======================================================================
+     NAVIGATION
+     ====================================================================== -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
   <div class="container navinner">
     <a class="brand" href="index.html" aria-label="Stayeno home">
-      <img class="brand-icon" src="assets/smart-hosting-icon.png" alt="" width="38" height="38">
+      <img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36">
       <span class="brand-wordmark">Stay<span>eno</span></span>
     </a>
 
     <div class="navlinks">
+      <a href="#ai">AI co-host</a>
       <a href="how-it-works.html">How it works</a>
       <a href="features.html">Features</a>
       <a href="pricing.html">Pricing</a>
       <a href="sms.html">Notifications</a>
-      <a class="navcta" href="signup.html">Get started</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Start free</a>
     </div>
 
     <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
@@ -417,395 +386,580 @@ a{text-decoration:none;color:inherit}
 
   <div class="mobile-menu" id="mobile-menu" hidden>
     <div class="container mobile-menu-inner">
+      <a href="#ai">AI co-host</a>
       <a href="how-it-works.html">How it works</a>
       <a href="features.html">Features</a>
       <a href="pricing.html">Pricing</a>
       <a href="sms.html">Notifications</a>
-      <a class="navcta mobile-cta" href="signup.html">Get started</a>
+      <a class="btn btn-primary" href="signup.html">Start free</a>
     </div>
   </div>
 </nav>
 
+<!-- ======================================================================
+     HERO — the product IS the chat
+     ====================================================================== -->
 <header class="hero">
   <div class="container hero-grid">
 
     <div>
-      <div class="eyebrow">The Stayeno automation platform</div>
-
-      <h1>Your next booking<br>shouldn't create<br>another <span class="blue">checklist.</span></h1>
-
+      <span class="ai-badge">✦ Your AI co-host for short-term rentals</span>
+      <h1>Just ask.<br>Your rentals<br><span class="grad-text">run themselves.</span></h1>
       <p class="hero-lead">
-        Stayeno turns reservation events into automated property operations —
-        helping you manage access, notifications and turnovers without
-        constantly checking calendars and chasing tasks.
+        Stayeno runs your <strong>listings, pricing, guest messages, door codes, cleaning and thermostats</strong> —
+        all by chat, on desktop and mobile. No menus to learn. No tasks to chase.
+        <strong>You focus on growing your business.</strong>
       </p>
-
       <div class="actions">
-        <a class="btn btn-primary" href="signup.html">Start automating</a>
-        <a class="btn btn-secondary" href="how-it-works.html">See how it works</a>
+        <a class="btn btn-primary" href="signup.html">Start free →</a>
+        <a class="btn btn-ghost" href="#ai">Watch it work</a>
       </div>
-
-      <div class="hero-proof">
-        <span class="proof-dot"></span>
-        <span>Reservation-driven automation for the work that happens between bookings.</span>
+      <div class="hero-notes">
+        <span>Set up by chat in minutes</span>
+        <span>Desktop &amp; mobile</span>
+        <span>Cancel anytime</span>
       </div>
     </div>
 
-    <div class="hero-product">
-
-      <div class="float readonly">
-        <div class="readonly-icon">↔</div>
-        <div>
-          <strong>READ-ONLY BY DESIGN</strong>
-          <span>Reservation calendar connection</span>
-        </div>
+    <div class="demo-wrap">
+      <div class="float-card floaty" aria-hidden="true">
+        <div class="fc-icon"><svg class="icon" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <div><strong>Door code ready</strong><small>Boardwalk Loft · check-in 3:00 PM</small></div>
       </div>
 
-      <div class="dashboard">
-        <div class="dash-top">
-          <div class="dash-brand">
-            <div class="dash-mini-icon">⌂</div>
-            Stayeno
+      <div class="chat" role="region" aria-label="Stayeno AI chat demo">
+        <div class="chat-top">
+          <div class="chat-id">
+            <div class="chat-orb" aria-hidden="true"></div>
+            <div><strong>Stayeno AI</strong><small>Your co-host · 3 properties</small></div>
           </div>
-          <div class="user"><div class="avatar">RC</div> Property Manager</div>
+          <div class="live"><i></i> Live</div>
         </div>
 
-        <div class="dash-main">
-          <aside class="sidebar">
-            <div class="side-label">PROPERTIES <span style="float:right;color:var(--blue);font-size:14px">+</span></div>
+        <div class="chat-log" id="chat-log" aria-live="polite"></div>
 
-            <div class="property active">
-              <div class="prop-img"></div>
-              <div class="prop-copy"><strong>Tucson Desert House</strong><span>Tucson, AZ</span><span style="color:#2a8e50;margin-top:4px"><i class="active-dot"></i>Active</span></div>
-            </div>
+        <div class="chat-suggest" id="chat-suggest" aria-label="Try a question"></div>
 
-            <div class="property">
-              <div class="prop-img sand"></div>
-              <div class="prop-copy"><strong>Sonoran Villa</strong><span>Tucson, AZ</span><span style="margin-top:4px">● Inactive</span></div>
-            </div>
-
-            <div class="property">
-              <div class="prop-img gray"></div>
-              <div class="prop-copy"><strong>Downtown Condo</strong><span>Phoenix, AZ</span><span style="color:#2a8e50;margin-top:4px"><i class="active-dot"></i>Active</span></div>
-            </div>
-          </aside>
-
-          <main class="main-panel">
-            <div class="panel-head">
-              <div>
-                <div class="panel-title"><span class="panel-title-icon">⊡</span><strong>Automation Center</strong></div>
-                <div class="panel-sub">Reservation-driven property operations</div>
-              </div>
-              <div class="running">● Running</div>
-            </div>
-
-            <div class="tabs">
-              <span class="active">Overview</span><span>Reservations</span><span>Access</span><span>Notifications</span><span>Operations</span>
-            </div>
-
-            <div class="stats">
-              <div class="stat"><strong>3</strong><span>Upcoming check-ins</span></div>
-              <div class="stat"><strong>2</strong><span>Upcoming check-outs</span></div>
-              <div class="stat"><strong>5</strong><span>Active access codes</span></div>
-              <div class="stat"><strong>0</strong><span>Pending alerts</span></div>
-            </div>
-
-            <div class="flow-activity">
-              <div class="flow-box">
-                <div class="box-head"><span>Automation Flow</span><a>View flow</a></div>
-                <div class="flow-body">
-                  <div class="flow-node">Reservation received<span>Airbnb / Vrbo / Booking.com</span></div>
-                  <div class="flow-arrow">↓</div>
-                  <div class="flow-node blue">Normalize & validate<span>De-duplicate + map property</span></div>
-                  <div class="flow-arrow">↓</div>
-                  <div class="flow-split">
-                    <div class="flow-node purple">24-hour checkout pass<span>Cleaning notification</span></div>
-                    <div class="flow-node blue">New reservation pass<span>Generate access code</span></div>
-                  </div>
-                  <div class="flow-arrow">↓</div>
-                  <div class="flow-node blue">Save state & close<span>Keep the workflow auditable</span></div>
-                </div>
-              </div>
-
-              <div class="activity-box">
-                <div class="box-head"><span>Recent Activity</span><a>View all</a></div>
-                <div class="activity-row"><time>10:00</time><strong>New reservation processed</strong><span>Guest: John Smith</span></div>
-                <div class="activity-row"><time>10:00</time><strong>Access code created</strong><span>PIN: 4823 · Check-in Sep 15</span></div>
-                <div class="activity-row"><time>09:58</time><strong>Notification queued</strong><span>Guest · Host · Cleaner</span></div>
-                <div class="activity-row"><time>09:55</time><strong>Calendar feeds updated</strong><span>3 new events found</span></div>
-              </div>
-            </div>
-          </main>
+        <div class="chat-input" aria-hidden="true">
+          <div class="typed" id="chat-typed"></div><span class="caret"></span>
+          <div class="send"><svg class="icon" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </div>
 
-      <div class="float cleaner">✓ Cleaner workflow <b>coordinated</b></div>
+      <div class="phone floaty" aria-hidden="true" style="animation-delay:1.5s">
+        <div class="phone-screen">
+          <div class="phone-notch"></div>
+          <div class="phone-time">9:41</div>
+          <div class="phone-date">Friday</div>
+          <div class="notif"><strong>✦ Stayeno · Pricing</strong><span>Weekend rates +10% on 3 listings</span></div>
+          <div class="notif"><strong>🧹 Cleaning confirmed</strong><span>Ocean View · 12–4 PM today</span></div>
+          <div class="notif"><strong>❄️ Pre-cooling started</strong><span>Boardwalk Loft → 70°F</span></div>
+        </div>
+      </div>
     </div>
 
   </div>
 </header>
 
-<div class="trust">
-  <div class="container trust-row">
-    <span class="trust-label">Works with the reservation calendars you already use</span>
-    <span class="ota">Airbnb</span>
-    <span class="ota">Vrbo</span>
-    <span class="ota">Booking.com</span>
-    <span class="ota">iCal</span>
+<!-- ======================================================================
+     CONNECTIONS
+     ====================================================================== -->
+<div class="strip">
+  <div class="container strip-row">
+    <span class="strip-label">Runs everything you already use</span>
+    <span class="strip-item"><i></i>Airbnb</span>
+    <span class="strip-item"><i></i>Vrbo</span>
+    <span class="strip-item"><i></i>Booking.com</span>
+    <span class="strip-item"><i></i>Your direct-booking site</span>
+    <span class="strip-item"><i></i>Schlage smart locks</span>
+    <span class="strip-item"><i></i>Honeywell thermostats</span>
+    <span class="strip-item"><i></i>Email &amp; SMS</span>
   </div>
 </div>
 
-<section class="section">
+<!-- ======================================================================
+     AI SHOWCASE — the star of the page
+     ====================================================================== -->
+<section class="section" id="ai">
   <div class="container">
-
-    <div class="section-head center">
-      <div class="eyebrow">What Stayeno does</div>
-      <h2>Your booking triggers the work. Stayeno handles the work around the stay.</h2>
-      <p>
-        Stayeno connects reservation calendar information to the operational tasks
-        that keep a short-term rental running.
-      </p>
+    <div class="section-head reveal">
+      <span class="ai-badge">✦ Stayeno AI</span>
+      <h2>Talk to your business.<br><span class="grad-text">It talks back — and gets it done.</span></h2>
+      <p>Other tools give you a dashboard with a hundred buttons. Stayeno gives you one place to ask.
+         Type it, say it, or tap it — on your laptop or your phone.</p>
     </div>
 
-    <div class="capability-checklist">
+    <div class="ai-grid">
 
-      <div class="capability-column ready">
-        <div class="capability-column-head">
-          <div class="capability-column-badge">✓</div>
-          <div>
-            <strong>Available today</strong>
-            <span>Core Stayeno automation</span>
-          </div>
+      <article class="ai-tile reveal">
+        <div class="ai-tile-head">
+          <div class="ai-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><div class="tag">AI command center</div><h3>Run everything by chat</h3></div>
         </div>
-
-        <div class="capability-list">
-
-          <div class="capability-item">
-            <div class="capability-mark">✓</div>
-            <div>
-              <strong>Reservation calendar integration</strong>
-              <span>iCal feeds from Airbnb, Vrbo and Booking.com.</span>
-            </div>
-          </div>
-
-          <div class="capability-item">
-            <div class="capability-mark">✓</div>
-            <div>
-              <strong>Reservation processing</strong>
-              <span>Normalize reservations, detect duplicates and handle changes.</span>
-            </div>
-          </div>
-
-          <div class="capability-item">
-            <div class="capability-mark">✓</div>
-            <div>
-              <strong>Schlage guest access</strong>
-              <span>Create, activate and manage guest access codes around each stay.</span>
-            </div>
-          </div>
-
-          <div class="capability-item">
-            <div class="capability-mark">✓</div>
-            <div>
-              <strong>Automatic Schlage code cleanup</strong>
-              <span>Remove past codes so the lock does not become overloaded.</span>
-            </div>
-          </div>
-
-          <div class="capability-item">
-            <div class="capability-mark">✓</div>
-            <div>
-              <strong>Cleaning & turnover automation</strong>
-              <span>Coordinate cleaners and handle same-day turnovers.</span>
-            </div>
-          </div>
-
-          <div class="capability-item">
-            <div class="capability-mark">✓</div>
-            <div>
-              <strong>Thermostat automation</strong>
-              <span>Apply property temperature rules around guest stays.</span>
-            </div>
-          </div>
-
-          <div class="capability-item">
-            <div class="capability-mark">✓</div>
-            <div>
-              <strong>Email & SMS notifications</strong>
-              <span>Keep hosts, cleaners and property contacts informed.</span>
-            </div>
-          </div>
-
-          <div class="capability-item">
-            <div class="capability-mark">✓</div>
-            <div>
-              <strong>Multi-property operations</strong>
-              <span>Run reservation-driven workflows across properties.</span>
-            </div>
-          </div>
-
+        <p>Connect a platform, see every property, change a setting, pull a report. If you can say it, Stayeno can do it — no menus, no training.</p>
+        <div class="mini">
+          <div class="q">Connect my Airbnb account</div>
+          <div class="a"><b>Connected ✓</b> 3 listings imported. Calendars, prices and messages are now synced.</div>
+          <div class="q">Show all my active properties</div>
+          <div class="a"><b>3 active:</b> Ocean View Suite · Boardwalk Loft · Marina House</div>
         </div>
-      </div>
+      </article>
 
-      <div class="capability-column future">
-        <div class="capability-column-head">
-          <div class="capability-column-badge">→</div>
-          <div>
-            <strong>Future expansion</strong>
-            <span>Direct platform connectivity</span>
-          </div>
+      <article class="ai-tile reveal">
+        <div class="ai-tile-head">
+          <div class="ai-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></svg></div>
+          <div><div class="tag">AI inbox</div><h3>Guests get answers in seconds</h3></div>
         </div>
-
-        <div class="capability-list">
-
-          <div class="capability-item">
-            <div class="capability-mark">→</div>
-            <div>
-              <strong>Direct OTA API access</strong>
-              <span>Direct API access to Airbnb, Vrbo and Booking.com is not available yet.</span>
-            </div>
-          </div>
-
-          <div class="capability-item">
-            <div class="capability-mark">→</div>
-            <div>
-              <strong>Unified guest inbox</strong>
-              <span>Bring guest conversations from booking platforms into one place.</span>
-            </div>
-          </div>
-
-          <div class="capability-item">
-            <div class="capability-mark">→</div>
-            <div>
-              <strong>Real-time OTA synchronization</strong>
-              <span>Direct platform synchronization beyond the available iCal feeds.</span>
-            </div>
-          </div>
-
+        <p>Stayeno reads every guest message, answers from your house rules and listing details, and only asks you when it truly needs you.</p>
+        <div class="mini">
+          <div class="guest">Hi! Is early check-in possible on Friday? We land at noon.</div>
+          <div class="meta">Guest · Boardwalk Loft · 11:02 AM</div>
+          <div class="reply">Welcome! The cleaners finish by 1 PM, so you can check in at 1:30 PM. Your door code will arrive before then. 🙂</div>
+          <div class="meta right">✦ Answered by Stayeno AI · 11:02 AM</div>
         </div>
+      </article>
 
-        <div class="capability-api-note">
-          <strong>Today:</strong> reservations remain managed on your booking platforms.
-          Stayeno focuses on automating the property operations around those reservations.
+      <article class="ai-tile reveal">
+        <div class="ai-tile-head">
+          <div class="ai-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+          <div><div class="tag">AI pricing</div><h3>The right price, every night</h3></div>
         </div>
-      </div>
+        <p>Ask for your base price, raise weekends, or let Stayeno follow local demand. You approve with one word — or let it run.</p>
+        <div class="mini">
+          <div class="q">What's my base price for Ocean View Suite?</div>
+          <div class="a"><b>$189/night</b> · weekends $229. Demand is high next Saturday — I suggest <b>$245</b>.</div>
+          <div class="price-bar" aria-hidden="true">
+            <span style="height:42%"></span><span style="height:48%"></span><span style="height:45%"></span><span style="height:52%"></span><span class="hot" style="height:88%"></span><span class="hot" style="height:96%"></span><span style="height:50%"></span>
+          </div>
+          <div class="q">Do it, and raise all weekends 10%</div>
+          <div class="a"><b>Done ✓</b> Updated on Airbnb, Vrbo and your direct site.</div>
+        </div>
+      </article>
+
+      <article class="ai-tile reveal">
+        <div class="ai-tile-head">
+          <div class="ai-ico"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8L7 17M17 7l2.8-2.8"/></svg></div>
+          <div><div class="tag">AI agent</div><h3>Works while you sleep</h3></div>
+        </div>
+        <p>Stayeno doesn't wait to be asked. It watches every booking, lock, cleaner and thermostat — and acts before small problems become bad reviews.</p>
+        <div class="agent-log">
+          <div><em>2:14 AM</em><span>New booking on Vrbo → door code created, cleaner scheduled, you notified.</span></div>
+          <div><em>6:30 AM</em><span>Marina House AC not keeping up (78°F vs 72°F) → you and your co-host alerted.</span></div>
+          <div><em>11:00 AM</em><span>Pre-cooling Boardwalk Loft to 70°F — guest arrives at 3 PM.</span></div>
+          <div><em>4:05 PM</em><span>Cancelled stay detected → old door code removed and confirmed.</span></div>
+        </div>
+      </article>
 
     </div>
 
+    <div class="try reveal" aria-label="Things hosts ask">
+      <span>Show my occupancy this month</span>
+      <span>Block Dec 24–26 for family</span>
+      <span>Who's cleaning tomorrow?</span>
+      <span>Set the house to vacant mode</span>
+      <span>Reply to all new inquiries</span>
+      <span>Why did my revenue drop?</span>
+    </div>
   </div>
 </section>
 
+<!-- ======================================================================
+     A DAY WITH STAYENO
+     ====================================================================== -->
+<section class="section soft" id="automation">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">A day with Stayeno</div>
+      <h2>One booking. Everything after it happens on its own.</h2>
+      <p>This is what a single reservation sets in motion — locks, cleaning, climate and messages, timed to the stay.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="t-step reveal"><span class="t-time">Booking</span><h3>Reservation arrives</h3><p>From Airbnb, Vrbo, Booking.com or your own site. Duplicates and changes are handled.</p><div class="who">✓ Automatic</div></div>
+      <div class="t-step reveal"><span class="t-time">Minutes later</span><h3>Door code created</h3><p>A unique code is set on the smart lock for exactly the stay — and checked on the lock.</p><div class="who">✓ Automatic</div></div>
+      <div class="t-step reveal"><span class="t-time">Minutes later</span><h3>Team informed</h3><p>You and your co-host get the details. Your cleaner gets the schedule — never the guest code.</p><div class="who">✓ Automatic</div></div>
+      <div class="t-step reveal"><span class="t-time">Day before</span><h3>Cleaning reminder</h3><p>24-hour notice to the cleaner, with the 12–4 PM window on same-day turnovers.</p><div class="who">✓ Automatic</div></div>
+      <div class="t-step reveal"><span class="t-time">4 h before</span><h3>Home gets comfortable</h3><p>The thermostat pre-cools or pre-heats so guests walk into the right temperature.</p><div class="who">✓ Automatic</div></div>
+      <div class="t-step reveal"><span class="t-time">During the stay</span><h3>Guests looked after</h3><p>AI answers questions day and night. AC trouble triggers an alert before it becomes a complaint.</p><div class="who">✓ Automatic</div></div>
+      <div class="t-step reveal"><span class="t-time">Checkout</span><h3>Access closed</h3><p>The door code expires and is removed from the lock — confirmed, not assumed.</p><div class="who">✓ Automatic</div></div>
+      <div class="t-step reveal"><span class="t-time">After checkout</span><h3>Energy saved</h3><p>The home returns to vacant settings, with freeze protection in winter.</p><div class="who">✓ Automatic</div></div>
+    </div>
+
+    <div class="zero reveal"><b>0</b><span>clicks needed from you for a normal stay.</span></div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     AUTOMATION PILLARS
+     ====================================================================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Smart-home automation, built in</div>
+      <h2>Locks, cleaning and climate — handled.</h2>
+      <p>Most rental software stops at the calendar. Stayeno reaches into the property itself.</p>
+    </div>
+
+    <div class="pillars">
+      <article class="pillar reveal">
+        <div class="pillar-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h3>Automated smart lock</h3>
+        <p>Every guest gets their own code, active only for their stay.</p>
+        <ul class="ticks">
+          <li>Unique code per stay, active 1 hour before check-in to 2 hours after checkout</li>
+          <li>Every code read back from the lock to confirm it works</li>
+          <li>Changed or cancelled bookings update access automatically</li>
+          <li>Old codes cleared so the lock never fills up</li>
+        </ul>
+      </article>
+
+      <article class="pillar reveal">
+        <div class="pillar-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V10l7-6 7 6v11"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3>Cleaning workflow</h3>
+        <p>Turnovers on time, without a single text from you.</p>
+        <ul class="ticks">
+          <li>Cleaner notified for every new booking and change</li>
+          <li>24-hour reminder before each checkout</li>
+          <li>Same-day turnovers flagged with a 12–4 PM window</li>
+          <li>Overlapping bookings caught before they become a problem</li>
+        </ul>
+      </article>
+
+      <article class="pillar reveal">
+        <div class="pillar-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>
+        <h3>Automated thermostat</h3>
+        <p>Comfort for guests. Lower bills for you.</p>
+        <ul class="ticks">
+          <li>Pre-cool or pre-heat 4 hours before arrival</li>
+          <li>Energy-saving vacant mode between stays</li>
+          <li>Freeze protection when the house gets cold</li>
+          <li>Alert when the AC or heat can't keep up</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     DIRECT BOOKING
+     ====================================================================== -->
+<section class="section soft" id="direct">
+  <div class="container split">
+    <div class="reveal">
+      <div class="eyebrow">Direct booking</div>
+      <h2>Your own booking site. Your guests. No platform fees.</h2>
+      <p class="lead">Stayeno gives every property a beautiful direct-booking page that stays in sync with Airbnb, Vrbo and Booking.com — so you keep more of every stay and build a brand of your own.</p>
+      <ul class="ticks">
+        <li>Live availability — no double bookings</li>
+        <li>Prices follow your AI pricing automatically</li>
+        <li>Door codes, cleaning and climate run exactly like OTA bookings</li>
+        <li>Manage it all by chat: “Offer 10% off to returning guests”</li>
+      </ul>
+      <div class="actions"><a class="btn btn-primary" href="signup.html">Launch my booking site</a></div>
+    </div>
+
+    <div class="reveal" style="position:relative">
+      <div class="booking">
+        <div class="booking-photo">
+          <div class="booking-title"><strong>Ocean View Suite</strong><span>Atlantic City · 2 bedrooms · sleeps 6</span></div>
+        </div>
+        <div class="booking-body">
+          <div class="b-row">
+            <div class="b-field"><small>Check-in</small><b>Fri, Jun 12</b></div>
+            <div class="b-field"><small>Checkout</small><b>Mon, Jun 15</b></div>
+          </div>
+          <div class="b-total"><span>3 nights · total</span><span><b>$612</b><span class="b-save">Save vs OTA</span></span></div>
+          <a class="btn btn-primary" href="signup.html">Book direct</a>
+        </div>
+      </div>
+      <div class="float-card b-chat floaty" aria-hidden="true" style="position:absolute;left:auto">
+        <div class="fc-icon" style="background:#f3eeff;color:var(--violet)">✦</div>
+        <div><strong>New direct booking</strong><small>Code, cleaner &amp; climate set</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     TIME & MONEY SAVED
+     ====================================================================== -->
+<section class="section" id="savings">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Time &amp; money back</div>
+      <h2>See what Stayeno gives back to you.</h2>
+      <p>Codes, messages, cleaner texts, price changes and thermostat checks add up. Move the slider.</p>
+    </div>
+
+    <div class="calc reveal">
+      <div class="calc-in">
+        <div class="field">
+          <label for="calc-props">Properties <span class="calc-value" id="calc-props-out">3</span></label>
+          <input id="calc-props" type="range" min="1" max="50" value="3">
+        </div>
+        <div class="field">
+          <label for="calc-rate">What is one hour of your time worth? ($)</label>
+          <input id="calc-rate" type="number" min="0" step="5" value="35" inputmode="numeric">
+        </div>
+        <p class="calc-note"><strong>Estimate.</strong> Based on about 6 hours of hands-on work per property per month
+          (guest messages, door codes, cleaner coordination, pricing updates, thermostat checks) that Stayeno automates.
+          Your results depend on your properties and how you run them.</p>
+      </div>
+      <div class="calc-out" aria-live="polite">
+        <div class="out-label">Time back every month</div>
+        <div class="out-big"><span id="calc-hours">18</span> hours</div>
+        <div class="out-row"><span>Value of your time / month</span><b id="calc-month">$630</b></div>
+        <div class="out-row"><span>Hours back / year</span><b id="calc-year-hours">216</b></div>
+        <div class="out-row"><span>Value of your time / year</span><b id="calc-year">$7,560</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     BUILT SAFE + COMPARISON
+     ====================================================================== -->
 <section class="section soft">
   <div class="container">
-    <div class="section-head center">
-      <div class="eyebrow">What Stayeno takes off your plate</div>
-      <h2>One booking. Fewer things to remember.</h2>
-      <p>The goal is simple: turn repeatable property operations into a repeatable workflow.</p>
+    <div class="section-head reveal">
+      <div class="eyebrow">Built safe</div>
+      <h2>Automation you can trust with your front door.</h2>
+      <p>Stayeno checks its own work, so you never have to.</p>
     </div>
 
-    <div class="cards">
-      <div class="card"><div class="card-icon">↔</div><h3>Reservation coordination</h3><p>Reservation information can be normalized and checked for duplicates before it drives the operational workflow.</p></div>
-      <div class="card"><div class="card-icon">⌂</div><h3>Guest access</h3><p>The Schlage workflow can generate and manage guest access information around the timing of each stay.</p></div>
-      <div class="card"><div class="card-icon">✓</div><h3>Property operations</h3><p>Email notifications and cleaner coordination help keep the property moving between guests.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-head center">
-      <div class="eyebrow">From reservation to turnover</div>
-      <h2>The workflow <span style="color:var(--blue)">AUTOMATION</span> follows the stay.</h2>
+    <div class="safe-grid">
+      <div class="safe reveal"><div class="safe-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div><strong>Verified on the lock</strong><span>Every code is read back from the lock. Not “sent” — confirmed.</span></div></div>
+      <div class="safe reveal"><div class="safe-ico"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></div><div><strong>Cancelled means closed</strong><span>When a booking is cancelled, its access is removed automatically.</span></div></div>
+      <div class="safe reveal"><div class="safe-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2v20M5 6l14 12M19 6L5 18"/></svg></div><div><strong>Freeze protection</strong><span>Heat turns on before pipes are at risk — even with no booking.</span></div></div>
+      <div class="safe reveal"><div class="safe-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div><div><strong>Early warnings</strong><span>AC failures, unreadable bookings and lock problems reach you by email and text.</span></div></div>
+      <div class="safe reveal"><div class="safe-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg></div><div><strong>No double messages</strong><span>Every message is tracked, so nobody gets the same text twice.</span></div></div>
+      <div class="safe reveal"><div class="safe-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><strong>Private by design</strong><span>Your data and guest details stay protected and are never sold.</span></div></div>
     </div>
 
-    <div class="process">
-      <div class="process-step"><div class="process-number">STEP 01</div><h3>Reservation arrives</h3><p>Calendar information is read, normalized and checked for duplicates.</p></div>
-      <div class="process-step"><div class="process-number">STEP 02</div><h3>Access is prepared</h3><p>The access workflow can prepare guest information around check-in.</p></div>
-      <div class="process-step"><div class="process-number">STEP 03</div><h3>People are notified</h3><p>Operational emails can keep the host, co-host and cleaner informed.</p></div>
-      <div class="process-step"><div class="process-number">STEP 04</div><h3>Turnover begins</h3><p>Checkout timing helps move the property toward the next stay.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section soft">
-  <div class="container feature-grid">
-    <div class="feature-copy">
-      <div class="eyebrow">The point isn't another dashboard</div>
-      <h2>It's fewer things you have to check yourself.</h2>
-      <p>Stayeno is being built around the events that already happen in a short-term rental. A reservation arrives. A guest checks in. A guest checks out. The property needs to move to the next step.</p>
-
-      <div class="feature-list">
-        <div><div class="tick">✓</div><div><strong>Reservation timing becomes the trigger</strong><span>Reduce repetitive calendar checking and manual coordination.</span></div></div>
-        <div><div class="tick">✓</div><div><strong>Read-only calendar connection</strong><span>Your booking platforms remain the place where reservations are managed.</span></div></div>
-        <div><div class="tick">✓</div><div><strong>Operational actions follow the stay</strong><span>Access, notifications and turnover steps can follow reservation timing.</span></div></div>
-      </div>
-    </div>
-
-    <div class="mini-dashboard">
-      <div class="mini-head"><strong>Property activity</strong><span>This week</span></div>
-      <div class="mini-calendar">
-        <div>M</div><div>T</div><div>W</div><div class="booked">T</div><div class="booked">F</div><div class="today">S</div><div>S</div>
-        <div></div><div></div><div></div><div class="booked"></div><div class="booked"></div><div class="booked"></div><div></div>
-        <div></div><div class="booked"></div><div class="booked"></div><div></div><div></div><div></div><div></div>
-      </div>
-      <div class="mini-events">
-        <div class="mini-event"><i></i><span>Guest access workflow</span><b>READY</b></div>
-        <div class="mini-event"><i></i><span>Cleaner notification</span><b>SENT</b></div>
-        <div class="mini-event"><i></i><span>Checkout turnover</span><b>NEXT</b></div>
-      </div>
+    <div class="compare reveal">
+      <table>
+        <caption class="sr-only">Stayeno compared with typical rental software</caption>
+        <thead><tr><th scope="col">&nbsp;</th><th scope="col" class="us">Stayeno</th><th scope="col">Typical rental software</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">How you use it</th><td class="us">Just ask, by chat</td><td class="them">Dozens of menus and settings</td></tr>
+          <tr><th scope="row">AI</th><td class="us">Runs the whole business</td><td class="them">A feature or an add-on</td></tr>
+          <tr><th scope="row">Smart locks &amp; thermostats</th><td class="us">Built in and automated</td><td class="them">Extra integrations, often manual</td></tr>
+          <tr><th scope="row">Cleaning workflow</th><td class="us">Automatic, timed to every stay</td><td class="them">Tasks you assign yourself</td></tr>
+          <tr><th scope="row">Mobile</th><td class="us">Same chat, same power</td><td class="them">A smaller version of the dashboard</td></tr>
+          <tr><th scope="row">Getting started</th><td class="us">Set up by chat in minutes</td><td class="them">Onboarding calls and training</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="section-head center">
-      <div class="eyebrow">Built to grow with your operation</div>
-      <h2>Start with the workflow. Add more when you're ready.</h2>
-      <p>Today's Stayeno workflow focuses on reservation ingestion, normalization, access-code workflows and email notifications.</p>
-    </div>
-
-    <div class="cards">
-      <div class="card"><div class="eyebrow">CURRENT</div><h3>Reservation & access automation</h3><p>Calendar ingestion, normalization, duplicate handling, Schlage workflows and operational email.</p></div>
-      <div class="card"><div class="eyebrow">NEXT</div><h3>More property communication</h3><p>SMS notifications and broader operational messaging are planned additions.</p></div>
-      <div class="card"><div class="eyebrow">ROADMAP</div><h3>More property automation</h3><p>Thermostat automation, a property dashboard and payments/reporting are planned additions.</p></div>
-    </div>
-  </div>
-</section>
-
+<!-- ======================================================================
+     FINAL CTA
+     ====================================================================== -->
 <section class="cta">
-  <div class="container">
-    <div class="eyebrow">Ready when you are</div>
-    <h2>Your booking creates the stay.<br><span style="color:var(--blue)">Stayeno handles the next steps.</span></h2>
-    <p>Built for hosts, co-hosts and property managers who want repetitive property operations to happen automatically.</p>
+  <div class="container reveal">
+    <span class="ai-badge">✦ Less busywork. More business.</span>
+    <h2>Spend your time on what<br><span class="grad-text">grows your business.</span></h2>
+    <p>Marketing, new properties, better guest experiences — or simply your evenings back.
+       Stayeno handles the rest.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="signup.html">Start automating</a>
-      <a class="btn btn-secondary" href="features.html">Explore features</a>
+      <a class="btn btn-primary" href="signup.html">Start free →</a>
+      <a class="btn btn-ghost" href="pricing.html">See pricing</a>
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="container footerrow">
-    <span>© 2026 Stayeno · A&R Investment Venture LLC</span>
-    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+    <span>© 2026 Stayeno · A&amp;R Investment Venture LLC</span>
+    <span class="footer-links">
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a href="sms-compliance.html">SMS Compliance</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="mailto:support@stayeno.com">support@stayeno.com</a>
+    </span>
   </div>
 </footer>
 
+<!-- ======================================================================
+     SCRIPTS (plain JavaScript, no libraries)
+     ====================================================================== -->
 <script>
+/* ---- 1. Navigation: dark background after scrolling + mobile menu ---- */
 (function(){
-  const btn=document.querySelector('.mobile-menu-toggle');
-  const menu=document.getElementById('mobile-menu');
-  if(!btn||!menu)return;
-  function closeMenu(){menu.hidden=true;btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu')}
-  btn.addEventListener('click',function(){
-    const open=menu.hidden;
-    menu.hidden=!open;
-    btn.setAttribute('aria-expanded',String(open));
-    btn.setAttribute('aria-label',open?'Close menu':'Open menu');
+  var nav = document.getElementById('nav');
+  function setNav(){ nav.classList.toggle('scrolled', window.scrollY > 20); }
+  setNav();
+  window.addEventListener('scroll', setNav, {passive:true});
+
+  var btn = document.querySelector('.mobile-menu-toggle');
+  var menu = document.getElementById('mobile-menu');
+  if(!btn || !menu) return;
+  function closeMenu(){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Open menu'); }
+  btn.addEventListener('click', function(){
+    var open = menu.hidden;
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-  window.addEventListener('resize',function(){if(window.innerWidth>800)closeMenu()});
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+  window.addEventListener('resize', function(){ if(window.innerWidth > 820) closeMenu(); });
+})();
+
+/* ---- 2. Hero chat demo: types a question, then shows the AI answer ---- */
+(function(){
+  var log = document.getElementById('chat-log');
+  var typed = document.getElementById('chat-typed');
+  var suggest = document.getElementById('chat-suggest');
+  if(!log || !typed || !suggest) return;
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MAX_MESSAGES = 6;          // keep the window tidy
+  var PAUSE_BETWEEN_MS = 3800;   // time to read each answer
+
+  // Each step: the chip label, the question, and the answer (HTML).
+  var STEPS = [
+    {chip:"My properties", q:"Show all my active properties",
+     a:"You have <b>3 active properties</b>:" +
+       "<div class='ai-card'>" +
+       "<div class='row'><div><b>Ocean View Suite</b><small>Atlantic City · guest until Sun</small></div><span class='pill green'>Occupied</span></div>" +
+       "<div class='row'><div><b>Boardwalk Loft</b><small>Ventnor · check-in today 3 PM</small></div><span class='pill blue'>Arriving</span></div>" +
+       "<div class='row'><div><b>Marina House</b><small>Brigantine · next guest Thu</small></div><span class='pill violet'>Vacant</span></div>" +
+       "</div>"},
+    {chip:"Base price", q:"What's my base price for Ocean View Suite?",
+     a:"Base price is <b>$189/night</b>, weekends <b>$229</b>." +
+       "<div class='ai-card'><div class='row'><div><b>Suggestion for Sat</b><small>Local demand is high this weekend</small></div><span class='pill violet'>$245</span></div></div>"},
+    {chip:"Raise weekends", q:"Increase weekend prices by 10% for all properties",
+     a:"<span class='done'>Done ✓</span> Weekend rates raised 10% on 3 listings." +
+       "<div class='ai-card'><div class='row'><div><b>Updated on</b><small>Airbnb · Vrbo · your direct site</small></div><span class='pill green'>Synced</span></div></div>"},
+    {chip:"Pre-cool", q:"Pre-cool Boardwalk Loft before Sarah arrives",
+     a:"<span class='done'>Scheduled ✓</span> AC to <b>70°F at 11:00 AM</b> — 4 hours before her 3 PM check-in." +
+       "<div class='ai-card'><div class='row'><div><b>Door code</b><small>Ready and sent to you and your co-host</small></div><span class='pill green'>Verified</span></div></div>"},
+    {chip:"Cleaning", q:"Who's cleaning tomorrow?",
+     a:"<b>Maria</b> is cleaning <b>Ocean View Suite</b> tomorrow." +
+       "<div class='ai-card'><div class='row'><div><b>Same-day turnover</b><small>Window 12–4 PM · reminder already sent</small></div><span class='pill amber'>12–4 PM</span></div></div>"},
+    {chip:"Connect Airbnb", q:"Connect me to Airbnb",
+     a:"<span class='done'>Connected ✓</span> I found <b>3 listings</b> and synced calendars, prices and messages. Want me to turn on AI replies?"}
+  ];
+
+  var current = 0, busy = false, autoPlay = true, timer = null, chips = [];
+
+  // [text] = escapeText(text): show user text safely
+  function escapeText(text){
+    var div = document.createElement('div'); div.textContent = text; return div.innerHTML;
+  }
+
+  // [element] = addMessage(kind, html)
+  function addMessage(kind, html){
+    var el = document.createElement('div');
+    el.className = 'msg ' + kind;
+    el.innerHTML = html;
+    log.appendChild(el);
+    while(log.children.length > MAX_MESSAGES){ log.removeChild(log.firstChild); }
+    log.scrollTop = log.scrollHeight;
+    return el;
+  }
+
+  // [] = typeQuestion(text, done): type into the input box one letter at a time
+  function typeQuestion(text, done){
+    if(reduceMotion){ done(); return; }
+    var i = 0;
+    typed.textContent = '';
+    (function nextLetter(){
+      i = i + 1;
+      typed.textContent = text.slice(0, i);
+      if(i < text.length){ setTimeout(nextLetter, 26 + Math.random() * 34); }
+      else { setTimeout(done, 380); }
+    })();
+  }
+
+  // [] = runStep(n): ask question n and show its answer
+  function runStep(n){
+    if(busy) return;
+    busy = true;
+    current = n;
+    chips.forEach(function(c, k){ c.classList.toggle('active', k === n); });
+    var step = STEPS[n];
+    typeQuestion(step.q, function(){
+      typed.textContent = '';
+      addMessage('user', escapeText(step.q));
+      var thinking = addMessage('ai typing', '<span></span><span></span><span></span>');
+      setTimeout(function(){
+        thinking.classList.remove('typing');
+        thinking.innerHTML = step.a;
+        log.scrollTop = log.scrollHeight;
+        busy = false;
+        if(autoPlay){ timer = setTimeout(nextStep, PAUSE_BETWEEN_MS); }
+      }, reduceMotion ? 0 : 950);
+    });
+  }
+
+  function nextStep(){ runStep((current + 1) % STEPS.length); }
+
+  // Suggestion chips: a click stops the auto-play and answers that question.
+  STEPS.forEach(function(step, n){
+    var chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'chip';
+    chip.textContent = step.chip;
+    chip.addEventListener('click', function(){
+      autoPlay = false;
+      clearTimeout(timer);
+      runStep(n);
+    });
+    suggest.appendChild(chip);
+    chips.push(chip);
+  });
+
+  if(reduceMotion){
+    autoPlay = false;
+    runStep(0);
+  } else {
+    setTimeout(function(){ runStep(0); }, 700);
+  }
+})();
+
+/* ---- 3. Savings calculator ---- */
+(function(){
+  var HOURS_PER_PROPERTY_PER_MONTH = 6;   // estimate shown on the page
+  var props = document.getElementById('calc-props');
+  var rate = document.getElementById('calc-rate');
+  if(!props || !rate) return;
+
+  function money(value){ return '$' + Math.round(value).toLocaleString('en-US'); }
+
+  function update(){
+    var properties = Number(props.value) || 1;
+    var hourValue = Math.max(0, Number(rate.value) || 0);
+    var hours = properties * HOURS_PER_PROPERTY_PER_MONTH;
+    document.getElementById('calc-props-out').textContent = properties;
+    document.getElementById('calc-hours').textContent = hours.toLocaleString('en-US');
+    document.getElementById('calc-month').textContent = money(hours * hourValue);
+    document.getElementById('calc-year-hours').textContent = (hours * 12).toLocaleString('en-US');
+    document.getElementById('calc-year').textContent = money(hours * hourValue * 12);
+  }
+  props.addEventListener('input', update);
+  rate.addEventListener('input', update);
+  update();
+})();
+
+/* ---- 4. Reveal sections as they scroll into view ---- */
+(function(){
+  var items = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    items.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add('in'); observer.unobserve(entry.target); }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  items.forEach(function(el){ observer.observe(el); });
 })();
 </script>
 
