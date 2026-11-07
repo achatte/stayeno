@@ -1,55 +1,100 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Terms of Service — Smart Hosting</title><link rel="stylesheet" href="css/style.css"><link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=5">
-<link rel="apple-touch-icon" href="favicon.png?v=5">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Terms of Service — Stayeno</title>
+<meta name="description" content="Stayeno Terms of Service.">
+<meta name="theme-color" content="#070d22">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=7">
+<link rel="apple-touch-icon" href="favicon.png?v=7">
+<link rel="stylesheet" href="css/stayeno.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-<nav class="nav" aria-label="Primary navigation">
+
+<nav class="nav" id="nav" aria-label="Primary navigation">
   <div class="container navinner">
-    <a class="brand" href="index.html" aria-label="Smart Hosting home">
-      <img class="brand-icon" src="assets/smart-hosting-icon.png" alt="" width="42" height="42">
-      <span class="brand-wordmark">Smart<span>Hosting</span></span>
+    <a class="brand" href="index.html" aria-label="Stayeno home">
+      <img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36">
+      <span class="brand-wordmark">Stay<span>eno</span></span>
     </a>
-    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="navlinks"><a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="sms.html">Notifications</a><a class="navcta" href="signup.html">Get started</a></div>
+    <div class="navlinks">
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Start free</a>
+    </div>
+    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobile-menu" hidden>
     <div class="container mobile-menu-inner">
-      <a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="sms.html">Notifications</a>
-      <a class="navcta mobile-cta" href="signup.html">Get started</a>
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-primary" href="signup.html">Start free</a>
     </div>
   </div>
 </nav>
-<section class="section"><div class="container" style="max-width:900px">
-<div class="eyebrow">Smart Hosting</div><h1 style="font-size:54px">Terms of Service</h1>
-<p style="color:var(--muted)">Last updated: September 14, 2026</p>
-<div class="panel">
-<h2>1. Service</h2><p>Smart Hosting provides software and automation tools intended to help hosts, co-hosts, property managers and authorized property staff coordinate short-term-rental operations.</p>
-<h2>2. Accounts and authorized use</h2><p>You are responsible for information provided to Smart Hosting and for maintaining appropriate authorization to manage properties, reservations, access systems and other connected services.</p>
-<h2>3. Automation</h2><p>Automation features depend on the availability and behavior of connected platforms, calendars, smart-lock systems, messaging services and other third-party services. Smart Hosting does not guarantee uninterrupted operation of third-party services.</p>
-<h2>4. Guest access and property systems</h2><p>You are responsible for ensuring that access codes, locks, property devices and other connected systems are configured appropriately and used only for authorized purposes.</p>
-<h2>5. SMS program terms</h2>
-<p>Smart Hosting SMS messages are intended for operational and account-related communications, such as reservation notifications, access-code notifications, cleaning/turnover notifications and property-automation alerts.</p>
-<p><strong>Message frequency may vary. Standard Message and Data Rates may apply. Reply STOP to opt out. Reply HELP for help.</strong> SMS consent is optional and is not a condition of purchase.</p>
-<p>We will not share mobile information with third parties for promotional or marketing purposes. Please see our <a href="privacy.html" style="color:var(--brand);font-weight:700">Privacy Policy</a> for additional information.</p>
-<h2>6. Opt-out and help</h2><p>Reply STOP to stop SMS messages. After opting out, you will receive no further SMS messages unless you opt in again. Reply HELP for help, or contact manager@chatterjeeconsultingservices.com / 331-244-9009.</p>
-<h2>7. Third-party services</h2><p>Smart Hosting may integrate with reservation platforms, calendar providers, smart-lock providers, messaging providers and other third parties. Their separate terms and policies may apply.</p>
-<h2>8. Changes</h2><p>These terms may be updated as the service develops. Continued use after an update constitutes acceptance of the revised terms to the extent permitted by law.</p>
-<h2>9. Contact</h2><p>Smart Hosting / A&amp;R Investment Venture LLC<br>Tucson, Arizona, USA<br>manager@chatterjeeconsultingservices.com<br>331-244-9009</p>
-</div></div></section>
-<footer class="footer"><div class="container footerrow"><span>© 2026 Smart Hosting · A&amp;R Investment Venture LLC</span><span><a href="privacy.html">Privacy</a> · <a href="signup.html">SMS opt-in</a></span></div></footer>
-<script>
-(function(){
-  const nav=document.querySelector('.nav');
-  const btn=document.querySelector('.mobile-menu-toggle');
-  const menu=document.getElementById('mobile-menu');
-  if(!btn||!menu) return;
-  function closeMenu(){menu.hidden=true;btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu');nav.classList.remove('menu-open');}
-  btn.addEventListener('click',function(){const open=menu.hidden;menu.hidden=!open;btn.setAttribute('aria-expanded',String(open));btn.setAttribute('aria-label',open?'Close menu':'Open menu');nav.classList.toggle('menu-open',open);});
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-  window.addEventListener('resize',function(){if(window.innerWidth>800) closeMenu();});
-})();
-</script>
-</body></html>
+
+<header class="page-hero compact">
+  <div class="container">
+    <div class="eyebrow on-dark">Stayeno</div>
+    <h1>Terms of Service</h1>
+    <div class="meta-pill"><i></i>Last updated: September 14, 2026</div>
+  </div>
+</header>
+
+<main class="legal">
+  <div class="container legal-wrap">
+    <nav class="toc" aria-label="On this page">
+      <div class="toc-title">On this page</div>
+      <div id="toc-list"></div>
+      <button class="btn btn-light btn-sm toc-print" id="toc-print" type="button">Print</button>
+    </nav>
+
+    <article class="legal-article">
+      <h2>1. Service</h2><p>Stayeno provides software and automation tools intended to help hosts, co-hosts, property managers and authorized property staff coordinate short-term-rental operations.</p>
+      <h2>2. Accounts and authorized use</h2><p>You are responsible for information provided to Stayeno and for maintaining appropriate authorization to manage properties, reservations, access systems and other connected services.</p>
+      <h2>3. Automation</h2><p>Automation features depend on the availability and behavior of connected platforms, calendars, smart-lock systems, messaging services and other third-party services. Stayeno does not guarantee uninterrupted operation of third-party services.</p>
+      <h2>4. Guest access and property systems</h2><p>You are responsible for ensuring that access codes, locks, property devices and other connected systems are configured appropriately and used only for authorized purposes.</p>
+      <h2>5. SMS program terms</h2>
+      <p>Stayeno SMS messages are intended for operational and account-related communications, such as reservation notifications, access-code notifications, cleaning/turnover notifications and property-automation alerts.</p>
+      <div class="highlight-box">
+        <p><strong>Message frequency may vary. Standard Message and Data Rates may apply. Reply STOP to opt out. Reply HELP for help.</strong> SMS consent is optional and is not a condition of purchase.</p>
+      </div>
+      <p>We will not share mobile information with third parties for promotional or marketing purposes. Please see our <a href="privacy.html">Privacy Policy</a> for additional information.</p>
+      <h2>6. Opt-out and help</h2><p>Reply STOP to stop SMS messages. After opting out, you will receive no further SMS messages unless you opt in again. Reply HELP for help, or contact support@stayeno.com / 331-244-9009.</p>
+      <h2>7. Third-party services</h2><p>Stayeno may integrate with reservation platforms, calendar providers, smart-lock providers, messaging providers and other third parties. Their separate terms and policies may apply.</p>
+      <h2>8. Changes</h2><p>These terms may be updated as the service develops. Continued use after an update constitutes acceptance of the revised terms to the extent permitted by law.</p>
+      <h2>9. Contact</h2><p>Stayeno / A&amp;R Investment Venture LLC<br>Tucson, Arizona, USA<br>support@stayeno.com<br>331-244-9009</p>
+      <a class="back-top" href="#nav">↑ Back to top</a>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36"><span class="brand-wordmark">Stay<span>eno</span></span></a>
+        <p>The AI co-host that runs your short-term rentals — so you can focus on growing your business.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><strong>Product</strong><a href="index.html#ai">AI co-host</a><a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="signup.html">Start free</a></div>
+        <div class="footer-col"><strong>Messaging</strong><a href="sms.html">Notifications</a><a href="sms-compliance.html">SMS Compliance</a></div>
+        <div class="footer-col"><strong>Legal</strong><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+        <div class="footer-col"><strong>Contact</strong><a href="mailto:support@stayeno.com">support@stayeno.com</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Stayeno · A&amp;R Investment Venture LLC</span><span>Built for hosts who'd rather grow than chase tasks.</span></div>
+  </div>
+</footer>
+
+<script src="js/stayeno.js"></script>
+</body>
+</html>
