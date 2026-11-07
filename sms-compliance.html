@@ -1,44 +1,108 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SMS Compliance — Smart Hosting</title><link rel="stylesheet" href="css/style.css"><link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=5">
-<link rel="apple-touch-icon" href="favicon.png?v=5">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SMS Compliance — Stayeno</title>
+<meta name="description" content="How subscribers opt in to Stayeno SMS, the SMS use case, required disclosure and customer care.">
+<meta name="theme-color" content="#070d22">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=7">
+<link rel="apple-touch-icon" href="favicon.png?v=7">
+<link rel="stylesheet" href="css/stayeno.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-<nav class="nav" aria-label="Primary navigation">
+
+<nav class="nav" id="nav" aria-label="Primary navigation">
   <div class="container navinner">
-    <a class="brand" href="index.html" aria-label="Smart Hosting home">
-      <img class="brand-icon" src="assets/smart-hosting-icon.png" alt="" width="42" height="42">
-      <span class="brand-wordmark">Smart<span>Hosting</span></span>
+    <a class="brand" href="index.html" aria-label="Stayeno home">
+      <img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36">
+      <span class="brand-wordmark">Stay<span>eno</span></span>
     </a>
-    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="navlinks"><a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="sms.html">Notifications</a><a class="navcta" href="signup.html">Get started</a></div>
+    <div class="navlinks">
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Start free</a>
+    </div>
+    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobile-menu" hidden>
     <div class="container mobile-menu-inner">
-      <a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="sms.html">Notifications</a>
-      <a class="navcta mobile-cta" href="signup.html">Get started</a>
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-primary" href="signup.html">Start free</a>
     </div>
   </div>
 </nav>
-<section class="section"><div class="container" style="max-width:900px"><div class="eyebrow">SMS program</div><h1 style="font-size:54px">Smart Hosting SMS Consent</h1>
-<div class="panel"><h2>How subscribers opt in</h2><p>Subscribers navigate to the public Smart Hosting signup page and voluntarily provide a phone number. SMS consent is provided through a separate, optional, unchecked checkbox dedicated exclusively to text messages.</p>
-<h2>SMS use case</h2><p>Operational/account notifications for hosts, co-hosts, property managers and authorized property staff, including reservation updates, guest access information, cleaning/turnover notifications and property automation alerts.</p>
-<h2>Required disclosure</h2><p>By providing your phone number and checking the SMS consent box, you agree to receive SMS operational/account notifications from Smart Hosting. Message frequency may vary. Standard Message and Data Rates may apply. Reply STOP to opt out. Reply HELP for help. Consent is not a condition of purchase. We will not share mobile information with third parties for promotional or marketing purposes.</p>
-<h2>Customer care</h2><p>Reply HELP or contact manager@chatterjeeconsultingservices.com or 331-244-9009.</p>
-<p><a href="signup.html" style="color:var(--brand);font-weight:800">Public SMS opt-in form →</a></p></div></div></section>
-<footer class="footer"><div class="container footerrow"><span>© 2026 Smart Hosting · A&amp;R Investment Venture LLC</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span></div></footer>
-<script>
-(function(){
-  const nav=document.querySelector('.nav');
-  const btn=document.querySelector('.mobile-menu-toggle');
-  const menu=document.getElementById('mobile-menu');
-  if(!btn||!menu) return;
-  function closeMenu(){menu.hidden=true;btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu');nav.classList.remove('menu-open');}
-  btn.addEventListener('click',function(){const open=menu.hidden;menu.hidden=!open;btn.setAttribute('aria-expanded',String(open));btn.setAttribute('aria-label',open?'Close menu':'Open menu');nav.classList.toggle('menu-open',open);});
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-  window.addEventListener('resize',function(){if(window.innerWidth>800) closeMenu();});
-})();
-</script>
-</body></html>
+
+<header class="page-hero compact">
+  <div class="container">
+    <div class="eyebrow on-dark">SMS program</div>
+    <h1>Stayeno SMS Consent</h1>
+  </div>
+</header>
+
+<main class="legal">
+  <div class="container">
+
+    <!-- Opt-in flow illustration -->
+    <div class="flow-steps reveal" aria-label="Opt-in steps">
+      <div class="flow-step"><div class="fs-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></div><b>Signup page</b><small>Public Stayeno form</small></div>
+      <div class="flow-step"><div class="fs-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><b>Phone number</b><small>Given voluntarily</small></div>
+      <div class="flow-step"><div class="fs-ico"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/></svg></div><b>Separate checkbox</b><small>Optional · unchecked</small></div>
+      <div class="flow-step"><div class="fs-ico"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><b>STOP or HELP</b><small>Any time</small></div>
+    </div>
+
+    <div class="legal-wrap">
+      <nav class="toc" aria-label="On this page">
+        <div class="toc-title">On this page</div>
+        <div id="toc-list"></div>
+      </nav>
+
+      <article class="legal-article">
+        <h2>How subscribers opt in</h2>
+        <p>Subscribers navigate to the public Stayeno signup page and voluntarily provide a phone number. SMS consent is provided through a separate, optional, unchecked checkbox dedicated exclusively to text messages.</p>
+
+        <h2>SMS use case</h2>
+        <p>Operational/account notifications for hosts, co-hosts, property managers and authorized property staff, including reservation updates, guest access information, cleaning/turnover notifications and property automation alerts.</p>
+
+        <h2>Required disclosure</h2>
+        <div class="highlight-box"><p>By providing your phone number and checking the SMS consent box, you agree to receive SMS operational/account notifications from Stayeno. Message frequency may vary. Standard Message and Data Rates may apply. Reply STOP to opt out. Reply HELP for help. Consent is not a condition of purchase. We will not share mobile information with third parties for promotional or marketing purposes.</p></div>
+
+        <h2>Customer care</h2>
+        <p>Reply HELP or contact support@stayeno.com or 331-244-9009.</p>
+
+        <p><a href="signup.html">Public SMS opt-in form →</a></p>
+        <a class="back-top" href="#nav">↑ Back to top</a>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36"><span class="brand-wordmark">Stay<span>eno</span></span></a>
+        <p>The AI co-host that runs your short-term rentals — so you can focus on growing your business.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><strong>Product</strong><a href="index.html#ai">AI co-host</a><a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="signup.html">Start free</a></div>
+        <div class="footer-col"><strong>Messaging</strong><a href="sms.html">Notifications</a><a href="sms-compliance.html">SMS Compliance</a></div>
+        <div class="footer-col"><strong>Legal</strong><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+        <div class="footer-col"><strong>Contact</strong><a href="mailto:support@stayeno.com">support@stayeno.com</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Stayeno · A&amp;R Investment Venture LLC</span><span>Built for hosts who'd rather grow than chase tasks.</span></div>
+  </div>
+</footer>
+
+<script src="js/stayeno.js"></script>
+</body>
+</html>
