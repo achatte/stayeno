@@ -1,136 +1,309 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Features — Stayeno</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=5">
-<link rel="apple-touch-icon" href="favicon.png?v=5">
+<meta name="description" content="AI chat control, AI guest inbox, AI pricing, an AI agent, smart locks, cleaning workflow, thermostat automation and direct booking — in one conversation.">
+<meta name="theme-color" content="#070d22">
+<meta property="og:title" content="Stayeno features — everything your rental needs, in one conversation">
+<meta property="og:description" content="AI co-host, smart locks, cleaning, thermostats and direct booking for short-term rental hosts.">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=7">
+<link rel="apple-touch-icon" href="favicon.png?v=7">
+<link rel="stylesheet" href="css/stayeno.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-<nav class="nav" aria-label="Primary navigation">
+
+<nav class="nav" id="nav" aria-label="Primary navigation">
   <div class="container navinner">
     <a class="brand" href="index.html" aria-label="Stayeno home">
-      <img class="brand-icon" src="assets/smart-hosting-icon.png" alt="" width="42" height="42">
+      <img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36">
       <span class="brand-wordmark">Stay<span>eno</span></span>
     </a>
-    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="navlinks"><a href="how-it-works.html">How it works</a><a href="features.html" class="active">Features</a><a href="pricing.html">Pricing</a><a href="sms.html">Notifications</a><a class="navcta" href="signup.html">Get started</a></div>
+    <div class="navlinks">
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html" class="active">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Start free</a>
+    </div>
+    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobile-menu" hidden>
     <div class="container mobile-menu-inner">
-      <a href="how-it-works.html">How it works</a><a href="features.html" class="active">Features</a><a href="pricing.html">Pricing</a><a href="sms.html">Notifications</a>
-      <a class="navcta mobile-cta" href="signup.html">Get started</a>
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html" class="active">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-primary" href="signup.html">Start free</a>
     </div>
   </div>
 </nav>
 
-<main>
-<section class="feature-hero">
-  <div class="container feature-hero-grid">
-    <div class="feature-copy">
-      <div class="eyebrow">THE STAYENO AUTOMATION PLATFORM</div>
-      <h1>Your next booking shouldn't create another checklist.</h1>
-      <p>Stayeno turns reservation events into automated property operations — helping you manage access, notifications and turnovers without constantly checking calendars and chasing tasks.</p>
-      <div class="actions"><a class="btn btn-primary" href="signup.html">Start automating</a><a class="btn btn-secondary" href="how-it-works.html">See how it works</a></div>
-      <div class="hero-note"><span class="live-dot"></span> Reservation → automation → property action</div>
+<!-- ===================================================================== HERO -->
+<header class="page-hero">
+  <div class="container hero-split">
+    <div>
+      <span class="ai-badge">✦ Stayeno features</span>
+      <h1>Everything your rental needs.<br><span class="grad-text">One conversation.</span></h1>
+      <p class="lead">Pricing, guest messages, door codes, cleaning, climate and direct bookings —
+        run by an AI co-host you simply talk to. On your laptop or your phone.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="signup.html">Start free →</a>
+        <a class="btn btn-ghost" href="#explore">Explore features</a>
+      </div>
     </div>
 
-    <div class="product-shell">
-      <div class="product-topbar">
-        <div class="mini-brand"><span class="mini-house">⌂</span> Stayeno</div>
-        <div class="mini-user"><span class="mini-bell">♢</span><span class="avatar">RC</span><strong>Property Manager</strong></div>
+    <div class="orbit-wrap" aria-hidden="true">
+      <div class="orbit-chip oc1 floaty"><i>✦</i>AI pricing</div>
+      <div class="orbit-chip oc2 floaty" style="animation-delay:1.2s"><i>🔒</i>Smart lock</div>
+      <div class="orbit-chip oc3 floaty" style="animation-delay:2.4s"><i>🌡️</i>Thermostat</div>
+      <div class="orbit-chip oc4 floaty" style="animation-delay:.6s"><i>🧹</i>Cleaning</div>
+
+      <div class="device" data-tilt>
+        <div class="device-bar"><i></i><i></i><i></i><span>stayeno.com · Stayeno AI</span></div>
+        <div class="device-body">
+          <div class="bubble me">How did my properties do this month?</div>
+          <div class="bubble bot"><b>Great month 🎉</b> 87% occupancy across 3 properties. Ocean View Suite earned the most. Want me to raise its weekend price?</div>
+          <div class="bubble me">Yes, +8% on weekends. And pre-cool the Loft for Friday.</div>
+          <div class="bubble bot"><b>Done ✓</b> Weekend price updated on every channel. AC set to 70°F at 11 AM Friday — 4 hours before check-in.</div>
+        </div>
       </div>
-      <div class="product-body">
-        <aside class="product-side">
-          <div class="side-title">PROPERTIES <span>＋</span></div>
-          <div class="property selected"><div class="thumb t1"></div><div><b>Tucson Desert House</b><small>Tucson, AZ</small><em><i></i> Active</em></div></div>
-          <div class="property"><div class="thumb t2"></div><div><b>Sonoran Villa</b><small>Tucson, AZ</small><em class="inactive"><i></i> Inactive</em></div></div>
-          <div class="property"><div class="thumb t3"></div><div><b>Downtown Condo</b><small>Phoenix, AZ</small><em><i></i> Active</em></div></div>
-        </aside>
-        <section class="product-main">
-          <div class="screen-head"><div><div class="screen-title"><span class="lock">⌑</span> Automation Center</div><small>Reservation-driven property operations</small></div><span class="running"><i></i> Running</span></div>
-          <div class="screen-tabs"><span class="sel">Overview</span><span>Reservations</span><span>Access</span><span>Notifications</span><span>Operations</span></div>
-          <div class="metrics"><div><strong>3</strong><small>Upcoming check-ins</small></div><div><strong>2</strong><small>Upcoming check-outs</small></div><div><strong>5</strong><small>Active access codes</small></div><div><strong>0</strong><small>Pending alerts</small></div></div>
-          <div class="dashboard-grid">
-            <div class="dash-card flow-card"><div class="card-head"><b>Automation Flow</b><span>View flow</span></div>
-              <div class="flowline"><div class="flowbox green">Reservation received<small>Airbnb / Vrbo / Booking.com</small></div><div class="down">↓</div><div class="flowbox">Normalize &amp; validate<small>Deduplicate + map property</small></div><div class="split"><div class="flowbox purple">24-hour checkout pass<small>Cleaning notification</small></div><div class="flowbox blue">New reservation pass<small>Generate access code</small></div></div><div class="down">↓</div><div class="flowbox">Save state &amp; close<small>Keep the workflow auditable</small></div></div>
-            </div>
-            <div class="dash-card activity-card"><div class="card-head"><b>Recent Activity</b><span>View all</span></div>
-              <div class="activity"><b>New reservation processed</b><small>Guest: John Smith</small><time>10:00</time></div>
-              <div class="activity"><b>Access code created</b><small>PIN: 4823 · Check-in Sep 15</small><time>10:00</time></div>
-              <div class="activity"><b>Notification queued</b><small>Guest · Host · Cleaner</small><time>09:58</time></div>
-              <div class="activity"><b>Reservation calendars checked</b><small>3 reservation sources checked</small><time>09:55</time></div>
-            </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================================================================== EXPLORER -->
+<section class="section" id="explore">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Explore Stayeno</div>
+      <h2>Pick a feature. See it work.</h2>
+      <p>Four AI powers and four automations that run your property between bookings.</p>
+    </div>
+
+    <div class="explorer reveal">
+      <div class="ex-tabs" role="tablist" aria-label="Stayeno features">
+        <button class="ex-tab" role="tab" id="t-command" aria-controls="p-command" aria-selected="true"><span class="tab-ico">✦</span><span><b>AI command center</b><small>Run everything by chat</small></span></button>
+        <button class="ex-tab" role="tab" id="t-inbox" aria-controls="p-inbox" aria-selected="false" tabindex="-1"><span class="tab-ico">✉</span><span><b>AI inbox</b><small>Guests answered in seconds</small></span></button>
+        <button class="ex-tab" role="tab" id="t-pricing" aria-controls="p-pricing" aria-selected="false" tabindex="-1"><span class="tab-ico">$</span><span><b>AI pricing</b><small>The right price, every night</small></span></button>
+        <button class="ex-tab" role="tab" id="t-agent" aria-controls="p-agent" aria-selected="false" tabindex="-1"><span class="tab-ico">⚡</span><span><b>AI agent</b><small>Works while you sleep</small></span></button>
+        <button class="ex-tab" role="tab" id="t-lock" aria-controls="p-lock" aria-selected="false" tabindex="-1"><span class="tab-ico">🔒</span><span><b>Smart lock</b><small>Codes that run themselves</small></span></button>
+        <button class="ex-tab" role="tab" id="t-clean" aria-controls="p-clean" aria-selected="false" tabindex="-1"><span class="tab-ico">🧹</span><span><b>Cleaning workflow</b><small>Turnovers on time</small></span></button>
+        <button class="ex-tab" role="tab" id="t-climate" aria-controls="p-climate" aria-selected="false" tabindex="-1"><span class="tab-ico">🌡️</span><span><b>Thermostat</b><small>Comfort in, bills down</small></span></button>
+        <button class="ex-tab" role="tab" id="t-direct" aria-controls="p-direct" aria-selected="false" tabindex="-1"><span class="tab-ico">⌂</span><span><b>Direct booking</b><small>Your site, no fees</small></span></button>
+      </div>
+
+      <div class="ex-stage">
+
+        <div class="ex-panel" role="tabpanel" id="p-command" aria-labelledby="t-command">
+          <div>
+            <span class="tag ai">AI</span>
+            <h3>If you can say it, Stayeno can do it.</h3>
+            <p>No menus to learn. Ask for a report, connect a platform, change a setting — Stayeno understands and acts.</p>
+            <ul class="ticks"><li>Connect Airbnb, Vrbo and Booking.com by chat</li><li>See every property, booking and task at a glance</li><li>Same power on desktop and mobile</li></ul>
           </div>
-        </section>
+          <div class="ex-visual">
+            <div class="bubble me">Show all my active properties</div>
+            <div class="vrow"><div>Ocean View Suite<small>Atlantic City · guest until Sun</small></div><span class="pill green">Occupied</span></div>
+            <div class="vrow"><div>Boardwalk Loft<small>Ventnor · check-in today 3 PM</small></div><span class="pill blue">Arriving</span></div>
+            <div class="vrow"><div>Marina House<small>Brigantine · next guest Thu</small></div><span class="pill violet">Vacant</span></div>
+          </div>
+        </div>
+
+        <div class="ex-panel" role="tabpanel" id="p-inbox" aria-labelledby="t-inbox" hidden>
+          <div>
+            <span class="tag ai">AI</span>
+            <h3>Every guest answered — day and night.</h3>
+            <p>Stayeno answers from your house rules and listing details, in the guest's language, and only asks you when it truly needs you.</p>
+            <ul class="ticks"><li>Instant replies to common questions</li><li>Learns your tone and your rules</li><li>Hands tricky questions to you</li></ul>
+          </div>
+          <div class="ex-visual">
+            <div class="bubble me" style="background:#fff7e6;color:#78350f;justify-self:start;border-radius:14px 14px 14px 4px">Hi! Can we bring our dog? 🐶</div>
+            <div class="bubble bot" style="justify-self:end;border-radius:14px 14px 4px 14px">Thanks for asking! Ocean View Suite is pet-free, but Marina House welcomes dogs — want me to check those dates?</div>
+            <div class="vrow"><div>Answered by Stayeno AI<small>Response time: 4 seconds</small></div><span class="pill green">Sent ✓</span></div>
+          </div>
+        </div>
+
+        <div class="ex-panel" role="tabpanel" id="p-pricing" aria-labelledby="t-pricing" hidden>
+          <div>
+            <span class="tag ai">AI</span>
+            <h3>The right price, every night.</h3>
+            <p>Ask for your base price, raise weekends, or let Stayeno follow demand. Approve with one word — or let it run on its own.</p>
+            <ul class="ticks"><li>Base, weekend and event pricing</li><li>Changes on every channel at once</li><li>You set the floor and the ceiling</li></ul>
+          </div>
+          <div class="ex-visual">
+            <div class="bars" aria-hidden="true"><span style="height:40%"></span><span style="height:46%"></span><span style="height:44%"></span><span style="height:52%"></span><span class="hot" style="height:88%"></span><span class="hot" style="height:97%"></span><span style="height:55%"></span></div>
+            <div class="vrow"><div>Base price<small>Ocean View Suite</small></div><span class="pill blue">$189</span></div>
+            <div class="vrow"><div>Suggested for Saturday<small>High local demand</small></div><span class="pill violet">$245</span></div>
+          </div>
+        </div>
+
+        <div class="ex-panel" role="tabpanel" id="p-agent" aria-labelledby="t-agent" hidden>
+          <div>
+            <span class="tag ai">AI</span>
+            <h3>It doesn't wait to be asked.</h3>
+            <p>Stayeno watches every booking, lock, cleaner and thermostat — and acts before small problems become bad reviews.</p>
+            <ul class="ticks"><li>Handles new bookings at 2 AM</li><li>Spots AC trouble before guests do</li><li>Tells you only what needs you</li></ul>
+          </div>
+          <div class="ex-visual">
+            <div class="vrow"><div>2:14 AM · New Vrbo booking<small>Code created · cleaner scheduled</small></div><span class="pill green">Done</span></div>
+            <div class="vrow"><div>6:30 AM · AC not keeping up<small>Marina House 78°F vs 72°F</small></div><span class="pill amber">Alerted</span></div>
+            <div class="vrow"><div>11:00 AM · Pre-cooling<small>Boardwalk Loft → 70°F</small></div><span class="pill blue">Running</span></div>
+            <div class="vrow"><div>4:05 PM · Cancelled stay<small>Old door code removed</small></div><span class="pill green">Confirmed</span></div>
+          </div>
+        </div>
+
+        <div class="ex-panel" role="tabpanel" id="p-lock" aria-labelledby="t-lock" hidden>
+          <div>
+            <span class="tag auto">Automation</span>
+            <h3>A private code for every stay.</h3>
+            <p>Each guest gets a unique code that works only for their stay. Stayeno checks it on the lock — and removes it after checkout.</p>
+            <ul class="ticks"><li>Active 1 hour before check-in to 2 hours after checkout</li><li>Read back from the lock to confirm</li><li>Cancelled or changed stays update access automatically</li></ul>
+          </div>
+          <div class="ex-visual">
+            <div class="code-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="keypad" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div>
+            <div class="verified">✓ Verified on the lock</div>
+          </div>
+        </div>
+
+        <div class="ex-panel" role="tabpanel" id="p-clean" aria-labelledby="t-clean" hidden>
+          <div>
+            <span class="tag auto">Automation</span>
+            <h3>Turnovers on time, without a text from you.</h3>
+            <p>Your cleaner hears about every booking and change, gets a reminder before each checkout, and sees same-day turnovers flagged.</p>
+            <ul class="ticks"><li>24-hour reminder before every checkout</li><li>12–4 PM window on same-day turnovers</li><li>Cleaners never receive guest door codes</li></ul>
+          </div>
+          <div class="ex-visual">
+            <div class="cal" aria-hidden="true">
+              <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+              <span class="bk">3</span><span class="bk">4</span><span class="cl">5</span><span class="bk">6</span><span class="bk">7</span><span class="bk">8</span><span class="cl">9</span>
+            </div>
+            <div class="vrow"><div>Maria · Ocean View Suite<small>Wed · same-day turnover</small></div><span class="pill amber">12–4 PM</span></div>
+            <div class="vrow"><div>Reminder sent<small>24 hours before checkout</small></div><span class="pill green">✓</span></div>
+          </div>
+        </div>
+
+        <div class="ex-panel" role="tabpanel" id="p-climate" aria-labelledby="t-climate" hidden>
+          <div>
+            <span class="tag auto">Automation</span>
+            <h3>Comfort for guests. Lower bills for you.</h3>
+            <p>Stayeno pre-cools or pre-heats before arrival, saves energy between stays, and protects the home in winter.</p>
+            <ul class="ticks"><li>Pre-arrival comfort 4 hours ahead</li><li>Energy-saving vacant mode</li><li>Freeze protection and AC failure alerts</li></ul>
+          </div>
+          <div class="ex-visual">
+            <div class="dial" aria-hidden="true"><b>70°</b><small>PRE-ARRIVAL</small></div>
+            <div class="vrow"><div>Vacant<small>Summer · Winter</small></div><span class="pill violet">80° · 65°</span></div>
+            <div class="vrow"><div>Freeze protection<small>Heat on below 45°F</small></div><span class="pill blue">Always on</span></div>
+          </div>
+        </div>
+
+        <div class="ex-panel" role="tabpanel" id="p-direct" aria-labelledby="t-direct" hidden>
+          <div>
+            <span class="tag grow">Growth</span>
+            <h3>Your own booking site. No platform fees.</h3>
+            <p>A beautiful booking page for every property, in sync with your other channels — so you keep more of every stay.</p>
+            <ul class="ticks"><li>Live availability, no double bookings</li><li>Prices follow your AI pricing</li><li>Codes, cleaning and climate run the same way</li></ul>
+          </div>
+          <div class="ex-visual">
+            <div class="vrow"><div><b>Ocean View Suite</b><small>Fri, Jun 12 → Mon, Jun 15 · 3 nights</small></div><span class="pill blue">$612</span></div>
+            <div class="vrow"><div>Platform fee<small>Booked on your own site</small></div><span class="pill green">$0</span></div>
+            <a class="btn btn-primary btn-block" href="signup.html">Book direct</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
 
-<section class="channel-section">
+<!-- ===================================================================== BENTO -->
+<section class="section soft">
   <div class="container">
-    <div class="channel-heading"><div><div class="eyebrow">BOOKING CALENDARS</div><h2>Bring your booking calendars into one unified view.</h2></div><p>Stayeno is designed around the reservation sources hosts already use. The reservation calendars are brought together into one unified view, then used to trigger the operational workflows that happen after a booking.</p></div>
-    <div class="channel-grid">
-      <div class="channel-card"><div class="channel-mark airbnb-mark">A</div><div><strong>Airbnb</strong><span>Reservation calendar</span></div><b class="channel-status">Calendar source</b></div>
-      <div class="channel-card"><div class="channel-mark vrbo-mark">V</div><div><strong>Vrbo</strong><span>Reservation calendar</span></div><b class="channel-status">Calendar source</b></div>
-      <div class="channel-card"><div class="channel-mark booking-mark">B</div><div><strong>Booking.com</strong><span>Reservation calendar</span></div><b class="channel-status">Calendar source</b></div>
+    <div class="section-head reveal">
+      <div class="eyebrow">Everything included</div>
+      <h2>The details that make hosting effortless.</h2>
     </div>
-    <p class="trademark-note">Airbnb, Vrbo and Booking.com are trademarks of their respective owners. Stayeno is an independent product and is not endorsed by or affiliated with these companies.</p>
+    <div class="bento">
+      <div class="card wide reveal"><span class="tag auto">Calendars</span><h3>One unified calendar</h3><p>Airbnb, Vrbo and Booking.com bookings in one view, with changes and cancellations detected automatically.</p></div>
+      <div class="card reveal"><span class="tag ai">AI</span><h3>Desktop &amp; mobile</h3><p>The same chat and the same power on every screen.</p></div>
+      <div class="card reveal"><span class="tag grow">Growth</span><h3>Multi-property</h3><p>One property or fifty — every workflow runs per property.</p></div>
+      <div class="card reveal"><span class="tag auto">Messages</span><h3>Email &amp; SMS alerts</h3><p>You, your co-host and your cleaner always know what's next.</p></div>
+      <div class="card reveal"><span class="tag auto">Cleaning</span><h3>Same-day turnovers</h3><p>Back-to-back stays are spotted and overlaps flagged early.</p></div>
+      <div class="card wide reveal"><span class="tag safe">Safety</span><h3>Built to protect your home</h3><p>Codes confirmed on the lock, freeze protection, alerts when the AC or heat can't keep up, and long “stays” over 90 days held for your review.</p></div>
+      <div class="card reveal"><span class="tag safe">Safety</span><h3>Read-only calendars</h3><p>Stayeno reads your calendars — your listings stay yours.</p></div>
+      <div class="card reveal"><span class="tag safe">Safety</span><h3>Never twice</h3><p>Every action is tracked, so nothing is sent or done twice.</p></div>
+      <div class="card reveal"><span class="tag safe">Safety</span><h3>Careful with changes</h3><p>Disappearing bookings are double-checked before access changes.</p></div>
+      <div class="card reveal"><span class="tag ai">AI</span><h3>Plain-language reports</h3><p>“How did May go?” gets you a clear answer, not a spreadsheet.</p></div>
+    </div>
+    <p class="note-small">Airbnb, Vrbo and Booking.com are trademarks of their respective owners. Stayeno is an independent product and is not endorsed by or affiliated with these companies.</p>
   </div>
 </section>
 
-<section class="section alt">
+<section class="cta">
+  <div class="container reveal">
+    <span class="ai-badge">✦ One conversation away</span>
+    <h2>Stop managing tasks.<br><span class="grad-text">Start growing.</span></h2>
+    <p>Paste your calendar link and let Stayeno take the busywork off your plate.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="signup.html">Start free →</a>
+      <a class="btn btn-ghost" href="pricing.html">View pricing</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
   <div class="container">
-    <div class="section-head"><div class="eyebrow">WHAT STAYENO AUTOMATES</div><h2>Everything that happens after the booking.</h2><p>Stayeno brings reservation calendars into one unified view, then focuses on the repetitive operational work between reservation, arrival, checkout and turnover — so you spend less time checking calendars and chasing tasks.</p></div>
-    <div class="feature-grid">
-      <article class="feature-card"><div class="feature-icon">↻</div><span class="status-tag available">Core feature</span><h3>Unified Reservation Calendar</h3><p>Bring reservation calendar information from supported platforms into one unified view and maintain property-level booking state.</p><ul><li>Airbnb iCal</li><li>Vrbo iCal</li><li>Booking.com iCal</li><li>Reservation change detection</li></ul></article>
-      <article class="feature-card"><div class="feature-icon">⌁</div><span class="status-tag available">Core feature</span><h3>Automation Engine</h3><p>Turn reservation events into repeatable actions instead of relying on someone to remember the next task.</p><ul><li>New reservation workflow</li><li>24-hour checkout workflow</li><li>Persistent state tracking</li><li>Repeat-safe processing</li></ul></article>
-      <article class="feature-card"><div class="feature-icon">▣</div><span class="status-tag available">Core feature</span><h3>Smart Guest Access</h3><p>Generate reservation-based guest PINs and coordinate the access workflow for supported Schlage locks.</p><ul><li>Automatic PIN generation</li><li>Schlage integration</li><li>Access verification</li><li>Post-checkout revocation</li></ul></article>
-      <article class="feature-card"><div class="feature-icon">✉</div><span class="status-tag available">Core feature</span><h3>Operational Notifications</h3><p>Keep the people responsible for the property informed when important reservation events occur.</p><ul><li>Host notifications</li><li>Cleaner notifications</li><li>Co-host notifications</li><li>Email and SMS workflows</li></ul></article>
-      <article class="feature-card"><div class="feature-icon">✓</div><span class="status-tag available">Core feature</span><h3>Turnover Coordination</h3><p>Use checkout events to create a predictable handoff for cleaning and identify same-day turnover situations.</p><ul><li>24-hour checkout alerts</li><li>Same-day turnover detection</li><li>Cleaner coordination</li><li>Reservation-aware timing</li></ul></article>
-      <article class="feature-card"><div class="feature-icon">🛡</div><span class="status-tag available">Safety built in</span><h3>Automation Protection</h3><p>Stayeno is designed to verify important actions before treating them as complete and to avoid acting on unreliable calendar data.</p><ul><li>Reservation calendar health checks</li><li>Safe cancellation handling</li><li>Verified access state</li><li>Production/test separation</li></ul></article>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36"><span class="brand-wordmark">Stay<span>eno</span></span></a>
+        <p>The AI co-host that runs your short-term rentals — so you can focus on growing your business.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><strong>Product</strong><a href="index.html#ai">AI co-host</a><a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="signup.html">Start free</a></div>
+        <div class="footer-col"><strong>Messaging</strong><a href="sms.html">Notifications</a><a href="sms-compliance.html">SMS Compliance</a></div>
+        <div class="footer-col"><strong>Legal</strong><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+        <div class="footer-col"><strong>Contact</strong><a href="mailto:support@stayeno.com">support@stayeno.com</a></div>
+      </div>
     </div>
+    <div class="footer-bottom"><span>© 2026 Stayeno · A&amp;R Investment Venture LLC</span><span>Built for hosts who'd rather grow than chase tasks.</span></div>
   </div>
-</section>
+</footer>
 
-<section class="section">
-  <div class="container split-feature">
-    <div class="visual-card">
-      <div class="visual-label">AUTOMATION COMMAND CENTER</div>
-      <div class="command-row"><span class="command-icon">01</span><div><b>Reservation arrives</b><small>Reservation event detected</small></div><span class="arrow">→</span></div>
-      <div class="command-row active"><span class="command-icon">02</span><div><b>Workflow evaluates</b><small>New reservation / checkout pass</small></div><span class="pulse">●</span></div>
-      <div class="command-row"><span class="command-icon">03</span><div><b>Property action runs</b><small>Access · notification · turnover</small></div><span class="arrow">→</span></div>
-      <div class="command-row"><span class="command-icon">04</span><div><b>State is saved</b><small>Keep the next run clean</small></div><span class="checkmark">✓</span></div>
-      <div class="mini-footer"><span><i></i> All systems operational</span><span>Last run · 10:00 AM</span></div>
-    </div>
-    <div class="section-head side-copy"><div class="eyebrow">LESS MANUAL WORK</div><h2>Your reservation becomes the starting point — not another task.</h2><p>Stayeno is built around a simple idea: when a reservation changes, the property workflow should know what happens next.</p><div class="bullet-list"><div><b>01</b><span><strong>Less manual checking</strong><small>Let reservation events initiate the next operational step.</small></span></div><div><b>02</b><span><strong>More consistent execution</strong><small>Use repeatable workflows instead of ad-hoc reminders.</small></span></div><div><b>03</b><span><strong>A foundation for automation</strong><small>Keep the same event-driven architecture as new property controls are added.</small></span></div></div></div>
-  </div>
-</section>
-
-<section class="section alt">
-  <div class="container"><div class="section-head"><div class="eyebrow">WHAT'S NEXT</div><h2>More automation is coming.</h2><p>The platform is designed to expand beyond today's core reservation workflows while keeping the same event-driven foundation.</p></div>
-    <div class="roadmap-grid"><div><span>01</span><b>SMS notifications</b><p>Operational alerts for hosts, co-hosts, property managers and authorized staff.</p></div><div><span>02</span><b>Thermostat automation</b><p>Reservation-aware comfort settings and temperature actions.</p></div><div><span>03</span><b>Unified dashboard</b><p>A central view for properties, reservations, workflows, access and activity.</p></div><div><span>04</span><b>Payments &amp; reporting</b><p>Future operational and financial tools for a broader property platform.</p></div></div>
-  </div>
-</section>
-
-<section class="cta"><div class="container"><h2>Let your next booking start the automation.</h2><p>Stop turning every reservation into another manual checklist. Start building a property workflow that works with you.</p><div class="actions"><a class="btn btn-primary" href="signup.html">Start automating</a><a class="btn btn-secondary" href="pricing.html">View pricing</a></div></div></section>
-</main>
-
-<footer class="footer"><div class="container footerrow"><span>© 2026 Smart Hosting · A&R Investment Venture LLC</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="sms-compliance.html">SMS Compliance</a></span></div></footer>
+<script src="js/stayeno.js"></script>
 <script>
+/* Feature explorer: accessible tabs (click, or arrow keys to move) */
 (function(){
-  const nav=document.querySelector('.nav');
-  const btn=document.querySelector('.mobile-menu-toggle');
-  const menu=document.getElementById('mobile-menu');
-  if(!btn||!menu) return;
-  function closeMenu(){menu.hidden=true;btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu');nav.classList.remove('menu-open');}
-  btn.addEventListener('click',function(){const open=menu.hidden;menu.hidden=!open;btn.setAttribute('aria-expanded',String(open));btn.setAttribute('aria-label',open?'Close menu':'Open menu');nav.classList.toggle('menu-open',open);});
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-  window.addEventListener('resize',function(){if(window.innerWidth>800) closeMenu();});
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.ex-tab'));
+  if(!tabs.length) return;
+
+  // [] = selectTab(tab, moveFocus)
+  function selectTab(tab, moveFocus){
+    tabs.forEach(function(t){
+      var on = (t === tab);
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if(moveFocus) tab.focus();
+  }
+
+  tabs.forEach(function(tab, n){
+    tab.addEventListener('click', function(){ selectTab(tab, false); });
+    tab.addEventListener('keydown', function(e){
+      var next = null;
+      if(e.key === 'ArrowDown' || e.key === 'ArrowRight') next = tabs[(n + 1) % tabs.length];
+      if(e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = tabs[(n - 1 + tabs.length) % tabs.length];
+      if(e.key === 'Home') next = tabs[0];
+      if(e.key === 'End') next = tabs[tabs.length - 1];
+      if(next){ e.preventDefault(); selectTab(next, true); }
+    });
+  });
 })();
 </script>
-</body></html>
+</body>
+</html>
