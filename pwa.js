@@ -7,6 +7,7 @@
    ========================================================================== */
 (function(){
   var DISMISS_KEY = 'stayeno-install-dismissed';
+  var SHOW_AFTER_MS = 25000;   // wait 25 s so the banner never covers the first view
   var installEvent = null;
 
   /* ---- 1. service worker ---- */
@@ -61,7 +62,16 @@
     installEvent = e;
     var dismissed = false;
     try { dismissed = localStorage.getItem(DISMISS_KEY) === '1'; } catch(err){}
-    if(!dismissed) showButton();
+    if(dismissed) return;
+    setTimeout(function(){
+      // Not while the phone menu is open; try again a bit later.
+      var menu = document.getElementById('mobile-menu');
+      if(menu && !menu.hidden){
+        setTimeout(function(){ if(installEvent) showButton(); }, 8000);
+        return;
+      }
+      if(installEvent) showButton();
+    }, SHOW_AFTER_MS);
   });
 
   window.addEventListener('appinstalled', function(){

@@ -4,11 +4,11 @@
    use the saved copy only when there is no connection.
    Change CACHE_NAME (v1 -> v2) to clear old saved copies.
    ========================================================================== */
-var CACHE_NAME = 'stayeno-v2';
+var CACHE_NAME = 'stayeno-v3';
 var CORE_FILES = [
   '/', '/index.html', '/how-it-works.html', '/features.html', '/pricing.html',
   '/signup.html', '/book-a-call.html', '/sms.html', '/sms-compliance.html', '/terms.html', '/privacy.html',
-  '/css/stayeno.css', '/js/stayeno.js', '/pwa.js',
+  '/css/stayeno.css', '/css/responsive.css', '/js/stayeno.js', '/pwa.js',
   '/favicon.png?v=7', '/icon.svg', '/manifest.webmanifest'
 ];
 
