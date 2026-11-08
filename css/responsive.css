@@ -1,0 +1,216 @@
+/* ==========================================================================
+   STAYENO — RESPONSIVE LAYER (loaded LAST on every page)
+   Makes every page fit any screen: 6.0" phones (about 360 px wide) up to
+   TVs. Order:
+     A. Global safety (nothing may push the page wider than the screen)
+     B. Menu on phones and tablets (up to 1024 px): full-screen menu,
+        hamburger turns into ✕, compact "Start free" next to it
+     C. Phones (up to 767 px): type sizes, buttons, every section
+     D. Small phones (up to 380 px) and very small (up to 339 px)
+     E. Large monitors and TVs
+   ========================================================================== */
+
+/* ---- A. GLOBAL SAFETY ---------------------------------------------------- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:84px}
+body{overflow-x:hidden}
+@supports (overflow:clip){ body{overflow-x:clip} }
+img,svg,video,iframe{max-width:100%}
+
+/* Grid and flex children may shrink below their content. Without this, one
+   long line of text (like the chat box in the home-page hero) makes the
+   whole column wider than the phone and buttons run off the screen. */
+.hero-grid>*,.hero-split>*,.split>*,.explorer>*,.ex-panel>*,.stage-wrap>*,
+.signup-wrap>*,.legal-wrap>*,.estimator>*,.calc>*,.book-wrap>*,.ai-grid>*,
+.grid-2>*,.grid-3>*,.timeline>*,.pillars>*,.steps4>*,.plans>*,.bento>*{min-width:0}
+.chat-input,.chat-input .typed,.row>div,.vrow>div,.mv-input,.mv-typed{min-width:0}
+
+/* Button text may wrap instead of overflowing */
+.btn{white-space:normal;text-align:center;line-height:1.2}
+
+/* ---- B. MENU ON PHONES AND TABLETS (up to 1024 px) ----------------------- */
+@media (max-width:1024px){
+  .nav{background:rgba(7,13,34,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .navinner{height:64px;gap:10px}
+
+  /* Only the blue "Start free" stays visible next to the hamburger */
+  .navlinks{display:flex;margin-left:auto;gap:0}
+  .navlinks>a:not(.btn-primary){display:none}
+  .navlinks .btn-primary{min-height:40px;padding:0 15px;font-size:14px;border-radius:11px;box-shadow:none}
+
+  .mobile-menu-toggle{display:flex;flex:none;width:44px;height:44px;padding:0;border-radius:12px;
+    border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);
+    flex-direction:column;gap:5px;align-items:center;justify-content:center;cursor:pointer}
+  .mobile-menu-toggle span{display:block;width:18px;height:2px;border-radius:2px;background:#fff;transition:transform .25s,opacity .2s}
+  /* hamburger -> ✕ while the menu is open */
+  .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* Full-screen menu: covers the page completely (no mixing with content) */
+  .mobile-menu{display:block;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:99;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;background:#070d22;
+    border-top:1px solid rgba(255,255,255,.08);padding-bottom:env(safe-area-inset-bottom)}
+  .mobile-menu[hidden]{display:none}
+  .mobile-menu-inner{display:grid;padding:10px 0 32px}
+  .mobile-menu-inner a:not(.btn){display:flex;align-items:center;min-height:56px;padding:0 4px;
+    color:#dbe4fb;font-size:18px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.07)}
+  .mobile-menu-inner a.active{color:#fff}
+  .mobile-menu-inner .btn{margin-top:20px;min-height:54px;font-size:16px}
+
+  /* While the menu is open: page can't scroll behind it, install banner hidden */
+  body:has(.mobile-menu:not([hidden])){overflow:hidden}
+  body:has(.mobile-menu:not([hidden])) #stayeno-install{display:none!important}
+
+  /* Tablet layouts */
+  .hero-grid,.hero-split{grid-template-columns:minmax(0,1fr)}
+}
+
+/* ---- C. PHONES (up to 767 px) -------------------------------------------- */
+@media (max-width:767px){
+  .container{width:calc(100% - 32px)}
+
+  /* Hero (home page and all other pages) */
+  .hero,.page-hero{padding:100px 0 64px}
+  .page-hero.compact{padding:96px 0 56px}
+  .hero h1,.page-hero h1{font-size:clamp(34px,9.6vw,48px);line-height:1.05;letter-spacing:-1.6px;margin:16px 0 16px}
+  .page-hero.compact h1{font-size:clamp(32px,8.8vw,44px)}
+  .hero-lead,.page-hero .lead{font-size:16.5px;line-height:1.6}
+  .ai-badge{font-size:11.5px;padding:6px 11px}
+  .meta-pill{font-size:12.5px}
+
+  /* Buttons: first one full width, the next two side by side */
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+  .actions .btn{width:100%;min-height:50px;padding:0 12px;font-size:15px}
+  .actions .btn:first-child,
+  .actions .btn:nth-child(2):last-child{grid-column:1 / -1}
+  .hero-notes{gap:6px 14px;font-size:12.5px;margin-top:20px}
+
+  /* Sections */
+  .section{padding:68px 0}
+  .section h2{font-size:clamp(28px,7.6vw,38px);letter-spacing:-1.2px;line-height:1.1}
+  .section-head{margin-bottom:34px}
+  .section-head p{font-size:16px}
+  .cta{padding:76px 0}
+  .cta h2{font-size:clamp(30px,8.4vw,44px);letter-spacing:-1.4px}
+  .cta p{font-size:16px}
+
+  /* Home page: hero chat demo */
+  .demo-wrap .phone{display:none}
+  .demo-wrap .float-card{left:10px;top:-24px;padding:9px 12px;font-size:11px}
+  .chat-top{padding:12px 14px}
+  .chat-log{height:330px;padding:14px;gap:10px}
+  .msg{max-width:96%;font-size:13.5px}
+  .row{flex-wrap:wrap}
+  .chat-input{margin:0 10px 10px}
+
+  /* Home page: other sections */
+  .ai-tile,.pillar{padding:22px}
+  .ai-tile h3,.pillar h3{font-size:19px}
+  .calc-in,.calc-out{padding:24px}
+  .compare{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .compare table{min-width:520px}
+  .footerrow{flex-direction:column;align-items:flex-start;gap:14px}
+  .footer-links{gap:4px 16px}
+
+  /* Footer (all other pages): two neat columns, bigger tap targets */
+  .footer{padding:44px 0 28px}
+  .footer-top{flex-direction:column;gap:28px}
+  .footer-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px 20px;width:100%}
+  .footer-col a,.footer-links a{padding:7px 0}
+  .footer-bottom{flex-direction:column;gap:8px}
+
+  /* Features */
+  .hero-split{gap:44px}
+  .orbit-wrap{padding:30px 4px}
+  .orbit-chip{font-size:11.5px;padding:7px 11px}
+  .ex-tabs{grid-template-columns:1fr 1fr;gap:8px}
+  .ex-tab{padding:10px;gap:9px;border-radius:14px}
+  .ex-tab small{display:none}
+  .ex-tab .tab-ico{width:32px;height:32px;border-radius:10px}
+  .ex-tab b{font-size:13.5px}
+  .ex-stage{padding:20px;min-height:0;border-radius:22px}
+  .ex-panel h3{font-size:23px}
+  .bento .card,.card{padding:22px}
+
+  /* Pricing */
+  .plans{gap:18px}
+  .plan .price{font-size:48px}
+  .est-in,.est-out{padding:24px}
+  .est-in h2{font-size:25px}
+  .faq summary{padding:16px 18px;font-size:15.5px}
+  .faq details p{padding:0 18px 18px}
+
+  /* Forms: 16 px text stops iPhones from zooming in */
+  .form-side,.visual-side{padding:24px}
+  .input{font-size:16px}
+  .check{font-size:13px}
+
+  /* Legal pages: section links become a sticky, swipeable row */
+  .legal{padding:36px 0 70px}
+  .legal-article{font-size:16px;line-height:1.8}
+  .legal-article h2{font-size:20px;margin-top:34px;padding-top:22px}
+  .toc{position:sticky;top:64px;z-index:5;margin:0 -16px;padding:10px 0;border-radius:0;
+    border-left:0;border-right:0;background:rgba(246,248,252,.96);
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .toc-title,.toc-print{display:none}
+  #toc-list{display:flex;gap:8px;overflow-x:auto;padding:0 16px;scrollbar-width:none}
+  #toc-list::-webkit-scrollbar{display:none}
+  .toc a{flex:none;white-space:nowrap;margin:0;padding:8px 13px;border:1px solid var(--line,#e5eaf2);border-radius:999px;background:#fff;font-size:13px}
+  .toc a.active{border-color:var(--blue,#2457ff)}
+  .flow-steps{grid-template-columns:1fr 1fr;gap:10px}
+  .flow-step{padding:16px 12px}
+
+  /* How it works: the animation */
+  .movie{border-radius:22px}
+  .movie-top{flex-wrap:wrap;padding:12px 14px;gap:8px}
+  .movie-bottom{padding:10px 12px;gap:10px}
+  .mv-chat{height:320px;margin:12px 12px 0}
+  .caption h3{font-size:18px}
+  .caption p{font-size:13.5px}
+  .endcard{padding:0 16px}
+  .endcard b{font-size:clamp(52px,16vw,84px);letter-spacing:-2px}
+  .endcard span{font-size:17px}
+  .endcard small{font-size:13.5px}
+  .steps4,.never{grid-template-columns:1fr}
+  .step-card{padding:22px}
+
+  /* SMS page phone picture */
+  .page-hero .phone{width:min(280px,100%)}
+
+  /* Book a call */
+  .book-side{padding:24px}
+
+  /* Install banner: full-width bar at the bottom, never wider than the screen */
+  #stayeno-install{left:12px!important;right:12px!important;max-width:none!important;
+    bottom:calc(12px + env(safe-area-inset-bottom))!important;justify-content:space-between}
+  #stayeno-install span{flex:1;font-size:13.5px}
+}
+
+/* ---- D. SMALL PHONES ------------------------------------------------------ */
+@media (max-width:380px){
+  .container{width:calc(100% - 24px)}
+  .brand-wordmark{font-size:20px}
+  .brand-icon{width:32px;height:32px}
+  .navlinks .btn-primary{padding:0 12px;font-size:13px}
+  .hero h1,.page-hero h1{letter-spacing:-1.2px}
+  .ex-tabs,.flow-steps{grid-template-columns:1fr}
+  .footer-cols{grid-template-columns:1fr}
+  .chat-log{height:310px}
+  .toc{margin:0 -12px}
+}
+@media (max-width:339px){
+  .actions{grid-template-columns:1fr}
+  .actions .btn{grid-column:1 / -1}
+  .navlinks{display:none!important}
+}
+
+/* ---- E. LARGE MONITORS AND TVs ------------------------------------------ */
+@media (min-width:1600px){
+  :root{--max:1360px}
+}
+@media (min-width:2200px){
+  html{zoom:1.3}
+}
+@media (min-width:3200px){
+  html{zoom:1.75}
+}
