@@ -46,10 +46,15 @@ img,svg,video,iframe{max-width:100%}
   .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
   .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-  /* Full-screen menu: covers the page completely (no mixing with content) */
-  .mobile-menu{display:block;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:99;
-    overflow-y:auto;-webkit-overflow-scrolling:touch;background:#070d22;
-    border-top:1px solid rgba(255,255,255,.08);padding-bottom:env(safe-area-inset-bottom)}
+  /* Full-screen menu: covers the page completely (no mixing with content).
+     It hangs directly under the top bar and is as tall as the SCREEN.
+     (A "fixed" menu would be squeezed to zero height, because the top bar's
+     blur effect makes the bar itself the frame for fixed elements inside it.) */
+  .mobile-menu{display:block;position:absolute;top:100%;left:0;right:0;z-index:99;
+    height:calc(100vh - 64px);height:calc(100dvh - 64px);
+    overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+    background:#070d22;border-top:1px solid rgba(255,255,255,.08);
+    padding-bottom:env(safe-area-inset-bottom)}
   .mobile-menu[hidden]{display:none}
   .mobile-menu-inner{display:grid;padding:10px 0 32px}
   .mobile-menu-inner a:not(.btn){display:flex;align-items:center;min-height:56px;padding:0 4px;
