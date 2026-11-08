@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Book a call — Stayeno</title>
+<meta name="description" content="Book a free 30-minute Google Meet call with the Stayeno team. Pick a day and time in your own time zone.">
+<meta name="theme-color" content="#070d22">
+<meta property="og:title" content="Book a call with the Stayeno team">
+<meta property="og:description" content="30 minutes on Google Meet. Pick a time that suits you — shown in your own time zone.">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=7">
+<link rel="apple-touch-icon" href="favicon.png?v=7">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Stayeno">
+<link rel="stylesheet" href="css/stayeno.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+/* ---- Book-a-call page only ---- */
+.book-wrap{display:grid;grid-template-columns:1.35fr .65fr;gap:24px;align-items:start;margin-top:-90px;position:relative;z-index:2}
+.book-card{border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-lg);overflow:hidden}
+.book-card-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:18px 24px;border-bottom:1px solid var(--line)}
+.book-card-head b{font-size:16px;color:var(--ink)}
+.book-card-head span{font-size:13px;color:var(--muted)}
+.calendly-inline-widget{min-width:300px;height:720px}
+.book-loading{display:grid;place-items:center;gap:10px;height:720px;color:var(--muted);font-size:14px;text-align:center;padding:20px}
+.book-loading i{width:34px;height:34px;border-radius:50%;border:3px solid var(--blue-soft);border-top-color:var(--blue);animation:spin 1s linear infinite}
+.book-fallback{padding:14px 24px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);background:var(--bg-soft)}
+.book-fallback a{color:var(--blue);font-weight:750}
+.book-side{position:sticky;top:96px;border-radius:26px;padding:30px;color:#fff;overflow:hidden;
+  background:radial-gradient(400px 260px at 100% 0%,rgba(139,92,246,.45),transparent 60%),radial-gradient(400px 260px at 0% 100%,rgba(36,87,255,.45),transparent 60%),var(--navy)}
+.book-side h2{margin:14px 0 8px;font-size:24px;letter-spacing:-.6px;line-height:1.2}
+.book-side > p{margin:0 0 18px;color:#b9c5e2;font-size:14.5px;line-height:1.6}
+.book-facts{display:grid;gap:9px;margin:0 0 22px}
+.book-fact{display:flex;align-items:center;gap:12px;padding:12px 13px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-size:14px;color:#dbe4fb}
+.book-fact i{flex:none;font-style:normal;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--ai);font-size:15px}
+.book-side .ticks li{color:#dbe4fb}
+.book-side .ticks li:before{background:rgba(34,197,94,.18);color:#86efac}
+.book-alt{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);font-size:14px;color:#b9c5e2}
+.book-alt a{color:#fff;font-weight:800}
+.book-privacy{margin-top:16px;font-size:12px;color:#8fa0c6;line-height:1.5}
+.book-privacy a{color:#c7d2ec;text-decoration:underline}
+@media(max-width:1080px){
+  .book-wrap{grid-template-columns:1fr}
+  .book-side{position:static}
+}
+@media(max-width:820px){
+  .book-wrap{margin-top:-60px}
+  .calendly-inline-widget,.book-loading{height:1000px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="container navinner">
+    <a class="brand" href="index.html" aria-label="Stayeno home">
+      <img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36">
+      <span class="brand-wordmark">Stay<span>eno</span></span>
+    </a>
+    <div class="navlinks">
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a class="btn btn-ghost btn-sm active" href="book-a-call.html" aria-current="page">Book a call</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Start free</a>
+    </div>
+    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="container mobile-menu-inner">
+      <a href="index.html#ai">AI co-host</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sms.html">Notifications</a>
+      <a href="book-a-call.html" class="active">Book a call</a>
+      <a class="btn btn-primary" href="signup.html">Start free</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero center" style="padding-bottom:150px">
+  <div class="container">
+    <span class="ai-badge">✦ Talk to a human</span>
+    <h1>Book a call with<br><span class="grad-text">the Stayeno team.</span></h1>
+    <p class="lead">Pick a day and time that suits you — times are shown in your own time zone.
+      You'll get a Google Meet link by email right away.</p>
+    <div class="meta-pill" style="margin-top:22px"><i></i> 30 minutes · Google Meet · Free, no obligation</div>
+  </div>
+</header>
+
+<section class="section soft" style="padding-top:0">
+  <div class="container">
+    <div class="book-wrap">
+
+      <!-- Scheduler -->
+      <div class="book-card">
+        <div class="book-card-head">
+          <b>Choose a day and time</b>
+          <span>Only open times are shown</span>
+        </div>
+
+        <div class="calendly-inline-widget" id="calendly-box"
+             data-url="https://calendly.com/teamstayeno/intro-call?hide_gdpr_banner=1&amp;primary_color=2457ff">
+          <div class="book-loading" id="book-loading"><i></i>Loading available times…</div>
+        </div>
+
+        <div class="book-fallback">
+          Scheduler not showing?
+          <a href="https://calendly.com/teamstayeno/intro-call" target="_blank" rel="noopener">Open it in a new tab →</a>
+        </div>
+      </div>
+
+      <!-- What to expect -->
+      <aside class="book-side">
+        <span class="ai-badge">✦ Stayeno intro call</span>
+        <h2>What we'll cover</h2>
+        <p>A relaxed 30 minutes, tailored to your properties.</p>
+        <div class="book-facts">
+          <div class="book-fact"><i>⏱</i>30 minutes</div>
+          <div class="book-fact"><i>🎥</i>Google Meet — link sent by email</div>
+          <div class="book-fact"><i>🌍</i>Times in your own time zone</div>
+        </div>
+        <ul class="ticks">
+          <li>Your properties and how you host today</li>
+          <li>Your AI co-host: chat, inbox and pricing</li>
+          <li>Door codes, cleaning and thermostat automation</li>
+          <li>Pricing and getting started</li>
+        </ul>
+        <div class="book-alt">Prefer to start right away? <a href="signup.html">Start free →</a></div>
+        <p class="book-privacy">Scheduling is handled by Calendly. See
+          <a href="https://calendly.com/privacy" target="_blank" rel="noopener">Calendly's privacy policy</a>
+          and our <a href="privacy.html">Privacy Policy</a>.</p>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img class="brand-icon" src="favicon.png?v=7" alt="" width="36" height="36"><span class="brand-wordmark">Stay<span>eno</span></span></a>
+        <p>The AI co-host that runs your short-term rentals — so you can focus on growing your business.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><strong>Product</strong><a href="index.html#ai">AI co-host</a><a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="signup.html">Start free</a><a href="book-a-call.html">Book a call</a></div>
+        <div class="footer-col"><strong>Messaging</strong><a href="sms.html">Notifications</a><a href="sms-compliance.html">SMS Compliance</a></div>
+        <div class="footer-col"><strong>Legal</strong><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+        <div class="footer-col"><strong>Contact</strong><a href="mailto:support@stayeno.com">support@stayeno.com</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Stayeno · A&amp;R Investment Venture LLC</span><span>Built for hosts who'd rather grow than chase tasks.</span></div>
+  </div>
+</footer>
+
+<script src="js/stayeno.js"></script>
+<script src="pwa.js" defer></script>
+<script>
+/* Calendly scheduler: load Calendly's own script. The "Loading…" message is
+   replaced by the scheduler when it arrives. If Calendly can't load (blocked
+   by an ad-blocker or no internet), the message changes and the
+   "Open it in a new tab" link below the box still works. */
+(function(){
+  var LOAD_WAIT_MS = 12000;
+  var loading = document.getElementById('book-loading');
+
+  var script = document.createElement('script');
+  script.src = 'https://assets.calendly.com/assets/external/widget.js';
+  script.async = true;
+  script.onerror = showProblem;
+  document.body.appendChild(script);
+
+  // [] = showProblem(): Calendly did not load
+  function showProblem(){
+    if(!loading || !loading.parentNode) return;
+    loading.innerHTML = 'The scheduler could not load here.<br>' +
+      '<a class="btn btn-primary btn-sm" href="https://calendly.com/teamstayeno/intro-call" target="_blank" rel="noopener">Open the scheduler →</a>';
+  }
+
+  // Remove the "Loading…" message as soon as Calendly's scheduler appears.
+  var boxEl = document.getElementById('calendly-box');
+  if(boxEl && 'MutationObserver' in window){
+    var watcher = new MutationObserver(function(){
+      if(boxEl.querySelector('iframe') && loading && loading.parentNode){
+        loading.parentNode.removeChild(loading);
+        watcher.disconnect();
+      }
+    });
+    watcher.observe(boxEl, {childList:true, subtree:true});
+  }
+
+  // If nothing has replaced the loading message after a while, offer the link.
+  setTimeout(function(){
+    var box = document.getElementById('calendly-box');
+    if(box && !box.querySelector('iframe')){ showProblem(); }
+  }, LOAD_WAIT_MS);
+})();
+</script>
+</body>
+</html>
